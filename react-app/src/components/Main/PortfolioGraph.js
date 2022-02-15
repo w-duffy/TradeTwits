@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
-import {getPortfolioDetails} from '../../store/portfolio'
+import {getPortfolioDetails, delPortfolioTicker} from '../../store/portfolio'
 
 function PortfolioGraph(){
     const [isLoaded, setIsLoaded] = useState(false)
+    const [deleteTicker, setDeleteTicker] = useState("")
     // const [portDetails, setPortDetails] = useState()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -13,19 +14,39 @@ function PortfolioGraph(){
     useEffect(() => {
           const id = user.id
 
-          console.log("ID IN COMPON", id)
         async function getDetails() {
             await dispatch(getPortfolioDetails(id))
             setIsLoaded(true)
-            console.log("PORTFOLIO INFO IN COMPN", portfolioDetail.info)
-            // setPortDetails(portfolioDetail.info)
+            console.log(portfolioDetail)
           }
         getDetails()
 
     }, [])
 
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
+    //   console.log("Ticker IN COMPONENT", deleteTicker)
+    const wrapperFunc = async (e) =>{
+        // console.log("Ticker IN COMPONENT", deleteTicker)
 
+        if(deleteTicker){
+
+            const handleDeleteTicker = async (e) => {
+                e.preventDefault()
+                let id = user.id
+            let ticker = deleteTicker
+            await dispatch(delPortfolioTicker(ticker, id))
+            await setDeleteTicker("")
+
+        }
+        handleDeleteTicker(e)
+    }
+}
+
+
+            // setPortDetails(portfolioDetail.info)
+
+        // await dispatch(loadUserWatchlists(user.id))
+        // dispatch(loadWatchlistTickers(list.id))
 
     if (isLoaded){
 
@@ -35,6 +56,7 @@ function PortfolioGraph(){
                 <>
                 {detail.ticker} {Number(detail.values[0]).toFixed(2)}
                 <Graph values={detail.values} dates={detail.dates}/>
+                <button onClick={(e) => {setDeleteTicker(detail.ticker); wrapperFunc(e)}}>DELETE</button>
                 </>
             ))}
         </div>

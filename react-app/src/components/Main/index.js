@@ -16,7 +16,6 @@ const Main = () => {
 
     return (
         <>
-        <h1> {user.portfolio[0].ticker} </h1>
         <PortfolioGraph />
         </>
     )
