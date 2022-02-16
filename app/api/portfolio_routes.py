@@ -51,7 +51,22 @@ def get_portfolio_stats(id):
     info['info'] = all_details
     return(info)
 
-    # print("DETAILSSS", details)
+
+@portfolio_routes.route('/new/ticker', methods=['POST'])
+# @login_required
+def new_ticker():
+    object = request.json
+    ticker = object['ticker']
+    user_id = object['user_id']
+    name = object['name']
+    print("IN API", ticker, user_id, name)
+    newPortfolio = Portfolio(name=name, ticker=ticker, user_id=user_id)
+    print("NEW PORT", newPortfolio)
+    db.session.add(newPortfolio)
+    db.session.commit()
+    return newPortfolio.to_dict()
+
+
 @portfolio_routes.route("/delete/<string:ticker>", methods=['DELETE'])
 # @login_required
 def deletePortfolioTicker(ticker):

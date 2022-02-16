@@ -1,5 +1,6 @@
-const SET_PORTFOLIO = "portfolio/setPortfolio"
-const DELETE_PORTFOLIO_TICKER = "portfolio/delPortfolioTicker"
+const SET_PORTFOLIO = "portfolio/SET_PORTFOLIO"
+const REMOVE_PORTFOLIO_TICKER = "portfolio/REMOVE_PORTFOLIO_TICKER"
+// const ADD_PORTFOLIO_TICKER = "portfolio/addPortfolioTicker"
 
 const setPortfolio = (portfolioDetails) =>{
     return {
@@ -19,12 +20,13 @@ export const getPortfolioDetails = (id) => async (dispatch) => {
 
 const delTicker = (ticker) => {
     return {
-        type: DELETE_PORTFOLIO_TICKER,
+        type: REMOVE_PORTFOLIO_TICKER,
         ticker
     }
 }
 
 export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
+    console.log("IN DELETE STORE", ticker, id)
     const res = await fetch(`/api/portfolio/delete/${ticker}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
@@ -35,9 +37,20 @@ export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
     })
     if(res.ok){
         const details = await res.json();
+        console.log("DELETE DETAIL:S", details)
         dispatch(delTicker(details['ticker']))
     }
 }
+
+// const add = (ticker) => {
+//     return {
+//         type: ADD_PORTFOLIO_TICKER,
+//         ticker
+//     }
+// }
+
+
+
 
 const initialState = {}
 const portfolioReducer = (state = initialState, action) => {
@@ -45,14 +58,23 @@ const portfolioReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_PORTFOLIO:
             newState = { ...state }
-            newState.portfolioDetail = action.portfolioDetails
+            newState = action.portfolioDetails.info
             return newState
-        case DELETE_PORTFOLIO_TICKER: {
-            newState = { ...state };
+        // case ADD_PORTFOLIO_TICKER:
+        //     newState = [...state]
+        //     console.log("STATE", newState)
+        //     newState.push(action.ticker)
+        //     console.log("NEWWWW STATE", newState)
 
-            newState.portfolioDetail.info.forEach((item, idx) =>{
+        //     // [action.ticker.id]: action.ticker
+
+        //     return newState
+        case REMOVE_PORTFOLIO_TICKER: {
+            newState = [ ...state ];
+            // console.log("NEW STATETET", newState)
+            newState.forEach((item, idx) =>{
                 if (item.ticker === action.ticker){
-                    delete newState.portfolioDetail.info[idx]
+                    delete newState[idx]
                 }
             })
 

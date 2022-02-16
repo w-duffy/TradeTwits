@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const ADD_PORTFOLIO_TICKER = "session/ADD_PORTFOLIO_TICKER"
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -24,7 +25,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +41,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -82,7 +83,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -97,12 +98,45 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
+const add = (newPortfolioTicker) => {
+  return {
+      type: ADD_PORTFOLIO_TICKER,
+      newPortfolioTicker
+  }
+}
+
+
+export const addTicker = (ticker, user_id, name) => async (dispatch) =>{
+  console.log("WATHCLIST NAME IN STORE", ticker, user_id, name)
+  const res = await fetch(`/api/portfolio/new/ticker`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+          ticker,
+          user_id,
+          name
+      })
+  })
+  if (res.ok){
+      const result = await res.json();
+      console.log("RESULT IN STORE", result)
+      dispatch(add(result))
+      return result
+  }
+}
+
 export default function reducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case ADD_PORTFOLIO_TICKER:
+      newState = {...state}
+      console.log("NEW STATE IN USER", newState)
+      newState.portfolio.push(action.newPortfolioTicker)
+      return newState
     default:
       return state;
   }
