@@ -2,6 +2,7 @@ const SET_DISCUSSION = "portfolio/SET_DISCUSSION"
 const ADD_DISCUSSION_COMMENT = "portfolio/ADD_DISCUSSION_COMMENT"
 const REMOVE_DISCUSSION_COMMENT = "portfolio/REMOVE_DISCUSSION_COMMENT"
 const EDIT_DISCUSSION_COMMENT = "portfolio/EDIT_DISCUSSION_COMMENT"
+const ADD_DISCUSSION_COMMENT_LIKE = "portfolio/ADD_DISCUSSION_COMMENT_LIKE"
 
 
 
@@ -85,6 +86,49 @@ export const editDiscussionComment = (id, newComment) => async (dispatch) =>{
         return editedComment
     }
 }
+
+// const addLike = (comment) => {
+//     return {
+//         type: ADD_DISCUSSION_COMMENT_LIKE,
+//         comment
+//     }
+// }
+
+export const addCommentLike = (id, user_id) => async (dispatch) =>{
+    const res = await fetch(`/api/discussion/new/like/${id}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id,
+            id
+        })
+    })
+    if (res.ok){
+        const likedComment = await res.json();
+        dispatch(editComment(likedComment))
+        return likedComment
+    }
+}
+
+export const deleteCommentLike = (likeId, user_id, commentId) => async (dispatch) =>{
+    console.log("IN STORE1", likeId, user_id)
+    const res = await fetch(`/api/discussion/delete/like/${likeId}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id,
+            likeId,
+            commentId
+        })
+    })
+    if (res.ok){
+        const likedComment = await res.json();
+        console.log("IN STORE2", likedComment)
+        dispatch(editComment(likedComment))
+        return likedComment
+    }
+}
+
 
 
 const initialState = {}
