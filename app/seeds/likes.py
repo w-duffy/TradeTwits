@@ -15,10 +15,23 @@ def seed_likes():
     user_like4 = Like(
         user_id=1, comment_id=3)
 
+    user_like5= Like(
+    user_id=1, comment_id=6)
+
+    user_like6 = Like(
+    user_id=2, comment_id=5)
+
+    user_like7 = Like(
+    user_id=1, comment_id=5)
+
+
     db.session.add(user_like1)
     db.session.add(user_like2)
     db.session.add(user_like3)
     db.session.add(user_like4)
+    db.session.add(user_like5)
+    db.session.add(user_like6)
+    db.session.add(user_like7)
 
     db.session.commit()
 

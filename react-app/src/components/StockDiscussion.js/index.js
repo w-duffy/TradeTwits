@@ -10,14 +10,11 @@ const StockDiscussion = () => {
   const [showForm, setShowForm] = useState(false);
 
   const user = useSelector((state) => state.session.user);
-  // const portArr = Object.values(user.portfolio)
   const stockDiscussion = useSelector(state => state.stockDiscussionReducer)
 
   useEffect(() => {
-    const id = user.id
 
   async function getDiscussion() {
-      console.log("TICKER IN GET DISCC COMP", ticker.ticker)
       await dispatch(getDiscussionDetails(ticker.ticker))
       setIsLoaded(true)
     }
