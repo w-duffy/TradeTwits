@@ -1,6 +1,6 @@
 const SET_PORTFOLIO = "portfolio/SET_PORTFOLIO"
 const REMOVE_PORTFOLIO_TICKER = "portfolio/REMOVE_PORTFOLIO_TICKER"
-// const ADD_PORTFOLIO_TICKER = "portfolio/addPortfolioTicker"
+
 
 const setPortfolio = (portfolioDetails) =>{
     return {
@@ -42,14 +42,6 @@ export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
     }
 }
 
-// const add = (ticker) => {
-//     return {
-//         type: ADD_PORTFOLIO_TICKER,
-//         ticker
-//     }
-// }
-
-
 
 
 const initialState = {}
@@ -61,15 +53,7 @@ const portfolioReducer = (state = initialState, action) => {
             newState = { ...state }
             newState = action.portfolioDetails.info
             return newState
-        // case ADD_PORTFOLIO_TICKER:
-        //     newState = [...state]
-        //     console.log("STATE", newState)
-        //     newState.push(action.ticker)
-        //     console.log("NEWWWW STATE", newState)
 
-        //     // [action.ticker.id]: action.ticker
-
-        //     return newState
         case REMOVE_PORTFOLIO_TICKER: {
             newState = [ ...state ];
             // console.log("NEW STATETET", newState)
