@@ -27,15 +27,25 @@ def new_comment():
 @stock_discussion_routes.route("/delete/<int:id>", methods=['DELETE'])
 # @login_required
 def deletePortfolioTicker(id):
-    print("ID IN API", id)
     comment_to_delete = Comment.query.filter(Comment.id == id).all()
-    print("TICKER IN API TO DEL", comment_to_delete[0])
     likes_to_delete = Like.query.filter(Like.comment_id == id).all()
     for like in likes_to_delete:
-        print("LIKE IN API", like)
         db.session.delete(like)
     delete_object = comment_to_delete[0]
     print(delete_object.to_dict())
     db.session.delete(delete_object)
     db.session.commit()
     return delete_object.to_dict()
+
+@stock_discussion_routes.route("/edit/<int:id>", methods=['PUT'])
+# @login_required
+def edit_discussion_comment(id):
+    object = request.json
+    new_comment = object['newComment']
+    today = datetime.now()
+    comment_to_edit = Comment.query.get(id)
+    comment_to_edit.comment = new_comment
+    comment_to_edit.time_updated = today
+    db.session.add(comment_to_edit)
+    db.session.commit()
+    return comment_to_edit.to_dict()

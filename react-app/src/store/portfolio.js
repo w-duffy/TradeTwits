@@ -56,7 +56,6 @@ const portfolioReducer = (state = initialState, action) => {
 
         case REMOVE_PORTFOLIO_TICKER: {
             newState = [ ...state ];
-            // console.log("NEW STATETET", newState)
             newState.forEach((item, idx) =>{
                 if (item.ticker === action.ticker){
                     delete newState[idx]
