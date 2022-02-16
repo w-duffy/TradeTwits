@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8eda6c67a29a063051832d3fe6ae61b990638d8676ec6647c950c5b42a6e6a8c"
+            "sha256": "6f51cd5a027648532c86bf27e2820e04098ab27e48b9c202b5fd7b20418f5e67"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -46,6 +46,14 @@
             ],
             "index": "pypi",
             "version": "==7.1.2"
+        },
+        "finnhub-python": {
+            "hashes": [
+                "sha256:01c6ec65bd94b4e9a5322453a92fd8a3a51c31e914fcef03ba7dd5c7b6319380",
+                "sha256:aed12b0eda1b479a6182758cab19b603627d9029a34f3079f37aa425f02bc0b0"
+            ],
+            "index": "pypi",
+            "version": "==2.4.9"
         },
         "flask": {
             "hashes": [
