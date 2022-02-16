@@ -4,6 +4,7 @@ from .comments import seed_comments, undo_comments
 from .likes import seed_likes, undo_likes
 from .portfolios import seed_portfolios, undo_portfolios
 from .stock_discussions import seed_stock_discussions, undo_stock_discussions
+from .watchlist import seed_watchlists, undo_watchlists
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -18,6 +19,7 @@ def seed():
     seed_stock_discussions()
     seed_comments()
     seed_likes()
+    seed_watchlists()
     # Add other seed functions here
 
 
@@ -29,4 +31,5 @@ def undo():
     undo_stock_discussions()
     undo_comments()
     undo_likes()
+    undo_watchlists()
     # Add other undo functions here

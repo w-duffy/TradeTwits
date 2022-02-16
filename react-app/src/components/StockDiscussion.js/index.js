@@ -71,13 +71,29 @@ if (isLoaded){
           </div>
         </form>
       )}
+      <h1>Watchlist</h1>
+      <div>
+        {user.watchlist.map(list => (
+          <div>
+          <p>
+            {list.ticker}
+            {list.price}
+            {list.percent_change}
+            {list.company_name}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div>
+
         {stockDiscussion.comments.map(comment => (
-            <>
+          <div>
             <Comment comment={comment} />
             <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE</button>
-            </>
+            </div>
 
-        ))}
+))}
+</div>
   </>
   );
 } else return(<></>)
