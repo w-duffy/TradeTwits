@@ -1,5 +1,6 @@
 const SET_DISCUSSION = "portfolio/SET_DISCUSSION"
 const ADD_DISCUSSION_COMMENT = "portfolio/ADD_DISCUSSION_COMMENT"
+const REMOVE_DISCUSSION_COMMENT = "portfolio/REMOVE_DISCUSSION_COMMENT"
 
 
 
@@ -43,10 +44,31 @@ export const addNewComment = (comment, user_id, stock_discussion_id) => async (d
     }
   }
 
+  const delComment = (comment) => {
+    return {
+        type: REMOVE_DISCUSSION_COMMENT,
+        comment
+    }
+}
+
+export const delDiscussionComment = (id) => async (dispatch) => {
+    console.log("ID IN STORE", id)
+    const res = await fetch(`/api/discussion/delete/${id}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+    })
+    if(res.ok){
+        const details = await res.json();
+        console.log("RESULT IN STORE", details)
+        dispatch(delComment(details))
+    }
+}
+
 
 const initialState = {}
 const stockDiscussionReducer = (state = initialState, action) => {
     let newState;
+    let newerState;
     switch (action.type) {
         case SET_DISCUSSION:
             newState = { ...state }
@@ -56,6 +78,19 @@ const stockDiscussionReducer = (state = initialState, action) => {
         case ADD_DISCUSSION_COMMENT:
             newState = {...state}
             newState.comments.push(action.comment)
+            return newState
+        case REMOVE_DISCUSSION_COMMENT:
+            newState = {...state}
+            newState.comments.forEach((comment, idx) => {
+                if (comment.id === action.comment.id){
+                    console.log("IN IF STATEMENT", newState.comments, idx)
+                    delete newState.comments[idx]
+                }
+            })
+            newerState = newState.comments.filter(el =>{
+                return el != null;
+            })
+            newState.comments = newerState
             return newState
         default:
             return state

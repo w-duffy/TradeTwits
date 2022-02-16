@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDiscussionDetails } from "../../store/stockDiscussion";
 import Comment from './Comment'
-import { addNewComment } from "../../store/stockDiscussion";
+import { addNewComment, delDiscussionComment } from "../../store/stockDiscussion";
 
 
 
@@ -39,6 +39,13 @@ const handleAddComment = (e) => {
     // setNewTick(!newTick)
 }
 
+const handleDeleteComment = async (e, commentId) => {
+    e.preventDefault()
+    console.log("ID IN COMP", commentId)
+    let id = commentId
+    await dispatch(delDiscussionComment(id))
+}
+
 if (isLoaded){
 
     return (
@@ -65,7 +72,10 @@ if (isLoaded){
         </form>
       )}
         {stockDiscussion.comments.map(comment => (
+            <>
             <Comment comment={comment} />
+            <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE</button>
+            </>
 
         ))}
   </>
