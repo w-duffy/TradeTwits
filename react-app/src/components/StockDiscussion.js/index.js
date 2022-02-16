@@ -89,7 +89,10 @@ if (isLoaded){
         {stockDiscussion.comments.map(comment => (
           <div>
             <Comment comment={comment} />
-            <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE</button>
+            {comment.user_id === user.id && (
+
+              <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE</button>
+            )}
             </div>
 
 ))}

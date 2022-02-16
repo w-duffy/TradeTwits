@@ -34,14 +34,11 @@ const handleAddLike = (e, comment) => {
     return like.user_id === user.id
   })
 
-  console.log("CONTAINS COMM", userLiked)
   if (userLiked.length === 0) {
-    console.log("IN COMP", commentId, user_id)
     dispatch(addCommentLike(commentId, user_id))
   }
   if (userLiked.length > 0) {
     let likeId = userLiked[0].id
-    console.log("IN COMP", likeId, user_id)
     dispatch(deleteCommentLike(likeId, user_id, commentId))
   }
 
@@ -60,11 +57,15 @@ const handleAddLike = (e, comment) => {
             </button>
             </div>
             </div>
-            <button
-        onClick={(e) => setShowEditForm(!showEditForm)}
-      >
+
+            {comment.user_id === user.id && (
+
+              <button
+              onClick={(e) => setShowEditForm(!showEditForm)}
+              >
           EDIT
       </button>
+                )}
       {showEditForm && (
         <form onSubmit={(e) => {handleEditComment(e, comment.id)}}>
           <div>
@@ -73,13 +74,15 @@ const handleAddLike = (e, comment) => {
               placeholder={comment.comment}
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
-            ></input>
+              ></input>
             <button type="submit">
               Submit
             </button>
           </div>
         </form>
-      )}
+              )}
+
+
 
   </>
   );

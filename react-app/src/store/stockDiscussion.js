@@ -111,7 +111,6 @@ export const addCommentLike = (id, user_id) => async (dispatch) =>{
 }
 
 export const deleteCommentLike = (likeId, user_id, commentId) => async (dispatch) =>{
-    console.log("IN STORE1", likeId, user_id)
     const res = await fetch(`/api/discussion/delete/like/${likeId}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
@@ -123,7 +122,6 @@ export const deleteCommentLike = (likeId, user_id, commentId) => async (dispatch
     })
     if (res.ok){
         const likedComment = await res.json();
-        console.log("IN STORE2", likedComment)
         dispatch(editComment(likedComment))
         return likedComment
     }
