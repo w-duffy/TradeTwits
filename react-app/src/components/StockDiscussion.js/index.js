@@ -32,9 +32,12 @@ if (isLoaded){
         <>
         {stockDiscussion.comments.map(item => (
             <div>
+                User: {item.user.username}
+            <div>
             {item.comment}
             <div>
             {item.likes.length} likes
+            </div>
             </div>
             </div>
         ))}

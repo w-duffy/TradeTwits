@@ -39,3 +39,11 @@ class User(db.Model, UserMixin):
             "comments": [comment.to_dict() for comment in self.comments],
             "likes": [like.to_dict() for like in self.likes],
         }
+
+    def to_dict_basic(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            "profile_picture": self.profile_picture,
+        }

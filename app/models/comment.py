@@ -26,4 +26,5 @@ class Comment(db.Model):
             "time_created": self.time_created,
             "time_updated": self.time_updated,
             "likes": [like.to_dict() for like in self.likes],
+            "user": self.user.to_dict_basic()
         }
