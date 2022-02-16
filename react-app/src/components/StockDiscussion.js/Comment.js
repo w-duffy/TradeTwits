@@ -44,7 +44,7 @@ const handleEditComment = async (e, commentId) => {
         <form onSubmit={(e) => {handleEditComment(e, comment.id)}}>
           <div>
             <input
-              name="Add Ticker"
+              name="Edit Comment"
               placeholder={comment.comment}
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
