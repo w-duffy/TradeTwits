@@ -7,8 +7,8 @@ def seed_comments():
     day_before = today - timedelta(days = 1)
     day_before2 = today - timedelta(days = 2)
     day_before3 = today - timedelta(days = 3)
-    day_before4 = today - timedelta(days = 4)
-    day_before5 = today - timedelta(days = 5)
+    # day_before4 = today - timedelta(days = 4)
+    # day_before5 = today - timedelta(days = 5)
 
     user_comment1 = Comment(
         user_id=1, comment="Great post", stock_discussion_id=1, time_created=today, time_updated=today)

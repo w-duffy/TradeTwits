@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Main from './components/Main'
-
+import StockDiscussion from './components/StockDiscussion.js';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,6 +33,9 @@ function App() {
       <ProtectedRoute path='/home' exact={true}>
           <Main />
         </ProtectedRoute>
+        <Route path='/discussion/:ticker' exact={true}>
+          <StockDiscussion />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

@@ -107,7 +107,6 @@ const add = (newPortfolioTicker) => {
 
 
 export const addTicker = (ticker, user_id, name) => async (dispatch) =>{
-  console.log("ADD TICKER IN STORE", ticker, user_id, name)
   const res = await fetch(`/api/portfolio/new/ticker`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -119,7 +118,6 @@ export const addTicker = (ticker, user_id, name) => async (dispatch) =>{
   })
   if (res.ok){
       const result = await res.json();
-      console.log("RESULT IN USER STORE", result)
       dispatch(add(result))
       return result
   }
@@ -134,7 +132,6 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     case ADD_PORTFOLIO_TICKER:
       newState = {...state}
-      console.log("NEW STATE IN USER", newState)
       newState.user.portfolio.push(action.newPortfolioTicker)
       return newState
     default:

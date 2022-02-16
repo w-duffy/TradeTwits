@@ -30,13 +30,12 @@ function PortfolioGraph({newTick}){
 
 
     if (isLoaded){
-
         return (
             <div>
             {portfolioDetail.map(detail => (
                 <>
                 {detail.ticker} {Number(detail.values[0]).toFixed(2)}
-                <Graph values={detail.values} dates={detail.dates}/>
+                <Graph key={detail.values[0]} values={detail.values} dates={detail.dates}/>
                 <button onClick={(e) => {handleDeleteTicker(e, detail.ticker)}}>DELETE {detail.ticker}</button>
                 </>
             ))}

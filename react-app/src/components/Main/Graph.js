@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 import {
     Chart as ChartJS,
@@ -25,11 +25,11 @@ function Graph({values, dates}){
       );
 
 
-      let date1 = new Date(new Date().setDate(new Date().getDate() - 1))
-      let date2 = new Date(new Date().setDate(new Date().getDate() - 2))
-      let date3 = new Date(new Date().setDate(new Date().getDate() - 3))
-      let date4 = new Date(new Date().setDate(new Date().getDate() - 4))
-      let date5 = new Date(new Date().setDate(new Date().getDate() - 5))
+    //   let date1 = new Date(new Date().setDate(new Date().getDate() - 1))
+    //   let date2 = new Date(new Date().setDate(new Date().getDate() - 2))
+    //   let date3 = new Date(new Date().setDate(new Date().getDate() - 3))
+    //   let date4 = new Date(new Date().setDate(new Date().getDate() - 4))
+    //   let date5 = new Date(new Date().setDate(new Date().getDate() - 5))
 
 
         //  values = [4592.23, 4668.22, 4700.68, 4862.325, 4768.89]
