@@ -7,6 +7,7 @@ const Main = () => {
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
 const [tickerName, setTickerName] = useState("")
+const [newTick, setNewTick] = useState(false)
 
   const user = useSelector((state) => state.session.user);
   // const portArr = Object.values(user.portfolio)
@@ -19,6 +20,7 @@ const [tickerName, setTickerName] = useState("")
     dispatch(addTicker(ticker, user_id, name))
     setTickerName("")
     setShowForm(!showForm)
+    setNewTick(!newTick)
 
 }
 
@@ -44,7 +46,7 @@ const [tickerName, setTickerName] = useState("")
           </div>
         </form>
       )}
-      <PortfolioGraph />
+      <PortfolioGraph newTick={newTick} />
     </>
   );
 };

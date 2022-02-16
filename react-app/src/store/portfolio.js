@@ -26,7 +26,7 @@ const delTicker = (ticker) => {
 }
 
 export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
-    console.log("IN DELETE STORE", ticker, id)
+
     const res = await fetch(`/api/portfolio/delete/${ticker}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
@@ -37,7 +37,7 @@ export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
     })
     if(res.ok){
         const details = await res.json();
-        console.log("DELETE DETAIL:S", details)
+
         dispatch(delTicker(details['ticker']))
     }
 }
@@ -55,6 +55,7 @@ export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
 const initialState = {}
 const portfolioReducer = (state = initialState, action) => {
     let newState;
+    let newestState;
     switch (action.type) {
         case SET_PORTFOLIO:
             newState = { ...state }
@@ -78,8 +79,10 @@ const portfolioReducer = (state = initialState, action) => {
                 }
             })
 
-
-            return newState
+            newestState = newState.filter(el =>{
+                return el != null;
+            })
+            return newestState
         }
         default:
             return state

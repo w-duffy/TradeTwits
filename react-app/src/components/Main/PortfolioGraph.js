@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
 import {getPortfolioDetails, delPortfolioTicker} from '../../store/portfolio'
 
-function PortfolioGraph(){
+function PortfolioGraph({newTick}){
     const [isLoaded, setIsLoaded] = useState(false)
     const [deleteTicker, setDeleteTicker] = useState("")
     // const [portDetails, setPortDetails] = useState()
@@ -20,7 +20,7 @@ function PortfolioGraph(){
           }
         getDetails()
 
-    }, [])
+    }, [newTick])
 
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
     //   console.log("Ticker IN COMPONENT", deleteTicker)
