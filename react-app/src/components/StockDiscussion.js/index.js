@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDiscussionDetails, addNewComment, delDiscussionComment } from "../../store/stockDiscussion";
 import Comment from './Comment'
-
+import Main from '../Main'
 
 
 
@@ -71,19 +71,9 @@ if (isLoaded){
           </div>
         </form>
       )}
-      <h1>Watchlist</h1>
-      <div>
-        {user.watchlist.map(list => (
-          <div>
-          <p>
-            {list.ticker}
-            {list.price}
-            {list.percent_change}
-            {list.company_name}
-            </p>
-          </div>
-        ))}
-      </div>
+      <h1>Portfolio</h1>
+      <Main />
+
       <div>
 
         {stockDiscussion.comments.map(comment => (
