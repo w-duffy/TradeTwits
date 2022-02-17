@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
-import { finalResultData } from './tickers'
+import { searchOptions } from './tickers'
 import {useHistory } from 'react-router-dom'
+
 function SearchBar() {
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +18,7 @@ function SearchBar() {
         }
 
 
-    const filteredResult = finalResultData.filter(word =>{
+    const filteredResult = searchOptions.filter(word =>{
         return (word[0].includes(searchTerm.toUpperCase()) || word[1].toUpperCase().includes(searchTerm.toUpperCase()))
     })
 
