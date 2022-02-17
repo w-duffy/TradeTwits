@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 # import requests
 # import os
-from app.models import db, StockDiscussion, Comment, Like
+from app.models import db, StockDiscussion, Comment, Like, Reply
 from datetime import datetime
 
 stock_discussion_routes = Blueprint("discussion", __name__)
@@ -29,6 +29,12 @@ def new_comment():
 def deletePortfolioTicker(id):
     comment_to_delete = Comment.query.filter(Comment.id == id).all()
     likes_to_delete = Like.query.filter(Like.comment_id == id).all()
+    replies_to_delete = Reply.query.filter(Reply.comment_id == id).all()
+    for reply in replies_to_delete:
+        reply_likes = Like.query.filter(Like.reply_id == reply.id).all()
+        for l in reply_likes:
+            db.session.delete(l)
+        db.session.delete(reply)
     for like in likes_to_delete:
         db.session.delete(like)
     delete_object = comment_to_delete[0]
