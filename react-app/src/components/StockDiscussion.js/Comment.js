@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { editDiscussionComment, addCommentLike, deleteCommentLike, addNewFollower } from "../../store/stockDiscussion";
+import { editDiscussionComment, addCommentLike, deleteCommentLike, addNewFollower, deleteNewFollower } from "../../store/stockDiscussion";
 
 const Comment = ({comment}) => {
     // const [isLoaded, setIsLoaded] = useState(false)
@@ -55,32 +55,50 @@ const handleAddFollow = (e, id) => {
   let currentlyFollowed = user.following.filter(follow =>{
     return follow.user_id === userToFollowId
   })
-  console.log("Current followed", currentlyFollowed)
+
   if (currentlyFollowed.length === 0) {
     dispatch(addNewFollower(userToFollowId, user_id))
   }
-  // if (currentlyFollowed.length > 0) {
-  //   let followId = currentlyFollowed[0].id
-  //   dispatch(deleteCommentLike(followId, user_id, userToFollowId))
-  // }
+  console.log("FOLLOW comp", currentlyFollowed)
+  if (currentlyFollowed.length > 0) {
+    let followId = currentlyFollowed[0].id
+    console.log("FOLLOW comp", followId)
+    dispatch(deleteNewFollower(followId, user_id, userToFollowId))
+  }
 
   // setNewTick(!newTick)
 }
 
 
 
+  let isFollower = user.following.map(follow =>{
+    return follow.user_id
+  })
+  console.log(isFollower)
     return (
         <>
             <div>
                 User: {comment.user.username}
-                <button onClick={(e) => {handleAddFollow(e, comment.user_id)}}>
-                  follow
-                </button>
+
+                  {isFollower.includes(comment.user.id) && (
+
+                    <button onClick={(e) => {handleAddFollow(e, comment.user_id)}}>
+                               unfollow
+                          </button>
+                    )}
+                {!isFollower.includes(comment.user.id) && (
+
+<button onClick={(e) => {handleAddFollow(e, comment.user_id)}}>
+           follow
+      </button>
+)}
             <div>
             {comment.comment}
-            <button onClick={(e) => {handleAddLike(e, comment)}}>
-            {comment.likes.length} likes
-            </button>
+
+                <button onClick={(e) => {handleAddLike(e, comment)}}>
+                {comment.likes.length} likes
+                </button>
+
             </div>
             </div>
 

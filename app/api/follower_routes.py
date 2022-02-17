@@ -10,28 +10,23 @@ follower_routes = Blueprint("follower", __name__)
 @follower_routes.route('/new', methods=['POST'])
 # @login_required
 def new_follower():
-    print("JERERERERE")
     object = request.json
-    print("OBJECTTT", object)
     user_to_follow_id = object['userToFollowId']
     user_id = object['user_id']
     new_follow = Follower(user_id=user_to_follow_id, follower_id=user_id)
-    print("new follow", new_follow)
     db.session.add(new_follow)
     db.session.commit()
     user = User.query.get(user_id)
-    print("USERRRRRR", user.to_dict())
     return user.to_dict()
 
-# @follower_routes.route("/delete/<int:id>", methods=['DELETE'])
-# # @login_required
-# def deletePortfolioTicker(id):
-#     comment_to_delete = Comment.query.filter(Comment.id == id).all()
-#     likes_to_delete = Like.query.filter(Like.comment_id == id).all()
-#     for like in likes_to_delete:
-#         db.session.delete(like)
-#     delete_object = comment_to_delete[0]
-#     print(delete_object.to_dict())
-#     db.session.delete(delete_object)
-#     db.session.commit()
-#     return delete_object.to_dict()
+@follower_routes.route("/delete/<int:followId>", methods=['DELETE'])
+# @login_required
+def delete_follower(followId):
+    object = request.json
+    user_id = object['user_id']
+    follow_to_delete = Follower.query.filter(Follower.id == followId).all()
+    for f in follow_to_delete:
+        db.session.delete(f)
+    db.session.commit()
+    user = User.query.get(user_id)
+    return user.to_dict()

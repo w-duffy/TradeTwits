@@ -146,22 +146,24 @@ export const addNewFollower = (userToFollowId, user_id) => async (dispatch) =>{
     }
 }
 
-// export const deleteNewFollower = (likeId, user_id, commentId) => async (dispatch) =>{
-//     const res = await fetch(`/api/discussion/delete/like/${likeId}`, {
-//         method: 'DELETE',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify({
-//             user_id,
-//             likeId,
-//             commentId
-//         })
-//     })
-//     if (res.ok){
-//         const likedComment = await res.json();
-//         dispatch(editComment(likedComment))
-//         return likedComment
-//     }
-// }
+export const deleteNewFollower = (followId, user_id, userToFollowId) => async (dispatch) =>{
+    console.log("store1", followId, user_id, userToFollowId)
+    const res = await fetch(`/api/follower/delete/${followId}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id,
+            followId,
+            userToFollowId
+        })
+    })
+    if (res.ok){
+        const updatedUser = await res.json();
+        console.log("store2", updatedUser)
+        dispatch(setUser(updatedUser))
+        return updatedUser
+    }
+}
 
 
 
