@@ -50,7 +50,7 @@ if (isLoaded){
 
     return (
         <>
-        <h1>{stockDiscussion.ticker} - {stockDiscussion.price}</h1>
+        <h1>{stockDiscussion.ticker} - {stockDiscussion.price.toFixed(2)}</h1>
         <button
         onClick={(e) => setShowForm(!showForm)}
       >

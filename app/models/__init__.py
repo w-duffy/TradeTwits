@@ -4,4 +4,6 @@ from .comment import Comment
 from .like import Like
 from .portfolio import Portfolio
 from .stock_discussion import StockDiscussion
+from .follower import Follower
+
 # from .watchlist import Watchlist
