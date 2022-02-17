@@ -58,9 +58,7 @@ def new_ticker():
     object = request.json
     ticker = object['ticker']
     user_id = object['user_id']
-    name = object['name']
-    print("IN API", ticker, user_id, name)
-    newPortfolio = Portfolio(name=name, ticker=ticker, user_id=user_id)
+    newPortfolio = Portfolio(ticker=ticker, user_id=user_id)
     print("NEW PORT", newPortfolio)
     db.session.add(newPortfolio)
     db.session.commit()
@@ -72,9 +70,7 @@ def new_ticker():
 def deletePortfolioTicker(ticker):
     object = request.json
     id = object['id']
-    # ticker = object['ticker']
     ticker_to_delete = Portfolio.query.filter(Portfolio.ticker == ticker and Portfolio.user_id == id).all()
-    print("TICKER IN API TO DEL", ticker_to_delete)
     delete_object = ticker_to_delete[0]
     db.session.delete(delete_object)
     db.session.commit()

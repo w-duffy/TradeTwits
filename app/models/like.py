@@ -8,9 +8,11 @@ class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=False)
+    reply_id = db.Column(db.Integer, db.ForeignKey("replies.id"))
 
     user = db.relationship("User", back_populates="likes")
     comments = db.relationship("Comment", back_populates="likes")
+    replies = db.relationship("Reply", back_populates="likes")
     # stock_discussion = db.relationship("StockDiscussion", back_populates="likes")
 
 

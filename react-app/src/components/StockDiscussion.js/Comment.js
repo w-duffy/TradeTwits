@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { editDiscussionComment, addCommentLike, deleteCommentLike, addNewFollower, deleteNewFollower } from "../../store/stockDiscussion";
-
+import Reply
+ from "./Reply";
 const Comment = ({comment}) => {
     // const [isLoaded, setIsLoaded] = useState(false)
     // const ticker = useParams()
@@ -50,8 +51,7 @@ const handleAddFollow = (e, id) => {
   console.log(id)
   let userToFollowId = id
   let user_id = user.id
-  console.log("USER TO FOLLOW comp", userToFollowId)
-  console.log("USER comp", user_id)
+
   let currentlyFollowed = user.following.filter(follow =>{
     return follow.user_id === userToFollowId
   })
@@ -59,10 +59,10 @@ const handleAddFollow = (e, id) => {
   if (currentlyFollowed.length === 0) {
     dispatch(addNewFollower(userToFollowId, user_id))
   }
-  console.log("FOLLOW comp", currentlyFollowed)
+
   if (currentlyFollowed.length > 0) {
     let followId = currentlyFollowed[0].id
-    console.log("FOLLOW comp", followId)
+
     dispatch(deleteNewFollower(followId, user_id, userToFollowId))
   }
 
@@ -74,7 +74,7 @@ const handleAddFollow = (e, id) => {
   let isFollower = user.following.map(follow =>{
     return follow.user_id
   })
-  console.log(isFollower)
+
     return (
         <>
             <div>
@@ -126,7 +126,12 @@ const handleAddFollow = (e, id) => {
         </form>
               )}
 
+<p>
 
+{comment.replies.map(reply => (
+  <Reply reply={reply} />
+  ))}
+  </p>
 
   </>
   );

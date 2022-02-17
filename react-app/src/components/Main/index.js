@@ -37,8 +37,7 @@ setSearchResults(finalResult)
     console.log("ADDTICKER", tickerName)
     const ticker = tickerName
     let user_id = user.id
-    let name = user.portfolio[0].name
-    dispatch(addTicker(ticker, user_id, name))
+    dispatch(addTicker(ticker, user_id))
     // setTickerName("")
     setShowForm(!showForm)
     setNewTick(!newTick)
@@ -50,7 +49,7 @@ setSearchResults(finalResult)
       <button
         onClick={(e) => setShowForm(!showForm)}
       >
-          Add a Stock to {user.portfolio[0].name}
+          Add a Stock to your Portfolio
       </button>
       {showForm && (
                <div className='search_container'>

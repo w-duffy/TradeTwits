@@ -12,10 +12,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.String)
+    bio = db.Column(db.String)
 
     portfolio = db.relationship("Portfolio", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
+    replies = db.relationship("Reply", back_populates="user")
     following = []
     followers = []
     # watchlist = db.relationship("Watchlist", back_populates="user")
@@ -46,6 +48,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             "profile_picture": self.profile_picture,
+            "bio": self.bio,
             "portfolio": [port.to_dict() for port in self.portfolio],
             "comments": [comment.to_dict() for comment in self.comments],
             "likes": [like.to_dict() for like in self.likes],
@@ -59,14 +62,16 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             "profile_picture": self.profile_picture,
+            "bio": self.bio,
         }
-        
+
     def to_dict_follower(self):
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             "profile_picture": self.profile_picture,
+            "bio": self.bio,
             "followers": [f.to_dict() for f in self.followers],
             "following": [f.to_dict() for f in self.following]
         }

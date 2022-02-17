@@ -24,5 +24,5 @@ def seed_followers():
     db.session.commit()
 
 def undo_followers():
-    db.session.execute('TRUNCATE likes RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE followers RESTART IDENTITY CASCADE;')
     db.session.commit()

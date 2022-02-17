@@ -2,31 +2,28 @@ from .db import db
 # import os
 # import finnhub
 
-class Comment(db.Model):
-    __tablename__ = "comments"
+class Reply(db.Model):
+    __tablename__ = "replies"
 
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    stock_discussion_id = db.Column(db.Integer, db.ForeignKey("stockDiscussions.id"), nullable=False)
+    comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"), nullable=False)
+    reply = db.Column(db.String(255), nullable=False)
     time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     time_updated = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
 
-    user = db.relationship("User", back_populates="comments")
-    likes = db.relationship("Like", back_populates="comments")
-    replies = db.relationship("Reply", back_populates="comments")
-    stock_discussion = db.relationship("StockDiscussion", back_populates="comments")
-
+    user = db.relationship("User", back_populates="replies")
+    likes = db.relationship("Like", back_populates="replies")
+    comments = db.relationship("Comment", back_populates="replies")
 
     def to_dict(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "stock_discussion_id": self.stock_discussion_id,
-            "comment": self.comment,
+            "comment_id": self.comment_id,
+            "reply": self.reply,
             "time_created": self.time_created,
             "time_updated": self.time_updated,
             "likes": [like.to_dict() for like in self.likes],
-            "replies": [reply.to_dict() for reply in self.replies],
             "user": self.user.to_dict_basic()
         }

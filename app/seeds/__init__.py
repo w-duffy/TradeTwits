@@ -5,6 +5,7 @@ from .likes import seed_likes, undo_likes
 from .portfolios import seed_portfolios, undo_portfolios
 from .stock_discussions import seed_stock_discussions, undo_stock_discussions
 from .followers import seed_followers, undo_followers
+from .replies import seed_replies, undo_replies
 # from .watchlist import seed_watchlists, undo_watchlists
 
 # Creates a seed group to hold our commands
@@ -21,6 +22,7 @@ def seed():
     seed_comments()
     seed_likes()
     seed_followers()
+    seed_replies()
     # seed_watchlists()
     # Add other seed functions here
 
@@ -34,5 +36,6 @@ def undo():
     undo_comments()
     undo_likes()
     undo_followers()
+    undo_replies()
     # undo_watchlists()
     # Add other undo functions here

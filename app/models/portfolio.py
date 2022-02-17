@@ -6,8 +6,7 @@ class Portfolio(db.Model):
     __tablename__ = "portfolios"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    ticker = db.Column(db.String)
+    ticker = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship("User", back_populates="portfolio")
@@ -18,6 +17,5 @@ class Portfolio(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "name": self.name,
             "ticker": self.ticker,
         }
