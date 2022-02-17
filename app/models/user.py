@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     portfolio = db.relationship("Portfolio", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
-    watchlist = db.relationship("Watchlist", back_populates="user")
+    # watchlist = db.relationship("Watchlist", back_populates="user")
     # stock_discussion = db.relationship("StockDiscussion", back_populates="user")
 
 
@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
             "portfolio": [port.to_dict() for port in self.portfolio],
             "comments": [comment.to_dict() for comment in self.comments],
             "likes": [like.to_dict() for like in self.likes],
-            "watchlist": [list.to_dict() for list in self.watchlist],
+            # "watchlist": [list.to_dict() for list in self.watchlist],
         }
 
     def to_dict_basic(self):
