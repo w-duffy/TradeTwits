@@ -9,6 +9,8 @@ import {
   deleteNewFollower,
 } from "../../store/stockDiscussion";
 import { delReply, editReply } from "../../store/replies";
+import { addReplyLike, deleteReplyLike } from "../../store/likes";
+
 const Reply = ({ reply }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
   // const ticker = useParams()
@@ -16,68 +18,9 @@ const Reply = ({ reply }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [updatedReply, setUpdatedReply] = useState("")
 
-  // const [updatedReply, setUpdatedReply] = useState("")
 
-  //   const [showForm, setShowForm] = useState(false);
 
   const user = useSelector((state) => state.session.user);
-
-  // console.log("STOCK DIOSCUSS IN COMP", stockDiscussion)
-  // const handleEditreply = async (e, replyId) => {
-  //     e.preventDefault()
-  //     let id = replyId
-  //     let newreply = updatedreply
-  //     await dispatch(editDiscussionreply(id, newreply))
-  //     await setShowEditForm(!showEditForm)
-  // }
-
-  // const handleAddLike = (e, reply) => {
-  //   e.preventDefault();
-  //   console.log(reply)
-  //   let replyId = reply.id
-  //   let user_id = user.id
-
-  //   let userLiked = reply.likes.filter(like =>{
-  //     return like.user_id === user.id
-  //   })
-
-  //   if (userLiked.length === 0) {
-  //     // dispatch(addreplyLike(replyId, user_id))
-  //   }
-  //   if (userLiked.length > 0) {
-  //     let likeId = userLiked[0].id
-  //     // dispatch(deletereplyLike(likeId, user_id, replyId))
-  //   }
-
-  //   // setNewTick(!newTick)
-  // }
-
-  // const handleAddFollow = (e, id) => {
-  //   e.preventDefault();
-  //   console.log(id)
-  //   let userToFollowId = id
-  //   let user_id = user.id
-
-  //   let currentlyFollowed = user.following.filter(follow =>{
-  //     return follow.user_id === userToFollowId
-  //   })
-
-  //   if (currentlyFollowed.length === 0) {
-  //     dispatch(addNewFollower(userToFollowId, user_id))
-  //   }
-
-  //   if (currentlyFollowed.length > 0) {
-  //     let followId = currentlyFollowed[0].id
-
-  //     dispatch(deleteNewFollower(followId, user_id, userToFollowId))
-  //   }
-
-  //   // setNewTick(!newTick)
-  // }
-
-  // let isFollower = user.following.map(follow =>{
-  //   return follow.user_id
-  // })
 
   const handleDeleteReply = async (e, replyId) => {
     e.preventDefault();
@@ -96,6 +39,27 @@ const Reply = ({ reply }) => {
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
 }
+const handleAddReplyLike = (e, reply) => {
+  e.preventDefault();
+  console.log("REPLYCOMP", reply)
+  let replyId = reply.id
+  let user_id = user.id
+  let commentId = reply.comment_id;
+  let userLiked = reply.likes.filter(like =>{
+    return like.user_id === user.id
+  })
+  console.log("USER LIKED ARR", userLiked)
+  if (userLiked.length === 0) {
+    console.log("REPLYCOMP 3", replyId, user_id, commentId)
+    dispatch(addReplyLike(replyId, user_id, commentId))
+  }
+  if (userLiked.length > 0) {
+    let likeId = userLiked[0].id
+    console.log("REPLYCOMP 4", likeId, replyId, user_id, commentId)
+    dispatch(deleteReplyLike(likeId, user_id, replyId, commentId))
+  }
+
+}
 
 
   return (
@@ -104,7 +68,9 @@ const Reply = ({ reply }) => {
         User: {reply.user.username}
         <div>
           {reply.reply}
-
+          <button onClick={(e) => {handleAddReplyLike(e, reply)}}>
+                {reply.likes.length} Reply likes
+                </button>
           {/* <button onClick={(e) => {handleAddLike(e, reply)}}>
                 {reply.likes.length} likes
                 </button> */}

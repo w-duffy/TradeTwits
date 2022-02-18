@@ -21,11 +21,36 @@ def add_like(id):
 # @login_required
 def delete_like(likeId):
     object = request.json
-    user_id = object['user_id']
     comment_id = object['commentId']
     like_to_delete = Like.query.filter(Like.id == likeId).all()
     for like in like_to_delete:
         db.session.delete(like)
+    db.session.commit()
+    comment_with_deleted_like = Comment.query.get(comment_id)
+    return comment_with_deleted_like.to_dict()
+
+@like_routes.route("/reply/new", methods=['POST'])
+# @login_required
+def add_reply_like():
+    object = request.json
+    print("OBJECT NEW", object)
+    user_id = object['user_id']
+    reply_id = object['replyId']
+    comment_id = object['commentId']
+    new_like = Like(user_id=user_id, reply_id=reply_id)
+    db.session.add(new_like)
+    db.session.commit()
+    comment_with_new_reply_like = Comment.query.get(comment_id)
+    return comment_with_new_reply_like.to_dict()
+
+@like_routes.route("/reply/delete/<int:likeId>", methods=['DELETE'])
+# @login_required
+def delete_reply_like(likeId):
+    object = request.json
+    print("OBJECT DELETE", object)
+    comment_id = object['commentId']
+    like_to_delete = Like.query.get(likeId)
+    db.session.delete(like_to_delete)
     db.session.commit()
     comment_with_deleted_like = Comment.query.get(comment_id)
     return comment_with_deleted_like.to_dict()
