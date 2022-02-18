@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { editDiscussionComment } from "../../store/stockDiscussion";
+import { editDiscussionComment, delDiscussionComment } from "../../store/stockDiscussion";
 import Reply from "./Reply";
 import { addNewFollower, deleteNewFollower } from "../../store/followers";
 import {addCommentLike, deleteCommentLike} from '../../store/likes'
@@ -30,6 +30,13 @@ const handleEditComment = async (e, commentId) => {
     await dispatch(editDiscussionComment(id, newComment))
     await setShowEditForm(!showEditForm)
 }
+
+const handleDeleteComment = async (e, commentId) => {
+  e.preventDefault()
+  let id = commentId
+  await dispatch(delDiscussionComment(id))
+}
+
 
 const handleAddLike = (e, comment) => {
   e.preventDefault();
@@ -121,12 +128,15 @@ const handleAddReply = (e) => {
             </div>
 
             {comment.user_id === user.id && (
-
+              <>
               <button
               onClick={(e) => setShowEditForm(!showEditForm)}
               >
           EDIT COMMENT
       </button>
+                <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE COMMENT</button>
+                </>
+
                 )}
       {showEditForm && (
         <form onSubmit={(e) => {handleEditComment(e, comment.id)}}>

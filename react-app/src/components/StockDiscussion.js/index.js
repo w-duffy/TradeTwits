@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDiscussionDetails, addNewComment, delDiscussionComment } from "../../store/stockDiscussion";
+import { getDiscussionDetails, addNewComment } from "../../store/stockDiscussion";
 import Comment from './Comment'
 import Main from '../Main'
 
@@ -39,12 +39,6 @@ const handleAddComment = (e) => {
     // setNewTick(!newTick)
 }
 
-const handleDeleteComment = async (e, commentId) => {
-    e.preventDefault()
-    let id = commentId
-    await dispatch(delDiscussionComment(id))
-}
-
 
 if (isLoaded){
 
@@ -80,10 +74,7 @@ if (isLoaded){
           <div>
             <br></br>
             <Comment key={comment.id} comment={comment} />
-            {comment.user_id === user.id && (
 
-              <button onClick={(e) => {handleDeleteComment(e, comment.id)}}>DELETE COMMENT</button>
-            )}
             </div>
 
 ))}
