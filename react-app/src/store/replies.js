@@ -33,7 +33,6 @@ export const addNewReply = (reply, user_id, comment_id) => async (dispatch) =>{
 }
 
 export const editReply = (id, editedReply, commentId) => async (dispatch) =>{
-    console.log("st1", id, editedReply, commentId)
     const res = await fetch(`/api/reply/edit/${id}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -45,7 +44,6 @@ export const editReply = (id, editedReply, commentId) => async (dispatch) =>{
     })
     if (res.ok){
         const commentWithNewReply = await res.json();
-        console.log("st1", commentWithNewReply)
         dispatch(editComment(commentWithNewReply))
         return commentWithNewReply
     }

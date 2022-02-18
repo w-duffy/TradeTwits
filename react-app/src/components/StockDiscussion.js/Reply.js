@@ -63,11 +63,11 @@ const handleAddReplyLike = (e, reply) => {
               handleDeleteReply(e, reply.id);
             }}
           >
-            DELETE Reply
+            Delete Reply
           </button>
           {reply.user_id === user.id && (
             <button onClick={(e) => setShowEditForm(!showEditForm)}>
-              EDIT REPLY
+              Edit Reply
             </button>
           )}
           {showEditForm && (
