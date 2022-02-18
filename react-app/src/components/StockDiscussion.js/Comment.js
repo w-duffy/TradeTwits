@@ -134,7 +134,7 @@ const handleAddReply = (e) => {
             <input
               name="Edit Comment"
               placeholder={comment.comment}
-              value={newReply}
+              value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
               ></input>
             <button type="submit">
