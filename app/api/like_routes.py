@@ -33,7 +33,6 @@ def delete_like(likeId):
 # @login_required
 def add_reply_like():
     object = request.json
-    print("OBJECT NEW", object)
     user_id = object['user_id']
     reply_id = object['replyId']
     comment_id = object['commentId']
@@ -47,7 +46,6 @@ def add_reply_like():
 # @login_required
 def delete_reply_like(likeId):
     object = request.json
-    print("OBJECT DELETE", object)
     comment_id = object['commentId']
     like_to_delete = Like.query.get(likeId)
     db.session.delete(like_to_delete)

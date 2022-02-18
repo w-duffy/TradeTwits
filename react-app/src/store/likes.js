@@ -35,7 +35,6 @@ export const deleteCommentLike = (likeId, user_id, commentId) => async (dispatch
 }
 
 export const addReplyLike = (replyId, user_id, commentId) => async (dispatch) =>{
-    console.log("IN COMP1", replyId, user_id, commentId)
     const res = await fetch(`/api/like/reply/new`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -54,7 +53,6 @@ export const addReplyLike = (replyId, user_id, commentId) => async (dispatch) =>
 }
 
 export const deleteReplyLike = (likeId, user_id, replyId, commentId) => async (dispatch) =>{
-    console.log("IN COMP3", replyId, user_id, replyId, commentId)
     const res = await fetch(`/api/like/reply/delete/${likeId}`, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
@@ -68,7 +66,6 @@ export const deleteReplyLike = (likeId, user_id, replyId, commentId) => async (d
     if (res.ok){
         const deletedReplyLikeComment = await res.json();
         dispatch(editComment(deletedReplyLikeComment))
-        console.log("In comp5", deletedReplyLikeComment)
         return deletedReplyLikeComment
     }
 }
