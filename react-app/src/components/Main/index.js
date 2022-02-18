@@ -90,7 +90,7 @@ setSearchResults(finalResult)
         //   </div>
         // </form>
       )}
-      <PortfolioGraph newTick={newTick} />
+      <PortfolioGraph key={user.id} newTick={newTick} />
     </>
   );
 };

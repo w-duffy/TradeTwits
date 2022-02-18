@@ -41,7 +41,6 @@ function SearchBar() {
                     <>
                     <div>
                     <a onClick={() => {setSearchTerm(""); window.location.href=`/discussion/${result[0]}`}} className="test" > {result[0]} - {result[1]} </a>
-                    <button>submit</button>
                     </div>
                     </>
                     ))}

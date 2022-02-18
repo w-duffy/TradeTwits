@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { editDiscussionComment, addCommentLike, deleteCommentLike, addNewFollower, deleteNewFollower } from "../../store/stockDiscussion";
-import Reply
- from "./Reply";
+import { editDiscussionComment } from "../../store/stockDiscussion";
+import Reply from "./Reply";
+import { addNewFollower, deleteNewFollower } from "../../store/followers";
+import {addCommentLike, deleteCommentLike} from '../../store/likes'
+import { addNewReply } from "../../store/replies";
+
+
 const Comment = ({comment}) => {
     // const [isLoaded, setIsLoaded] = useState(false)
     // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
   const [updatedComment, setUpdatedComment] = useState("")
+  const [newReply, setNewReply] = useState("")
+  const [showReplyAddForm, setReplyAddShowForm] = useState(false)
 
 
 //   const [showForm, setShowForm] = useState(false);
@@ -69,6 +75,18 @@ const handleAddFollow = (e, id) => {
   // setNewTick(!newTick)
 }
 
+const handleAddReply = (e) => {
+  e.preventDefault();
+  const reply = newReply
+  let user_id = user.id
+  let comment_id = comment.id
+  dispatch(addNewReply(reply, user_id, comment_id))
+  setNewReply("")
+  setReplyAddShowForm(!showReplyAddForm)
+  // setNewTick(!newTick)
+}
+
+
 
 
   let isFollower = user.following.map(follow =>{
@@ -96,7 +114,7 @@ const handleAddFollow = (e, id) => {
             {comment.comment}
 
                 <button onClick={(e) => {handleAddLike(e, comment)}}>
-                {comment.likes.length} likes
+                {comment.likes.length} Comment likes
                 </button>
 
             </div>
@@ -107,7 +125,7 @@ const handleAddFollow = (e, id) => {
               <button
               onClick={(e) => setShowEditForm(!showEditForm)}
               >
-          EDIT
+          EDIT COMMENT
       </button>
                 )}
       {showEditForm && (
@@ -116,7 +134,7 @@ const handleAddFollow = (e, id) => {
             <input
               name="Edit Comment"
               placeholder={comment.comment}
-              value={updatedComment}
+              value={newReply}
               onChange={(e) => setUpdatedComment(e.target.value)}
               ></input>
             <button type="submit">
@@ -126,12 +144,32 @@ const handleAddFollow = (e, id) => {
         </form>
               )}
 
-<p>
+<br></br>
 
 {comment.replies.map(reply => (
-  <Reply reply={reply} />
+  <Reply key={reply.id} reply={reply} />
   ))}
-  </p>
+          <button
+        onClick={(e) => setReplyAddShowForm(!showReplyAddForm)}
+      >
+          Reply to {comment.user.username}'s post
+      </button>
+      {showReplyAddForm && (
+        <form onSubmit={handleAddReply}>
+          <div>
+            <input
+              name="Add Reply"
+              placeholder="Enter your reply here.."
+              value={newReply}
+              onChange={(e) => setNewReply(e.target.value)}
+            ></input>
+            <button type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      )}
+
 
   </>
   );

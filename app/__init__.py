@@ -11,6 +11,8 @@ from .api.auth_routes import auth_routes
 from .api.portfolio_routes import portfolio_routes
 from .api.stock_discussion_routes import stock_discussion_routes
 from .api.follower_routes import follower_routes
+from .api.like_routes import like_routes
+from .api.reply_routes import reply_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +39,8 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(portfolio_routes, url_prefix='/api/portfolio')
 app.register_blueprint(stock_discussion_routes, url_prefix='/api/discussion')
 app.register_blueprint(follower_routes, url_prefix='/api/follower')
+app.register_blueprint(like_routes, url_prefix='/api/like')
+app.register_blueprint(reply_routes, url_prefix='/api/reply')
 db.init_app(app)
 Migrate(app, db)
 

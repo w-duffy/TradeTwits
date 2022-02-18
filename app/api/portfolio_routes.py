@@ -26,6 +26,7 @@ def get_portfolio_stats(id):
         response = requests.request("GET", url, headers=headers, params=querystring)
 
         object = response.json()
+        
 
         values_to_destructure = object["Time Series (Daily)"]
 

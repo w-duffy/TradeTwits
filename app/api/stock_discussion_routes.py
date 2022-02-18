@@ -56,26 +56,3 @@ def edit_discussion_comment(id):
     db.session.commit()
     return comment_to_edit.to_dict()
 
-@stock_discussion_routes.route("/new/like/<int:id>", methods=['POST'])
-# @login_required
-def add_discussion_comment_like(id):
-    object = request.json
-    user_id = object['user_id']
-    new_like = Like(user_id=user_id, comment_id=id)
-    db.session.add(new_like)
-    db.session.commit()
-    comment_with_new_like = Comment.query.get(id)
-    return comment_with_new_like.to_dict()
-
-@stock_discussion_routes.route("/delete/like/<int:likeId>", methods=['DELETE'])
-# @login_required
-def delete_discussion_comment_like(likeId):
-    object = request.json
-    user_id = object['user_id']
-    comment_id = object['commentId']
-    like_to_delete = Like.query.filter(Like.id == likeId).all()
-    for like in like_to_delete:
-        db.session.delete(like)
-    db.session.commit()
-    comment_with_deleted_like = Comment.query.get(comment_id)
-    return comment_with_deleted_like.to_dict()

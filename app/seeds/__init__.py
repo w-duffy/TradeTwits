@@ -20,9 +20,9 @@ def seed():
     seed_portfolios()
     seed_stock_discussions()
     seed_comments()
+    seed_replies()
     seed_likes()
     seed_followers()
-    seed_replies()
     # seed_watchlists()
     # Add other seed functions here
 
@@ -34,8 +34,8 @@ def undo():
     undo_portfolios()
     undo_stock_discussions()
     undo_comments()
+    undo_replies()
     undo_likes()
     undo_followers()
-    undo_replies()
     # undo_watchlists()
     # Add other undo functions here

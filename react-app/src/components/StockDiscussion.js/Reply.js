@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { editDiscussionComment, addCommentLike, deleteCommentLike, addNewFollower, deleteNewFollower } from "../../store/stockDiscussion";
-
+import { delReply } from "../../store/replies";
 const Reply = ({reply}) => {
     // const [isLoaded, setIsLoaded] = useState(false)
     // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
-  // const [updatedreply, setUpdatedreply] = useState("")
+  // const [updatedReply, setUpdatedReply] = useState("")
 
 
 //   const [showForm, setShowForm] = useState(false);
@@ -76,18 +76,11 @@ const Reply = ({reply}) => {
 
 
 
-                  /* {isFollower.includes(reply.user.id) && (
-
-                    <button onClick={(e) => {handleAddFollow(e, reply.user_id)}}>
-                               unfollow
-                          </button>
-                    )}
-                {!isFollower.includes(reply.user.id) && (
-
-<button onClick={(e) => {handleAddFollow(e, reply.user_id)}}>
-           follow
-      </button>
-)} */
+const handleDeleteReply = async (e, replyId) => {
+    e.preventDefault()
+    let id = replyId
+    await dispatch(delReply(id))
+}
     return (
         <>
             <div>
@@ -99,6 +92,7 @@ const Reply = ({reply}) => {
                 {/* <button onClick={(e) => {handleAddLike(e, reply)}}>
                 {reply.likes.length} likes
                 </button> */}
+              <button onClick={(e) => {handleDeleteReply(e, reply.id)}}>DELETE Reply</button>
 
             </div>
             </div>
