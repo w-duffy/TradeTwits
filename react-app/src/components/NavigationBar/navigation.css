@@ -1,6 +1,5 @@
 .navbar {
     z-index: 99;
-    /* position: fixed; */
     top: 0;
     background-color: black;
     border: solid red 1px;
@@ -9,7 +8,6 @@
     justify-content: space-evenly;
     align-items: center;
     height: 69px;
-    /* padding: 0 20px; */
     box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 
 }
@@ -50,10 +48,8 @@
     font-size: 14pt;
     width: 2%;
     padding-left: 0px;
-    /* padding: 1px; */
     margin-right: 50%;
     position: absolute;
-    /* right: 0; */
     margin-top: .3%;
     background-color: rgb(87, 87, 87);
     border: rgb(109, 109, 109) 1px solid;
@@ -65,7 +61,6 @@
     justify-content: flex-start;
     text-decoration: none;
     border-bottom: rgb(109, 109, 109) 1px solid;
-    /* color: darken(#f2f2f2, 50%); */
     font-size: 1rem;
     color: white;
 }
@@ -74,7 +69,6 @@
     justify-content: flex-start;
     text-decoration: none;
     border-bottom: none;
-    /* color: darken(#f2f2f2, 50%); */
     font-size: 1rem;
     color: white;
 }

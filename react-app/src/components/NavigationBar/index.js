@@ -39,7 +39,7 @@ const NavigationBar = () => {
                 Newsletters
                 Shop
             </div>
-        <div>
+        <div className='search-bar-div'>
       <SearchBar />
         </div>
         {user && (

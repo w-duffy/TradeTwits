@@ -39,8 +39,8 @@ function SearchBar() {
                 <>
                 {searchResults.map((result) => (
                     <>
-                    <div>
-                    <a onClick={() => {setSearchTerm(""); window.location.href=`/discussion/${result[0]}`}} className="test" > {result[0]} - {result[1]} </a>
+                    <div className="search-result-select">
+                    <a onClick={() => {setSearchTerm(""); window.location.href=`/discussion/${result[0]}`}} > {result[0]} - {result[1]} </a>
                     </div>
                     </>
                     ))}
