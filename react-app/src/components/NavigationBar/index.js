@@ -19,8 +19,8 @@ const NavigationBar = () => {
 
     const handleLogout = async () => {
         await dispatch(sessionActions.logout());
-
-        history.push('/login');
+        await setShowProfileMenu(!showProfileMenu)
+        await history.push('/login');
       };
 
   return (
@@ -44,28 +44,27 @@ const NavigationBar = () => {
         </div>
         {user && (
             <>
+            <div className='profile-container'>
+
             <div>
-                <button className='profile-button' onClick={openProfileMenu}>
+                <div className='profile-button' onClick={openProfileMenu}>
                     <img className='profile-picture-on-button' src={user.profile_picture}></img>
-                </button>
-            profile button
+                </div>
         </div>
         {showProfileMenu && (
-        <ul className="profile-dropdown">
-          <div className="username__container">
-            <li className="Dd-username">Welcome, {user?.username}</li>
-          </div>
-          <div className="email__container">
-            <li className="Dd-email">Email: {user?.email}</li>
-          </div>
-          <div className="my__profile__container" >
-          <img src={user.profile_picture} />
+        <ul className="profile-ul">
 
-            <NavLink to={'/my-profile'} className="my__profile"> Profile</NavLink>
-          </div>
-          {user ? <button className="logout-btn" onClick={handleLogout}>Sign Out</button> : null}
+            <li className="profile-li"><a className='profile-a' href="/my-profile">Profile</a></li>
+
+
+            <li className="profile-li"><a className='profile-a' href="/my-profile">Edit Profile</a></li>
+
+
+          <li className='profile-li'><a className='profile-a' href="#" onClick={handleLogout}>Sign Out</a></li>
+
         </ul>
       )}
+      </div>
         <div>
             Post
         </div>
