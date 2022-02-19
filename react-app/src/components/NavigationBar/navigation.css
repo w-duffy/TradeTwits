@@ -14,9 +14,14 @@
 
 }
 
+.tradetwits-title{
+    text-decoration: none;
+    color: white
+}
+
 .nav-container{
     margin-left: 8rem;
-    margin-right: 8 rem;
+    margin-right: 8rem;
 }
 
 .trending-container {
