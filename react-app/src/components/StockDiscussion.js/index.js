@@ -7,6 +7,8 @@ import {
 } from "../../store/stockDiscussion";
 import Comment from "./Comment";
 import Main from "../Main";
+import './stockdiscussion.css'
+
 
 const StockDiscussion = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,9 +41,19 @@ const StockDiscussion = () => {
   if (isLoaded) {
     return (
       <>
-        <h1>
+      <div className="main-container">
+      <div className="portfolio">
+            <div className="portfolio-name">Portfolio</div>
+            <div>
+
+        <Main />
+            </div>
+      </div>
+      <div className="discussion-feed">
+
+        <div>
           {stockDiscussion.ticker} - {stockDiscussion.price.toFixed(2)}
-        </h1>
+        </div>
         <button onClick={(e) => setShowForm(!showForm)}>
           Share your thoughts on {stockDiscussion.ticker}
         </button>
@@ -58,8 +70,7 @@ const StockDiscussion = () => {
             </div>
           </form>
         )}
-        <h1>Portfolio</h1>
-        <Main />
+
 
         <div>
           {stockDiscussion.comments.map((comment) => (
@@ -69,6 +80,8 @@ const StockDiscussion = () => {
             </div>
           ))}
         </div>
+          </div>
+              </div>
       </>
     );
   } else return <></>;

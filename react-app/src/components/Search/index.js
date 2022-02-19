@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import { searchOptions } from './tickers'
 import {useHistory } from 'react-router-dom'
-
+import './search.css'
 function SearchBar() {
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("");

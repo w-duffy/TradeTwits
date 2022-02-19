@@ -6,8 +6,7 @@ import SearchBar from './Search';
 
 const NavBar = () => {
   return (
-    <nav>
-      <SearchBar />
+    <div>
       <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
@@ -33,7 +32,7 @@ const NavBar = () => {
           <LogoutButton />
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }
 

@@ -10,6 +10,10 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Main from './components/Main'
 import StockDiscussion from './components/StockDiscussion.js';
+import NavigationBar from './components/NavigationBar';
+
+
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +32,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+
+    <NavigationBar />
+
+      {/* <NavBar /> */}
       <Switch>
       <ProtectedRoute path='/home' exact={true}>
           <Main />
