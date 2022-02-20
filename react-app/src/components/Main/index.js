@@ -46,11 +46,14 @@ setSearchResults(finalResult)
 
   return (
     <>
+        <div className='add-stock-button'>
+
       <button
         onClick={(e) => setShowForm(!showForm)}
-      >
+        >
           Add a Stock to your Portfolio
       </button>
+        </div>
       {showForm && (
                <div className='search_container'>
                <div className="search__bar">

@@ -28,15 +28,44 @@ function PortfolioGraph({newTick}){
             await dispatch(delPortfolioTicker(ticker, id))
         }
 
-
+        const isTrue = false
     if (isLoaded){
         return (
-            <div>
+            <div className='main-port-container'>
             {portfolioDetail.map(detail => (
                 <>
-                {detail.ticker} {Number(detail.values[0]).toFixed(2)}
+                <div className='portfolio-details-container'>
+
+                        <div className='del-stock'>
+                    {isTrue && (
+
+<button onClick={(e) => {handleDeleteTicker(e, detail.ticker)}}>X</button>
+                    )}
+</div>
+                <div className='stock-name'>
+                    <div>
+
+                {detail.ticker}
+                    </div>
+                    <div className='port-co-name'>
+                        Comapany
+                    </div>
+                </div>
+                <div className='stock-graph'>
+
                 <Graph key={detail.values[0]} values={detail.values} dates={detail.dates}/>
-                <button onClick={(e) => {handleDeleteTicker(e, detail.ticker)}}>DELETE {detail.ticker}</button>
+                </div>
+                <div className='stock-price'>
+                    <div>
+                {Number(detail.values[0]).toFixed(2)}
+                    </div>
+                <div className='port-co-name'>
+                    %change
+                </div>
+                </div>
+
+                </div>
+
                 </>
             ))}
         </div>
