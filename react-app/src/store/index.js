@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import portfolioReducer from './portfolio';
 import stockDiscussionReducer from './stockDiscussion';
+import stockDiscussionGraphReducer from './stockDiscussionGraph';
 
 const rootReducer = combineReducers({
   session,
   portfolioReducer,
-  stockDiscussionReducer
+  stockDiscussionReducer,
+  stockDiscussionGraphReducer
 });
 
 

@@ -8,6 +8,9 @@ import {
 import Comment from "./Comment";
 import Main from "../Main";
 import './stockdiscussion.css'
+import CompanyInfo from "./CompanyInfo";
+import DiscussionGraph from "./DiscussionGraph";
+import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 
 
 const StockDiscussion = () => {
@@ -16,13 +19,16 @@ const StockDiscussion = () => {
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [showEditPortfolio, setEditPortfolio] = useState(false);
 
   const user = useSelector((state) => state.session.user);
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
+  const stockDiscussionGraph = useSelector((state) => state.stockDiscussionGraphReducer)
 
   useEffect(() => {
     async function getDiscussion() {
       await dispatch(getDiscussionDetails(ticker.ticker));
+      await dispatch(getStockDiscussionGraph(ticker.ticker))
       setIsLoaded(true);
     }
     getDiscussion();
@@ -38,22 +44,34 @@ const StockDiscussion = () => {
     setShowForm(!showForm);
   };
 
+
+
   if (isLoaded) {
+
     return (
       <>
       <div className="main-container">
       <div className="portfolio">
             <div className="portfolio-name">Portfolio</div>
             <div>
+            <button
+        onClick={(e) => setEditPortfolio(!showEditPortfolio)}
+        >
+          Edit Portfolio
+      </button>
 
-        <Main />
+        <Main key={stockDiscussion.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
       <div className="discussion-feed">
 
         <div>
-          {stockDiscussion.ticker} - {stockDiscussion.price.toFixed(2)}
+          <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
+        <div>
+          <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
+        </div>
+        <br></br>
         <button onClick={(e) => setShowForm(!showForm)}>
           Share your thoughts on {stockDiscussion.ticker}
         </button>

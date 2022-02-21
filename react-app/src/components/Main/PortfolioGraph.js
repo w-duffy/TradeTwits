@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
 import {getPortfolioDetails, delPortfolioTicker} from '../../store/portfolio'
 
-function PortfolioGraph({newTick}){
+function PortfolioGraph({newTick, showEditPortfolio}){
     const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -28,7 +28,6 @@ function PortfolioGraph({newTick}){
             await dispatch(delPortfolioTicker(ticker, id))
         }
 
-        const isTrue = false
     if (isLoaded){
         return (
             <div className='main-port-container'>
@@ -37,7 +36,7 @@ function PortfolioGraph({newTick}){
                 <div className='portfolio-details-container'>
 
                         <div className='del-stock'>
-                    {isTrue && (
+                    {showEditPortfolio && (
 
 <button onClick={(e) => {handleDeleteTicker(e, detail.ticker)}}>X</button>
                     )}

@@ -93,6 +93,8 @@
 
 .trending-container {
     display: grid;
+    border: 1px solid white;
+    margin-bottom: 25px;
     grid-auto-columns: 1fr;
     grid-template-columns: 0.6fr 1.4fr;
     /* grid-template-rows: 0.3fr; */
@@ -100,6 +102,7 @@
     gap: 0px 0px;
     grid-template-areas:
       "three feed";
+
   }
   .three {
       grid-area: three;

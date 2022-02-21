@@ -7,7 +7,7 @@
     grid-template-areas:
     "portfolio discussion-feed";
     margin-right: 10rem;
-    margin-left: 10rem;
+    margin-left: 15rem;
   }
 
 .portfolio{
@@ -29,5 +29,5 @@
 }
 .discussion-feed{
     padding-left: 20px;
-    margin-right: 100px;
+    /* margin-right: 100px; */
 }

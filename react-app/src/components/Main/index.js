@@ -4,7 +4,7 @@ import PortfolioGraph from "./PortfolioGraph";
 import { addTicker } from '../../store/session';
 import { searchOptions } from '../Search/tickers'
 
-const Main = () => {
+const Main = ({showEditPortfolio}) => {
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
 // const [tickerName, setTickerName] = useState("")
@@ -46,15 +46,15 @@ setSearchResults(finalResult)
 
   return (
     <>
-        <div className='add-stock-button'>
+        {/* <div className='add-stock-button'>
 
       <button
         onClick={(e) => setShowForm(!showForm)}
         >
           Add a Stock to your Portfolio
       </button>
-        </div>
-      {showForm && (
+        </div> */}
+      {showEditPortfolio && (
                <div className='search_container'>
                <div className="search__bar">
                    <input type="text" value={searchTerm} placeholder="Search ticker or company name.." onChange={(e)=>setSearchTerm(e.target.value)}></input>
@@ -93,7 +93,7 @@ setSearchResults(finalResult)
         //   </div>
         // </form>
       )}
-      <PortfolioGraph key={user.id} newTick={newTick} />
+      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} newTick={newTick} />
     </>
   );
 };
