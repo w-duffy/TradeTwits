@@ -43,7 +43,7 @@ function SearchBar() {
         <input
           type="text"
           value={searchTerm}
-          placeholder="Search ticker or company name.."
+          placeholder="Ticker or Company Name"
           onChange={(e) => setSearchTerm(e.target.value)}
         ></input>
       </div>

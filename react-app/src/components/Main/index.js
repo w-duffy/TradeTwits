@@ -57,7 +57,7 @@ setSearchResults(finalResult)
       {showEditPortfolio && (
                <div className='search_container'>
                <div className="search__bar">
-                   <input type="text" value={searchTerm} placeholder="Search ticker or company name.." onChange={(e)=>setSearchTerm(e.target.value)}></input>
+                   <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
 
                </div>
                <div id="search_results">

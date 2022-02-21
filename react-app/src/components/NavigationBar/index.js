@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from '../Search';
@@ -86,7 +85,7 @@ const NavigationBar = () => {
       {/* <SearchBar /> */}
       <div className='search_container'>
         <div className="search__bar">
-            <input type="text" value={searchTerm} placeholder="Search ticker or company name.." onChange={(e)=>setSearchTerm(e.target.value)}></input>
+            <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
 
         </div>
         <div id="search_results">
@@ -165,7 +164,7 @@ const NavigationBar = () => {
 
       <Route path='/discussion/:ticker' exact={true}>
 
-      <StockDiscussion key={user.id} tickerSearch={tickerSearch}/>
+      <StockDiscussion tickerSearch={tickerSearch}/>
       </Route>
 
       </>
