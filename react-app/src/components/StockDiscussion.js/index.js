@@ -11,7 +11,7 @@ import './stockdiscussion.css'
 import CompanyInfo from "./CompanyInfo";
 import DiscussionGraph from "./DiscussionGraph";
 import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
-
+import { getPortfolioDetails } from "../../store/portfolio";
 
 
 const StockDiscussion = ({tickerSearch}) => {
@@ -41,6 +41,8 @@ const StockDiscussion = ({tickerSearch}) => {
     getDiscussion();
   }, [tickerSearch]);
 
+
+
   const handleAddComment = (e) => {
     e.preventDefault();
     const comment = newComment;
@@ -51,6 +53,15 @@ const StockDiscussion = ({tickerSearch}) => {
     setShowForm(!showForm);
   };
 
+  useEffect(() => {
+    const id = user.id
+
+      async function getDetails() {
+      await dispatch(getPortfolioDetails(id))
+    }
+  getDetails()
+
+}, [])
 
 
   if (isLoaded) {

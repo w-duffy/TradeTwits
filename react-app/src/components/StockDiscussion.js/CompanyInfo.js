@@ -8,14 +8,13 @@ import { getPortfolioDetails, delPortfolioTicker } from "../../store/portfolio";
 
 
 const CompanyInfo = ({stockDiscussion}) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const ticker = useParams();
+
   const dispatch = useDispatch();
-  const [showForm, setShowForm] = useState(false);
-  const [newComment, setNewComment] = useState("");
-  const [showEditPortfolio, setEditPortfolio] = useState(false);
+
   const user = useSelector((state) => state.session.user);
   const portfolioDetail = useSelector(state => state.portfolioReducer)
+
+
 
   const handleAddTicker = (e) => {
     e.preventDefault();
@@ -23,8 +22,6 @@ const CompanyInfo = ({stockDiscussion}) => {
     let user_id = user.id
     let id = user.id
     async function addToPortfolio() {
-        console.log("TICKER", ticker)
-        console.log("ID", id)
         await dispatch(addTicker(ticker, user_id))
         await dispatch(getPortfolioDetails(id))
     }
@@ -36,12 +33,15 @@ const handleDeleteTicker = async (e) => {
     let id = user.id
     let ticker = stockDiscussion.ticker
     await dispatch(delPortfolioTicker(ticker, id))
-
+    await dispatch(getPortfolioDetails(id))
 }
-    let inPortfolio = portfolioDetail.filter(item =>{
-        return item.ticker === stockDiscussion.ticker
-    })
-    console.log(inPortfolio)
+
+let inPortfolio = portfolioDetail.filter(detail =>{
+    return detail.ticker == stockDiscussion.ticker
+})
+
+console.log("inportfolio", inPortfolio)
+
     return (
       <>
       <div className="top-container">
