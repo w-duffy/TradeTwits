@@ -42,9 +42,9 @@ function App() {
       <ProtectedRoute path='/home' exact={true}>
           <Main />
         </ProtectedRoute>
-        <Route path='/discussion/:ticker' exact={true}>
+        {/* <Route path='/discussion/:ticker' exact={true}>
           <StockDiscussion />
-        </Route>
+        </Route> */}
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

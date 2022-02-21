@@ -14,7 +14,7 @@ import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 
 
 
-const StockDiscussion = () => {
+const StockDiscussion = ({tickerSearch}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const ticker = useParams();
   const dispatch = useDispatch();
@@ -27,12 +27,12 @@ const StockDiscussion = () => {
 
   useEffect(() => {
     async function getDiscussion() {
-      await dispatch(getDiscussionDetails(ticker.ticker));
-      await dispatch(getStockDiscussionGraph(ticker.ticker))
+      await dispatch(getDiscussionDetails(tickerSearch));
+      await dispatch(getStockDiscussionGraph(tickerSearch))
       setIsLoaded(true);
     }
     getDiscussion();
-  }, []);
+  }, [tickerSearch]);
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -60,7 +60,7 @@ const StockDiscussion = () => {
           Edit Portfolio
       </button>
 
-        <Main key={stockDiscussion.id} showEditPortfolio={showEditPortfolio} />
+        <Main showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
       <div className="discussion-feed">
