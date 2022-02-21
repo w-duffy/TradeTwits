@@ -35,6 +35,9 @@ const NavigationBar = () => {
       const [searchResults, setSearchResults] = useState([]);
       const [tickerSearch, setTickerSearch] = useState("");
       const browserHistory = createBrowserHistory()
+
+      const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
+
       useEffect(() =>{
           setSearchTerm("")
       },[])
@@ -92,7 +95,13 @@ const NavigationBar = () => {
                 {searchResults.map((result) => (
                     <>
                     <div className="search-result-select">
-                    <a onClick={() => {setSearchTerm(""); setTickerSearch(result[0]); browserHistory.push(`/discussion/${result[0]}`)}} > {result[0]} - {result[1]} </a>
+                    {stockDiscussion.id && (
+                        <a onClick={() => {setSearchTerm(""); setTickerSearch(result[0]); browserHistory.push(`/discussion/${result[0]}`)}} > {result[0]} - {result[1]} </a>
+                    )}
+                    {!stockDiscussion.id && (
+                        <a onClick={() => {setSearchTerm(""); setTickerSearch(result[0]); history.push(`/discussion/${result[0]}`)}} > {result[0]} - {result[1]} </a>
+
+                    )}
                     </div>
                     </>
                     ))}
@@ -119,7 +128,7 @@ const NavigationBar = () => {
             <li className="profile-li"><a className='profile-a' href="/my-profile">Edit Profile</a></li>
 
 
-          <li className='profile-li'><a className='profile-a' href="#" onClick={handleLogout}>Sign Out</a></li>
+          <li className='profile-li'><a className='profile-a' href="/login" onClick={handleLogout}>Sign Out</a></li>
 
         </ul>
       )}

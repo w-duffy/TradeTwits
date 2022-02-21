@@ -17,7 +17,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     } else {
-      history.push("/home")
+      history.push("/discussion/home")
     }
   };
 

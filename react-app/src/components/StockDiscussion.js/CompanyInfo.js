@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import './companyInfo.css'
+import { addTicker } from "../../store/session";
+import { getPortfolioDetails } from "../../store/portfolio";
 
 
 const CompanyInfo = ({stockDiscussion}) => {
@@ -12,8 +14,21 @@ const CompanyInfo = ({stockDiscussion}) => {
   const [showForm, setShowForm] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [showEditPortfolio, setEditPortfolio] = useState(false);
+  const user = useSelector((state) => state.session.user);
 
-
+  const handleAddTicker = (e) => {
+    e.preventDefault();
+    const ticker = stockDiscussion.ticker
+    let user_id = user.id
+    let id = user.id
+    async function addToPortfolio() {
+        console.log("TICKER", ticker)
+        console.log("ID", id)
+        await dispatch(addTicker(ticker, user_id))
+        await dispatch(getPortfolioDetails(id))
+    }
+    addToPortfolio()
+}
 
     return (
       <>
@@ -36,7 +51,7 @@ const CompanyInfo = ({stockDiscussion}) => {
               Amount of watchers
               </div>
               <div className="add-co-to-portfolio">
-                add to port
+              <button onClick={(e) => {handleAddTicker(e)}}>Add to Portfolio</button>
               </div>
           </div>
       </div>

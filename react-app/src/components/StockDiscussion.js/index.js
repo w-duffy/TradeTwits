@@ -27,9 +27,16 @@ const StockDiscussion = ({tickerSearch}) => {
 
   useEffect(() => {
     async function getDiscussion() {
-      await dispatch(getDiscussionDetails(tickerSearch));
-      await dispatch(getStockDiscussionGraph(tickerSearch))
-      setIsLoaded(true);
+      if(!tickerSearch){
+        await dispatch(getDiscussionDetails(ticker.ticker));
+        await dispatch(getStockDiscussionGraph(ticker.ticker))
+        setIsLoaded(true);
+      }
+      if(tickerSearch) {
+        await dispatch(getDiscussionDetails(tickerSearch));
+        await dispatch(getStockDiscussionGraph(tickerSearch))
+        setIsLoaded(true);
+      }
     }
     getDiscussion();
   }, [tickerSearch]);
