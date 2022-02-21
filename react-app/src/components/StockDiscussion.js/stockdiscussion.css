@@ -5,9 +5,10 @@
     /* grid-template-rows: 0.1fr; */
     gap: 0px 0px;
     grid-template-areas:
-    "portfolio discussion-feed";
+    "portfolio discussion-feed .";
     margin-right: 10rem;
     margin-left: 15rem;
+
   }
 
 .portfolio{
@@ -28,6 +29,11 @@
     margin-left: 25px;
 }
 .discussion-feed{
-    padding-left: 20px;
-    /* margin-right: 100px; */
+    padding-left: 40px;
+    padding-right: 250px;
+    max-width: 600px;
+}
+
+.discussion-graph{
+    margin-top: 10px;
 }

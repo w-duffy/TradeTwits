@@ -14,10 +14,10 @@ import NavigationBar from './components/NavigationBar';
 
 
 
-
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     (async() => {
@@ -29,6 +29,8 @@ function App() {
   if (!loaded) {
     return null;
   }
+
+
 
   return (
     <BrowserRouter>

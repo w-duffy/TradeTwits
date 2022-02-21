@@ -34,11 +34,13 @@ function DiscussionGraph({values, dates}){
         //  values = [4592.23, 4668.22, 4700.68, 4862.325, 4768.89]
         //  dates = [date5.toLocaleDateString("en-US"), date4.toLocaleDateString("en-US"), date3.toLocaleDateString("en-US"), date2.toLocaleDateString("en-US"), date1.toLocaleDateString("en-US")]
 
-
+        const formatDays = dates.map(day =>{
+            return day.slice(5)
+        })
       const [lineColor, setLineColor] = useState("")
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
-      const daySlicer = dates.slice(0, 30)
-      const valuesSlicer = values.slice(0, 30)
+      const daySlicer = formatDays.slice(0, 5)
+      const valuesSlicer = values.slice(0, 5)
 
       useEffect(() =>{
         if(valuesSlicer[0] < valuesSlicer[valuesSlicer.length - 1]){
@@ -67,27 +69,27 @@ function DiscussionGraph({values, dates}){
         scales: {
           xAxes: {
             grid: {
-              display: false,
+              display: true,
             },
             gridLines: {
               display: true,
               color: 'rgb(255,255,255)',
             },
             ticks: {
-              display: false
+              display: true
             }
           },
           yAxes:
             {
               grid: {
-                display: false,
+                display: true,
               },
               gridLines: {
                 display: true,
                 color: 'rgb(255,255,255)',
              },
               ticks: {
-                display: false,
+                display: true,
                 beginAtZero: true,
               },
             },
@@ -102,7 +104,7 @@ function DiscussionGraph({values, dates}){
             display: false,
           },
           datalabels: {
-            display: false
+            display: true
           },
         },
         interaction: {

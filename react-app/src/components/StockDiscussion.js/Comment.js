@@ -120,7 +120,9 @@ const Comment = ({ comment }) => {
           </button>
         )}
         <div>
+          <p>
           {comment.comment}
+          </p>
 
           <button
             onClick={(e) => {

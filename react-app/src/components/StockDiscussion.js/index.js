@@ -13,6 +13,7 @@ import DiscussionGraph from "./DiscussionGraph";
 import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 
 
+
 const StockDiscussion = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const ticker = useParams();
@@ -20,7 +21,6 @@ const StockDiscussion = () => {
   const [showForm, setShowForm] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [showEditPortfolio, setEditPortfolio] = useState(false);
-
   const user = useSelector((state) => state.session.user);
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
   const stockDiscussionGraph = useSelector((state) => state.stockDiscussionGraphReducer)
@@ -68,7 +68,7 @@ const StockDiscussion = () => {
         <div>
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
-        <div>
+        <div className="discussion-graph">
           <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>

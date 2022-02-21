@@ -5,7 +5,7 @@ import SearchBar from '../Search';
 import './navigation.css'
 import * as sessionActions from '../../store/session';
 import { NavLink, useHistory } from 'react-router-dom';
-
+import StockDiscussion from '../StockDiscussion.js';
 const NavigationBar = () => {
     const user = useSelector((state) => state.session.user);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -31,14 +31,14 @@ const NavigationBar = () => {
             <a href={`/home`}className='tradetwits-title'>
         TradeTwits
             </a>
-            <div>
+            {/* <div>
                 Rooms
                 Shows
                 Rankings
                 Earnings
                 Newsletters
                 Shop
-            </div>
+            </div> */}
         <div className='search-bar-div'>
       <SearchBar />
         </div>
