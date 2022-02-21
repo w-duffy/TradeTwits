@@ -37,3 +37,31 @@
 .discussion-graph{
     margin-top: 10px;
 }
+
+.add-comment-textarea{
+    width: 500px;
+    height: 78px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    resize: none;
+    font-size: 15px;
+}
+
+.post-comment-button{
+    height: 30px;
+    margin-left: 8px;
+}
+
+.add-comment-container{
+    display: flex;
+    align-items: center;
+}
+
+.comment-prof-pic{
+    height: 30px;
+    width: 30px;
+    margin-right: 7px;
+}
+.larger-comment-container{
+    display: flex;
+}

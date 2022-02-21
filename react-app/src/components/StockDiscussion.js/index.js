@@ -12,7 +12,7 @@ import CompanyInfo from "./CompanyInfo";
 import DiscussionGraph from "./DiscussionGraph";
 import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 import { getPortfolioDetails } from "../../store/portfolio";
-
+import KeyData from "./KeyData";
 
 const StockDiscussion = ({tickerSearch}) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -90,24 +90,31 @@ const StockDiscussion = ({tickerSearch}) => {
           <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
-        <button onClick={(e) => setShowForm(!showForm)}>
+      <KeyData />
+        <br></br>
+        {/* <button onClick={(e) => setShowForm(!showForm)}>
           Share your thoughts on {stockDiscussion.ticker}
-        </button>
-        {showForm && (
+        </button> */}
+        {true && (
           <form onSubmit={handleAddComment}>
-            <div>
-              <input
-                name="Add Ticker"
-                placeholder="Enter your comment here.."
+            <div className="larger-comment-container">
+
+                          <img className="comment-prof-pic" src={user.profile_picture}>
+
+</img>
+            <div className="add-comment-container">
+
+              <textarea className="add-comment-textarea"
+                name="Add Comment"
+                placeholder={`Share your thoughts on ${stockDiscussion.ticker}`}
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
-              ></input>
-              <button type="submit">Submit</button>
+                ></textarea>
+              <button className="post-comment-button" type="submit">Post</button>
             </div>
+          </div>
           </form>
         )}
-
-
         <div>
           {stockDiscussion.comments.map((comment) => (
             <div>

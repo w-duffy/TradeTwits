@@ -1,0 +1,38 @@
+.key-data-container{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ada9a9;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    border-radius: 5px;
+}
+
+
+.key-data-first {
+    border-right: 1px solid #ada9a9;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    padding-right: 20px;
+}
+
+.week-low{
+    border-right: 1px solid #ada9a9;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+}
+
+.week-high{
+    border-right: 1px solid #ada9a9;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+}
+
+.market-cap{
+    border-right: 1px solid #ada9a9;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+}
