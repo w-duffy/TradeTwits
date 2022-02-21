@@ -165,7 +165,7 @@ const NavigationBar = () => {
 
       <Route path='/discussion/:ticker' exact={true}>
 
-      <StockDiscussion tickerSearch={tickerSearch}/>
+      <StockDiscussion key={user.id} tickerSearch={tickerSearch}/>
       </Route>
 
       </>

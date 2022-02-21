@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import './companyInfo.css'
 import { addTicker } from "../../store/session";
-import { getPortfolioDetails } from "../../store/portfolio";
+import { getPortfolioDetails, delPortfolioTicker } from "../../store/portfolio";
 
 
 const CompanyInfo = ({stockDiscussion}) => {
@@ -15,6 +15,7 @@ const CompanyInfo = ({stockDiscussion}) => {
   const [newComment, setNewComment] = useState("");
   const [showEditPortfolio, setEditPortfolio] = useState(false);
   const user = useSelector((state) => state.session.user);
+  const portfolioDetail = useSelector(state => state.portfolioReducer)
 
   const handleAddTicker = (e) => {
     e.preventDefault();
@@ -30,6 +31,17 @@ const CompanyInfo = ({stockDiscussion}) => {
     addToPortfolio()
 }
 
+const handleDeleteTicker = async (e) => {
+    e.preventDefault()
+    let id = user.id
+    let ticker = stockDiscussion.ticker
+    await dispatch(delPortfolioTicker(ticker, id))
+
+}
+    let inPortfolio = portfolioDetail.filter(item =>{
+        return item.ticker === stockDiscussion.ticker
+    })
+    console.log(inPortfolio)
     return (
       <>
       <div className="top-container">
@@ -51,7 +63,12 @@ const CompanyInfo = ({stockDiscussion}) => {
               Amount of watchers
               </div>
               <div className="add-co-to-portfolio">
-              <button onClick={(e) => {handleAddTicker(e)}}>Add to Portfolio</button>
+                {inPortfolio.length === 0 && (
+                    <button onClick={(e) => {handleAddTicker(e)}}>Add to Portfolio</button>
+                )}
+                {inPortfolio.length > 0 && (
+                    <button onClick={(e) => {handleDeleteTicker(e)}}>Delete from Portfolio</button>
+                )}
               </div>
           </div>
       </div>

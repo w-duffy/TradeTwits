@@ -114,7 +114,7 @@ function DiscussionGraph({values, dates}){
       };
     return (
 
-             <Line options={options} data={data}/>
+             <Line key={data[0]} options={options} data={data}/>
 
     )
 }

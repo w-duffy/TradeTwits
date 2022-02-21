@@ -52,7 +52,7 @@ function PortfolioGraph({newTick, showEditPortfolio}){
                 </div>
                 <div className='stock-graph'>
 
-                <Graph key={detail.values[0]} values={detail.values} dates={detail.dates}/>
+                <Graph key={detail.id} values={detail.values} dates={detail.dates}/>
                 </div>
                 <div className='stock-price'>
                     <div>

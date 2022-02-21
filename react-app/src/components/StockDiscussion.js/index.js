@@ -67,7 +67,7 @@ const StockDiscussion = ({tickerSearch}) => {
           Edit Portfolio
       </button>
 
-        <Main showEditPortfolio={showEditPortfolio} />
+        <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
       <div className="discussion-feed">
