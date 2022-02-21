@@ -115,14 +115,12 @@ const StockDiscussion = ({tickerSearch}) => {
           </div>
           </form>
         )}
-        <div>
+        <br></br>
+
           {stockDiscussion.comments.map((comment) => (
-            <div>
-              <br></br>
               <Comment key={comment.id} comment={comment} />
-            </div>
           ))}
-        </div>
+
           </div>
               </div>
       </>

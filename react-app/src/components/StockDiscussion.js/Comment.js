@@ -9,6 +9,8 @@ import Reply from "./Reply";
 import { addNewFollower, deleteNewFollower } from "../../store/followers";
 import { addCommentLike, deleteCommentLike } from "../../store/likes";
 import { addNewReply } from "../../store/replies";
+import './comment.css'
+
 
 const Comment = ({ comment }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
@@ -99,15 +101,63 @@ const Comment = ({ comment }) => {
 
   return (
     <>
-      <div>
-        User: {comment.user.username}
+    <div className="comment-container">
+      <div className="comment-body-div-prof-pic">
+        <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+      </div>
+      <div className="comment-body-container">
+      <div className="comment-body-first-row">
+      <div className="username-posted">
+        <div className="comment-top-row-username">
+        {comment.user.username}
+        </div>
+        <div className="comment-top-row-updated">
+          {comment.time_updated}
+        </div>
+      </div>
+      <div> delete</div>
+      </div>
+      <div className="comment-body-comment">
+            {comment.comment}
+      </div>
+
+      <div className="comment-body-bottom-row">
+        <div>
+
+      <button onClick={(e) => setReplyAddShowForm(!showReplyAddForm)}>
+        Reply to {comment.user.username}'s post
+      </button>
+      {showReplyAddForm && (
+        <form onSubmit={handleAddReply}>
+          <div>
+            <input
+              name="Add Reply"
+              placeholder="Enter your reply here.."
+              value={newReply}
+              onChange={(e) => setNewReply(e.target.value)}
+            ></input>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      )}
+        </div>
+        <div>
+        <button
+            onClick={(e) => {
+              handleAddLike(e, comment);
+            }}
+            >
+            {comment.likes.length} Comment likes
+          </button>
+        </div>
+        <div>
         {isFollower.includes(comment.user.id) && (
           <button
             onClick={(e) => {
               handleAddFollow(e, comment.user_id);
             }}
-          >
-            Unfollow
+            >
+            Unfollow {comment.user.username}
           </button>
         )}
         {!isFollower.includes(comment.user.id) && (
@@ -116,23 +166,13 @@ const Comment = ({ comment }) => {
               handleAddFollow(e, comment.user_id);
             }}
           >
-            follow
+            Follow {comment.user.username}
           </button>
         )}
-        <div>
-          <p>
-          {comment.comment}
-          </p>
-
-          <button
-            onClick={(e) => {
-              handleAddLike(e, comment);
-            }}
-          >
-            {comment.likes.length} Comment likes
-          </button>
         </div>
+
       </div>
+
 
       {comment.user_id === user.id && (
         <>
@@ -167,26 +207,12 @@ const Comment = ({ comment }) => {
       )}
 
       <br></br>
-
       {comment.replies.map((reply) => (
         <Reply key={reply.id} reply={reply} />
       ))}
-      <button onClick={(e) => setReplyAddShowForm(!showReplyAddForm)}>
-        Reply to {comment.user.username}'s post
-      </button>
-      {showReplyAddForm && (
-        <form onSubmit={handleAddReply}>
-          <div>
-            <input
-              name="Add Reply"
-              placeholder="Enter your reply here.."
-              value={newReply}
-              onChange={(e) => setNewReply(e.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      )}
+
+              </div>
+    </div>
     </>
   );
 };

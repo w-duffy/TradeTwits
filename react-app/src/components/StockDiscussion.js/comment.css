@@ -1,0 +1,41 @@
+.comment-container{
+    display: flex;
+    margin-bottom: 24px;
+    border-bottom: 1px red solid;
+    padding-bottom: 15px;
+}
+.comment-body-div-prof-pic{
+    margin-right: 25px;
+}
+.comment-body-prof-pic{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+}
+.comment-body-container{
+    width: 100%;
+}
+.username-posted{
+    display: flex;
+}
+
+.comment-top-row-username{
+    margin-right: 10px;
+}
+.comment-body-first-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-body-comment{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.comment-body-bottom-row{
+    display: flex;
+    justify-content: space-between;
+}
+.comment-body-bottom-row > div{
+    /* margin-right: 30px; */
+}

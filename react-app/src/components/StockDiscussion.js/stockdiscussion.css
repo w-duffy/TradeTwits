@@ -61,6 +61,7 @@
     height: 30px;
     width: 30px;
     margin-right: 7px;
+    border-radius: 50%;
 }
 .larger-comment-container{
     display: flex;
