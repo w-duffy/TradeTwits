@@ -136,7 +136,9 @@ const Comment = ({ comment }) => {
         {updatedDateFormatted.toLocaleDateString()}
         </div>
       </div>
-      <div> delete</div>
+      <div className="comment-icon-container">
+      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      </div>
       </div>
       <div className="comment-body-comment">
             {comment.comment}
@@ -169,7 +171,7 @@ const Comment = ({ comment }) => {
       )} */}
         </div>
         <div>
-        <div className="comment-icon-container"
+        <div className="comment-icon-container-like"
             onClick={(e) => {
               handleAddLike(e, comment);
             }}
@@ -275,7 +277,9 @@ const Comment = ({ comment }) => {
          {updatedDateFormatted.toLocaleDateString()}
        </div>
      </div>
-     <div> delete</div>
+     <div>
+     <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-dot-browser-ui-elements-flat-icons-inmotus-design.png"/>
+     </div>
      </div>
      <div className="comment-body-comment-modal">
            {comment.comment}

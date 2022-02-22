@@ -82,11 +82,55 @@
     cursor: pointer;
 }
 
+.comment-icon-container:hover{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 .comment-icon-container > div{
+    margin-right: 5px;
+}
+
+.comment-icon-container-like{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.comment-icon-container-like > div{
     margin-right: 5px;
 }
 
 .comment-like-pic{
     height: 30px;
     width: 30px;
+}
+
+.comment-icon-container-like:hover{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.edit-icon{
+    height: 30px;
+    width: 30px;
+}
+
+.edit-icon:hover {
+    height: 30px;
+    width: 30px;
+    content:url("https://img.icons8.com/color/48/000000/more.png")
 }

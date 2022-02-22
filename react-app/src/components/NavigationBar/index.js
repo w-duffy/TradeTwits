@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from '../Search';
 import './navigation.css'
@@ -15,7 +15,7 @@ const NavigationBar = () => {
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const refHandler = useRef(null);
 
     const openProfileMenu = () => {
         setShowProfileMenu(!showProfileMenu)
@@ -57,11 +57,18 @@ const NavigationBar = () => {
 
 
 
+      useEffect(() => {
+        document.addEventListener("click", clickedOffSearch, false);
+        return () => {
+          document.removeEventListener("click", clickedOffSearch, false);
+        };
+      }, []);
 
-
-
-
-
+      const clickedOffSearch = event => {
+        if (refHandler.current && !refHandler.current.contains(event.target)) {
+          setSearchTerm("");
+        }
+      };
 
 
   return (
@@ -83,8 +90,8 @@ const NavigationBar = () => {
             </div> */}
         <div className='search-bar-div'>
       {/* <SearchBar /> */}
-      <div className='search_container'>
-        <div className="search__bar">
+      <div ref={refHandler} className='search_container'>
+      <div className="search__bar">
             <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
 
         </div>

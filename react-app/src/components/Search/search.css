@@ -43,6 +43,7 @@
 .search-result-select{
     padding: 5px;
     border: rgb(109, 109, 109) 1px solid;
+    cursor: pointer;
 }
 
 .search-result-select:hover{

@@ -37,15 +37,21 @@ function SearchBar() {
     [searchTerm]
   );
 
+  document.getElementById('search-container').addEventListener("click", function() {
+    document.getElementById("form").classList.remove("active");
+  });
+
   return (
     <div className="search_container">
-      <div className="search__bar">
+      <div id="search-container" className="search__bar">
+        <form action="#" class="entypo-search active">
         <input
           type="text"
           value={searchTerm}
           placeholder="Ticker or Company Name"
           onChange={(e) => setSearchTerm(e.target.value)}
-        ></input>
+          ></input>
+          </form>
       </div>
       <div id="search_results">
         {searchTerm && (
