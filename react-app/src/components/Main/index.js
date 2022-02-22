@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import PortfolioGraph from "./PortfolioGraph";
 import { addTicker } from '../../store/session';
@@ -11,7 +11,7 @@ const [showForm, setShowForm] = useState(false)
 const [newTick, setNewTick] = useState(false)
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
-
+const refHandler = useRef(null);
 useEffect(() =>{
     setSearchTerm("")
 },[])
@@ -44,6 +44,21 @@ setSearchResults(finalResult)
 
 }
 
+
+useEffect(() => {
+  document.addEventListener("click", clickedOffSearch, false);
+  return () => {
+    document.removeEventListener("click", clickedOffSearch, false);
+  };
+}, []);
+
+const clickedOffSearch = event => {
+  if (refHandler.current && !refHandler.current.contains(event.target)) {
+    setSearchTerm("");
+  }
+};
+
+
   return (
     <>
         {/* <div className='add-stock-button'>
@@ -55,7 +70,7 @@ setSearchResults(finalResult)
       </button>
         </div> */}
       {showEditPortfolio && (
-               <div className='search_container'>
+               <div ref={refHandler} className='search_container'>
                <div className="search__bar">
                    <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
 
