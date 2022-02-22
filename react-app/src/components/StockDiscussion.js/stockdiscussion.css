@@ -22,11 +22,13 @@
 .portfolio-name{
     display: flex;
     width: 100%;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: center;
     justify-items: flex-start;
     align-content: flex-start;
-    margin-left: 25px;
+    border-bottom: 1px solid red;
+    padding-bottom: 5px;
+
 }
 .discussion-feed{
     padding-left: 40px;
@@ -39,7 +41,7 @@
 }
 
 .add-comment-textarea{
-    width: 500px;
+    width: 475px;
     height: 78px;
     border: 3px solid #cccccc;
     padding: 5px;
@@ -47,9 +49,54 @@
     font-size: 15px;
 }
 
-.post-comment-button{
+/* .post-comment-button{
     height: 30px;
     margin-left: 8px;
+} */
+
+.post-comment-button{
+    background-color: rgb(22, 91, 182);
+    transition-property: background-color,color,fill;
+    outline: 0;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    /* width: 100%; */
+    text-align: center;
+    padding: 7px 15px;
+    margin-left: 5px;
+    outline-color: initial;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    transition-duration: .5s
+}
+
+.post-comment-button:hover{
+    outline: 0;
+    background-color: lightgray;
+    white-space: nowrap;
+    color: rgb(22, 91, 182);
+    cursor: pointer;
+    font-weight: 700;
+    /* width: 100%; */
+    text-align: center;
+    padding: 7px 15px;
+    margin-left: 5px;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.post-button-container{
+    display: flex;
+    justify-content: flex-start;
 }
 
 .add-comment-container{
@@ -132,7 +179,7 @@
 }
 .top-right{
     display:flex;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: column;
     align-items: flex-end;
 }

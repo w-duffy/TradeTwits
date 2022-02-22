@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import './keydata.css'
 
-const KeyData = () => {
+const KeyData = ({stockDiscussion}) => {
 
 
     return (
@@ -18,34 +18,34 @@ const KeyData = () => {
         </div>
         <div className="week-low">
         <div className="key-data-title">
-          52WK Low
+        52WK LOW
           </div>
           <div className="key-data-data">
-          58.85
+          {stockDiscussion.fifty_week_low}
           </div>
         </div>
         <div className="week-high">
         <div className="key-data-title">
-          52WK high
+          52WK HIGH
           </div>
           <div className="key-data-data">
-          58.85
+          {stockDiscussion.fifty_week_high}
           </div>
         </div>
         <div className="market-cap">
         <div className="key-data-title">
-          Mkt Cap
+          MKT CAP
           </div>
           <div className="key-data-data">
-          58.85
+          {stockDiscussion.market_cap}
           </div>
         </div>
         <div className="volume">
         <div className="key-data-title">
-          Volume
+          VOLUME
           </div>
           <div className="key-data-data">
-          58.85
+          {stockDiscussion.volume}
           </div>
         </div>
         </div>

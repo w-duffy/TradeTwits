@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 # import requests
 # import os
-from app.models import db, StockDiscussion, Comment, Like, Reply
+from app.models import db, StockDiscussion, Comment, Like, Reply, Portfolio
 from datetime import datetime
 import requests
 import os
@@ -11,9 +11,7 @@ stock_discussion_routes = Blueprint("discussion", __name__)
 
 @stock_discussion_routes.route("/<string:ticker>")
 def get_portfolio_stats(ticker):
-
     discussion = StockDiscussion.query.filter(StockDiscussion.ticker == ticker).all()
-
     return(discussion[0].to_dict())
 
     # return(info)

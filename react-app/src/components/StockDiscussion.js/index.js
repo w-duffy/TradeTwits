@@ -13,6 +13,7 @@ import DiscussionGraph from "./DiscussionGraph";
 import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 import { getPortfolioDetails } from "../../store/portfolio";
 import KeyData from "./KeyData";
+import './comment.css'
 
 const StockDiscussion = ({tickerSearch}) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -71,13 +72,15 @@ const StockDiscussion = ({tickerSearch}) => {
       <>
       <div className="main-container">
       <div className="portfolio">
-            <div className="portfolio-name">Watchlist</div>
+            <div className="portfolio-name">
+              Watchlist
+
+     <div onClick={(e) => setEditPortfolio(!showEditPortfolio)} className="comment-icon-container">
+      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      </div>
+              </div>
             <div>
-            <button
-        onClick={(e) => setEditPortfolio(!showEditPortfolio)}
-        >
-          Edit Watchlist
-      </button>
+
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
@@ -91,7 +94,7 @@ const StockDiscussion = ({tickerSearch}) => {
           <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
-      <KeyData />
+      <KeyData stockDiscussion={stockDiscussion} />
         <br></br>
         {/* <button onClick={(e) => setShowForm(!showForm)}>
           Share your thoughts on {stockDiscussion.ticker}
@@ -111,7 +114,10 @@ const StockDiscussion = ({tickerSearch}) => {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 ></textarea>
+                <div className="post-button-container">
+
               <button className="post-comment-button" type="submit">Post</button>
+                </div>
             </div>
           </div>
           </form>

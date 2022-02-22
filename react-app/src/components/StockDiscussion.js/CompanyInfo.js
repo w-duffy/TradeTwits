@@ -39,29 +39,44 @@ const handleDeleteTicker = async (e) => {
 let inPortfolio = portfolioDetail.filter(detail =>{
     return detail.ticker == stockDiscussion.ticker
 })
+    let time = new Date().toLocaleString("en-US", {timeZone: "America/New_York"})
 
-console.log("inportfolio", inPortfolio)
 
+    // let currentTime = time.toISOString().split('T')[0]
     return (
       <>
       <div className="top-container">
           <div className="top-left">
           <div className="co-info-company-name">
-              company name updated at
+              {stockDiscussion.name} Updated {time}
           </div>
-          <div className="co-nfo-ticker-p-change">
+          <div className="co-info-ticker-p-change">
               <div className="co-info-ticker">
 {stockDiscussion.ticker} - {stockDiscussion.price.toFixed(2)}
               </div>
               <div className="co-info-p-change">
-                  % change
+                  <div>
+                  Daily Change
+                  </div>
+                    {stockDiscussion.percent_change < 0 && (
+
+                        <div className="co-p-change-red">
+                  <img className="down-arrow" src="https://img.icons8.com/external-rabit-jes-flat-rabit-jes/62/000000/external-direction-navigation-and-maps-rabit-jes-flat-rabit-jes-3.png"/> {stockDiscussion.percent_change.toFixed(2)} %
+                  </div>
+                      )}
+            {stockDiscussion.percent_change > 0 && (
+
+<div className="co-p-change-green">
+<img src="https://img.icons8.com/office/16/000000/up--v1.png"/> {stockDiscussion.percent_change.toFixed(2)} %
+</div>
+)}
                   </div>
           </div>
           </div>
           <div className="top-right">
-              <div className="amount-of-watchers">
+              {/* <div className="amount-of-watchers">
               Amount of watchers
-              </div>
+              </div> */}
               <div className="add-co-to-portfolio">
                 {inPortfolio.length === 0 && (
                     <button className="watch-button" onClick={(e) => {handleAddTicker(e)}}>
