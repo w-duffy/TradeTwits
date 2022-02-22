@@ -111,6 +111,13 @@ const Comment = ({ comment }) => {
     document.body.style.overflow = 'unset';
   }
 
+
+ let updatedDateFormatted = new Date(comment.time_updated)
+ let hasLiked = comment.likes.filter(like =>{
+   return like.user_id === user.id
+ })
+
+
   return (
     <>
 
@@ -126,7 +133,7 @@ const Comment = ({ comment }) => {
         {comment.user.username}
         </div>
         <div className="comment-top-row-updated">
-          {comment.time_updated}
+        {updatedDateFormatted.toLocaleDateString()}
         </div>
       </div>
       <div> delete</div>
@@ -138,9 +145,15 @@ const Comment = ({ comment }) => {
       <div className="comment-body-bottom-row">
         <div>
 
-      <button onClick={openModal}>
-        Reply to {comment.user.username}'s post
-      </button>
+      <div className="comment-icon-container" onClick={openModal}>
+        <div>
+
+      <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
+        </div>
+        <div>
+        {comment.replies.length}
+          </div>
+      </div>
       {/* {true && (
         <form onSubmit={handleAddReply}>
           <div>
@@ -156,13 +169,25 @@ const Comment = ({ comment }) => {
       )} */}
         </div>
         <div>
-        <button className="comment-like-button"
+        <div className="comment-icon-container"
             onClick={(e) => {
               handleAddLike(e, comment);
             }}
             >
-            {comment.likes.length} Comment likes
-          </button>
+              {hasLiked.length === 0 && (
+                <div>
+              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              </div>
+                )}
+                {hasLiked.length > 0 && (
+                    <div>
+                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                    </div>
+                )}
+              <div>
+            {comment.likes.length}
+              </div>
+          </div>
         </div>
         <div>
         {isFollower.includes(comment.user.id) && (
@@ -229,7 +254,11 @@ const Comment = ({ comment }) => {
     </div>
     {showModal && (
       <Modal onClose={closeModal}>
+        <div className="top-of-modal-message">
 
+        Message
+
+        </div>
         <div className="comment-modal-container">
 
      <div className="comment-container">
@@ -243,12 +272,12 @@ const Comment = ({ comment }) => {
        {comment.user.username}
        </div>
        <div className="comment-top-row-updated">
-         {comment.time_updated}
+         {updatedDateFormatted.toLocaleDateString()}
        </div>
      </div>
      <div> delete</div>
      </div>
-     <div className="comment-body-comment">
+     <div className="comment-body-comment-modal">
            {comment.comment}
      </div>
 
@@ -272,15 +301,25 @@ const Comment = ({ comment }) => {
       //  </form> */}
 
        {/* </div> */}
-       <div>
-       <button
-           onClick={(e) => {
-             handleAddLike(e, comment);
-           }}
-           >
-           {comment.likes.length} Comment likes
-         </button>
-       </div>
+       <div className="comment-icon-container"
+            onClick={(e) => {
+              handleAddLike(e, comment);
+            }}
+            >
+              {hasLiked.length === 0 && (
+                <div>
+              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              </div>
+                )}
+                {hasLiked.length > 0 && (
+                    <div>
+                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                    </div>
+                )}
+              <div>
+            {comment.likes.length}
+              </div>
+          </div>
        <div>
        {isFollower.includes(comment.user.id) && (
          <button

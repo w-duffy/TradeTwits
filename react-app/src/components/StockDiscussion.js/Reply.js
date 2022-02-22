@@ -47,8 +47,13 @@ const handleAddReplyLike = (e, reply) => {
 
 }
 
+let updatedDateFormatted = new Date(reply.time_updated)
 
-  return (
+let hasLiked = reply.likes.filter(like =>{
+  return like.user_id === user.id
+})
+
+return (
     <>
     <div className="comment-container">
       <div className="comment-body-div-prof-pic">
@@ -61,7 +66,7 @@ const handleAddReplyLike = (e, reply) => {
         {reply.user.username}
         </div>
         <div className="comment-top-row-updated">
-          {reply.time_updated}
+        {updatedDateFormatted.toLocaleDateString()}
         </div>
       </div>
       <div> delete</div>
@@ -72,15 +77,25 @@ const handleAddReplyLike = (e, reply) => {
 
       <div className="comment-body-bottom-row">
 
-        <div>
-        <button
+      <div className="comment-icon-container"
             onClick={(e) => {
               handleAddReplyLike(e, reply);
             }}
             >
-            {reply.likes.length} Reply likes
-          </button>
-        </div>
+              {hasLiked.length === 0 && (
+                <div>
+              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              </div>
+                )}
+                {hasLiked.length > 0 && (
+                    <div>
+                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                    </div>
+                )}
+              <div>
+            {reply.likes.length}
+              </div>
+          </div>
 
       </div>
 
@@ -149,7 +164,7 @@ const handleAddReplyLike = (e, reply) => {
 
 
 
-{/* 
+{/*
 
 
 

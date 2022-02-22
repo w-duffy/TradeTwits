@@ -26,6 +26,9 @@
 .comment-body-first-row{
     display: flex;
     justify-content: space-between;
+    align-content: center;
+    align-self: center;
+    align-items: center;
 }
 
 .comment-body-comment{
@@ -39,4 +42,51 @@
 
 .comment-like-button{
     z-index: 1000;
+}
+
+.top-of-modal-message{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px red solid;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    font-weight: bolder;
+    font-size: 20px;
+    align-items: center;
+}
+
+.comment-body-comment-modal{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.comment-top-row-updated{
+    font-size: 12px;
+    align-content: flex-end;
+    align-self: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.comment-icon{
+    height: 30px;
+    width: 30px;
+}
+.comment-icon-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.comment-icon-container > div{
+    margin-right: 5px;
+}
+
+.comment-like-pic{
+    height: 30px;
+    width: 30px;
 }

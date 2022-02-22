@@ -65,7 +65,7 @@
 }
 .larger-comment-container{
     display: flex;
-    margin-bottom: 25px;
+    margin-bottom: 11px;
     padding-bottom: 25px;
     border-bottom: 1px red solid;
 }
