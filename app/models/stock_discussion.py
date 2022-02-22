@@ -3,6 +3,8 @@ import os
 import finnhub
 from .portfolio import Portfolio
 import requests
+from datetime import datetime
+
 
 class StockDiscussion(db.Model):
     __tablename__ = "stockDiscussions"
@@ -85,6 +87,7 @@ class StockDiscussion(db.Model):
             fifty_week_high = "N/A"
             fifty_week_low = "N/A"
 
+        today = datetime.now()
 
         return {
             "id": self.id,
@@ -96,7 +99,8 @@ class StockDiscussion(db.Model):
             "volume": volume,
             "market_cap": market_cap,
             "fifty_week_high": fifty_week_high,
-            "fifty_week_low": fifty_week_low
+            "fifty_week_low": fifty_week_low,
+            "time": today
             # "watchers": [watcher.to_dict() for watcher in portfolio_watchers]
             # "likes": [like.to_dict() for like in self.likes],
         }

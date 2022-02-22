@@ -1,4 +1,4 @@
-const tickers = ['AAPL',
+export const tickers = ['AAPL',
 'MSFT',
 'AMZN',
 'GOOGL',

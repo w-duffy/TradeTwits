@@ -107,12 +107,37 @@
   .three {
       grid-area: three;
       display: flex;
+      flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
 }
+.three-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.three-p-change-red{
+    margin-left: 8px;
+    color: red;
+
+}
+.three-p-change-green{
+    margin-left: 5px;
+    color: green;
+}
+
+.three-container-feed{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
   .feed {
       grid-area: feed;
       display: flex;
+      flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
     }
@@ -132,4 +157,14 @@
     background-size: 16px;
     padding-left: 35px;
     height: 25px;
+    }
+
+    .a-select{
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
     }
