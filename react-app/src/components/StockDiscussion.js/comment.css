@@ -36,6 +36,7 @@
     display: flex;
     justify-content: space-between;
 }
-.comment-body-bottom-row > div{
-    /* margin-right: 30px; */
+
+.comment-like-button{
+    z-index: 1000;
 }

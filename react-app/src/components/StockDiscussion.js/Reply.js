@@ -50,6 +50,110 @@ const handleAddReplyLike = (e, reply) => {
 
   return (
     <>
+    <div className="comment-container">
+      <div className="comment-body-div-prof-pic">
+        <img className="comment-body-prof-pic" src={reply.user.profile_picture}></img>
+      </div>
+      <div className="comment-body-container">
+      <div className="comment-body-first-row">
+      <div className="username-posted">
+        <div className="comment-top-row-username">
+        {reply.user.username}
+        </div>
+        <div className="comment-top-row-updated">
+          {reply.time_updated}
+        </div>
+      </div>
+      <div> delete</div>
+      </div>
+      <div className="comment-body-comment">
+            {reply.reply}
+      </div>
+
+      <div className="comment-body-bottom-row">
+
+        <div>
+        <button
+            onClick={(e) => {
+              handleAddReplyLike(e, reply);
+            }}
+            >
+            {reply.likes.length} Reply likes
+          </button>
+        </div>
+
+      </div>
+
+
+      {reply.user_id === user.id && (
+        <>
+          <button onClick={(e) => setShowEditForm(!showEditForm)}>
+            EDIT reply
+          </button>
+          <button
+            onClick={(e) => {
+              handleDeleteReply(e, reply.id);
+            }}
+            >
+            DELETE reply
+          </button>
+        </>
+      )}
+      {showEditForm && (
+        <form
+          onSubmit={(e) => {
+            handleEditReply(e, reply.id);
+          }}
+        >
+          <div>
+            <input
+              name="Edit Comment"
+              placeholder={reply.reply}
+              value={updatedReply}
+              onChange={(e) => setUpdatedReply(e.target.value)}
+            ></input>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      )}
+
+
+</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* 
+
+
+
+
       <div>
         User: {reply.user.username}
         <div>
@@ -88,7 +192,7 @@ const handleAddReplyLike = (e, reply) => {
             </form>
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

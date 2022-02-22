@@ -51,6 +51,7 @@ const StockDiscussion = ({tickerSearch}) => {
     dispatch(addNewComment(comment, user_id, stock_discussion_id));
     setNewComment("");
     setShowForm(!showForm);
+    document.body.style.overflow = 'unset';
   };
 
   useEffect(() => {

@@ -1,0 +1,38 @@
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    z-index: 500;
+    overflow: auto;
+  }
+
+  #modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+
+  }
+
+  #modal-content {
+    position: absolute;
+    background-color:white;
+    padding: 15px;
+    border-radius: 0.6rem;
+    width: 600px;
+    top: 5%;
+  }
+
+
+   @keyframes slide_out {
+     from{width: 5%;}
+     to{width: 30%;}
+   }
