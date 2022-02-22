@@ -69,3 +69,99 @@
     padding-bottom: 25px;
     border-bottom: 1px red solid;
 }
+
+.watch-button{
+    background-color: rgb(22, 91, 182);
+    transition-property: background-color,color,fill;
+    outline: 0;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    padding: 7px 20px;
+    outline-color: initial;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    transition-duration: .5s
+}
+
+.watch-button:hover{
+    outline: 0;
+    background-color: lightgray;
+    white-space: nowrap;
+    color: rgb(22, 91, 182);
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    padding: 7px 20px;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.watch-button-unwatch{
+    background-color: lightgray;
+    transition-property: background-color,color,fill;
+    outline: 0;
+    white-space: nowrap;
+    color: rgb(22, 91, 182);
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    padding: 7px 12px;
+    outline-color: initial;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    transition-duration: .5s;
+}
+.top-right{
+    display:flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.watch-button-unwatch:hover{
+    /* transition-property: background-color,color,fill; */
+    outline: 0;
+    background-color: rgb(22, 91, 182);
+    white-space: nowrap;
+    color: black;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    padding: 7px 12px;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.watch-icon{
+    height: 20px;
+    width: 20px;
+    margin-right: 7px;
+    mix-blend-mode: multiply;
+}
+.watch-icon:hover{
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    mix-blend-mode: multiply;
+}

@@ -71,12 +71,12 @@ const StockDiscussion = ({tickerSearch}) => {
       <>
       <div className="main-container">
       <div className="portfolio">
-            <div className="portfolio-name">Portfolio</div>
+            <div className="portfolio-name">Watchlist</div>
             <div>
             <button
         onClick={(e) => setEditPortfolio(!showEditPortfolio)}
         >
-          Edit Portfolio
+          Edit Watchlist
       </button>
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />

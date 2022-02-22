@@ -64,10 +64,25 @@ console.log("inportfolio", inPortfolio)
               </div>
               <div className="add-co-to-portfolio">
                 {inPortfolio.length === 0 && (
-                    <button onClick={(e) => {handleAddTicker(e)}}>Add to Portfolio</button>
+                    <button className="watch-button" onClick={(e) => {handleAddTicker(e)}}>
+                        <div>
+                        <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>
+                                     </div>
+                        <div>
+
+                        Watch
+                        </div>
+                        </button>
                 )}
                 {inPortfolio.length > 0 && (
-                    <button onClick={(e) => {handleDeleteTicker(e)}}>Delete from Portfolio</button>
+                    <button className="watch-button-unwatch" onClick={(e) => {handleDeleteTicker(e)}}>
+                        <div>
+
+                        <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>                        </div>
+                        <div>
+                        Unwatch
+                        </div>
+                        </button>
                 )}
               </div>
           </div>
