@@ -30,7 +30,16 @@
     width: 600px;
     top: 5%;
   }
-
+  #modal-content-auth {
+    position: absolute;
+    background-color:white;
+    padding: 15px;
+    border-radius: 0.6rem;
+    padding: 30px 24px 24px;
+    min-width: auto;
+    width: 327px;
+    border-radius: 9px;
+  }
 
    @keyframes slide_out {
      from{width: 5%;}

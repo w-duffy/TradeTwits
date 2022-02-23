@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
-
+import './login.css'
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -13,11 +13,22 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
+    let errArr = []
+    if(!email){
+      errArr.push("You must enter an email")
+    }
+    if(!password){
+      errArr.push("You must enter a password")
+    }
+
+    if(errArr.length){
+      return setErrors(errArr)
+    }
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     } else {
-      history.push("/discussion")
+      history.push("/home")
     }
   };
 
@@ -30,20 +41,24 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/home' />;
   }
 
   return (
-
+    <>
+    <div className='login-modal-title'>
+      Log In
+    </div>
     <form onSubmit={onLogin}>
-      <div>
+      <div className="error-login">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor='email'></label>
         <input
+          className='login-modal-input'
           name='email'
           type='text'
           placeholder='Email'
@@ -52,17 +67,22 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor='password'></label>
         <input
+          className='login-modal-input'
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+        <div className='modal-login-button-container'>
+
+        <button className='login-splash-button-modal' type='submit'>Log In</button>
+        </div>
       </div>
     </form>
+    </>
   );
 };
 

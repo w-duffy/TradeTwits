@@ -21,6 +21,13 @@ const CompanyInfo = ({stockDiscussion}) => {
     const ticker = stockDiscussion.ticker
     let user_id = user.id
     let id = user.id
+    let portCheck = portfolioDetail.filter(portfolio =>{
+        return portfolio.ticker === ticker
+      })
+      if (portCheck.length > 0){
+        window.alert("You cannot add an existing ticker to your portfolio")
+        return;
+      }
     async function addToPortfolio() {
         await dispatch(addTicker(ticker, user_id))
         await dispatch(getPortfolioDetails(id))

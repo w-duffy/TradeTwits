@@ -14,8 +14,11 @@ import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
 import { getPortfolioDetails } from "../../store/portfolio";
 import KeyData from "./KeyData";
 import './comment.css'
+import { tickers } from "../Search/tickers";
+import { useHistory } from "react-router-dom";
 
 const StockDiscussion = ({tickerSearch}) => {
+
   const [isLoaded, setIsLoaded] = useState(false);
   const ticker = useParams();
   const dispatch = useDispatch();
@@ -25,6 +28,15 @@ const StockDiscussion = ({tickerSearch}) => {
   const user = useSelector((state) => state.session.user);
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
   const stockDiscussionGraph = useSelector((state) => state.stockDiscussionGraphReducer)
+  const history = useHistory();
+
+useEffect(() =>{
+
+  if(!tickers.includes(tickerSearch) && !tickers.includes(ticker.ticker)){
+    window.alert("This ticker does not exist on TradeTwits.  Please try a different ticker.")
+    history.push('/')
+  }
+}, [])
 
   useEffect(() => {
     async function getDiscussion() {
@@ -49,6 +61,10 @@ const StockDiscussion = ({tickerSearch}) => {
     const comment = newComment;
     let user_id = user.id;
     let stock_discussion_id = stockDiscussion.id;
+    if(comment.length < 1){
+      window.alert("You cannot submit a blank comment")
+      return;
+    }
     dispatch(addNewComment(comment, user_id, stock_discussion_id));
     setNewComment("");
     setShowForm(!showForm);
@@ -123,11 +139,14 @@ const StockDiscussion = ({tickerSearch}) => {
           </form>
         )}
         <br></br>
-
-          {stockDiscussion.comments.map((comment) => (
+          {stockDiscussion.comments && (
+            <>
+            {stockDiscussion.comments.map((comment) => (
               <Comment key={comment.id} comment={comment} />
-          ))}
+              ))}
+              </>
 
+              )}
           </div>
               </div>
       </>

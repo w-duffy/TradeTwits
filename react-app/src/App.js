@@ -12,8 +12,8 @@ import { authenticate } from './store/session';
 import Main from './components/Main'
 import StockDiscussion from './components/StockDiscussion.js';
 import NavigationBar from './components/NavigationBar';
-
-
+import Splash from './components/Splash';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,36 +31,35 @@ function App() {
     return null;
   }
 
+  // const user = useSelector((state) => state.session.user);
 
 
-  return (
+    return (
     <BrowserRouter>
 
-    <NavigationBar />
-
-      {/* <NavBar /> */}
       <Switch>
-      <ProtectedRoute path='/home' exact={true}>
-          <Main />
+        <Route path='/' exact={true}>
+          <LandingPage />
+        </Route>
+
+        <ProtectedRoute path='/home' exact={true} >
+          <Splash />
         </ProtectedRoute>
-        {/* <Route path='/discussion/:ticker' exact={true}>
-          <StockDiscussion />
-        </Route> */}
-        <Route path='/login' exact={true}>
-          <LoginFormModal />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
+
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Splash Page</h1>
+        <ProtectedRoute path="/discussion/:ticker" exact={true}>
+      <NavigationBar />
         </ProtectedRoute>
+        <Route path="">
+          <h1>Page Not Found</h1>
+          <a href="/">Return Home</a>
+        </Route>
+
       </Switch>
     </BrowserRouter>
   );

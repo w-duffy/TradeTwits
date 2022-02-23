@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../Search";
-import "./navigation.css";
+import "../NavigationBar/navigation.css";
 import * as sessionActions from "../../store/session";
 import { NavLink, useHistory } from "react-router-dom";
 import StockDiscussion from "../StockDiscussion.js";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { searchOptions, tickers } from "../Search/tickers";
 import { createBrowserHistory } from "history";
+import { getPortfolioDetails } from "../../store/portfolio";
+import Main from "../Main";
+import './splash.css'
 
-const NavigationBar = () => {
+const Splash = () => {
   const user = useSelector((state) => state.session.user);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const refHandler = useRef(null);
+  const refHandlerSplash = useRef(null);
+  const [showEditPortfolio, setEditPortfolio] = useState(false);
 
   const openProfileMenu = () => {
     setShowProfileMenu(!showProfileMenu);
@@ -27,7 +32,9 @@ const NavigationBar = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchTermSplash, setSearchTermSplash] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchResultsSplash, setSearchResultsSplash] = useState([]);
   const [tickerSearch, setTickerSearch] = useState("");
   const browserHistory = createBrowserHistory();
 
@@ -68,6 +75,55 @@ const NavigationBar = () => {
       setSearchTerm("");
     }
   };
+
+
+//   --------------------
+  useEffect(() => {
+    setSearchTermSplash("");
+  }, []);
+
+  useEffect(
+    async (e) => {
+      if (searchTermSplash === "") {
+        return setSearchTermSplash("");
+      }
+
+      const filteredResult = searchOptions.filter((word) => {
+        return (
+          word[0].includes(searchTermSplash.toUpperCase()) ||
+          word[1].toUpperCase().includes(searchTermSplash.toUpperCase())
+        );
+      });
+
+      const finalResult = filteredResult.slice(0, 5);
+      setSearchResultsSplash(finalResult);
+    },
+    [searchTermSplash]
+  );
+
+  useEffect(() => {
+    document.addEventListener("click", clickedOffSearchSplash, false);
+    return () => {
+      document.removeEventListener("click", clickedOffSearchSplash, false);
+    };
+  }, []);
+
+  const clickedOffSearchSplash = (event) => {
+    if (refHandlerSplash.current && !refHandlerSplash.current.contains(event.target)) {
+      setSearchTermSplash("");
+    }
+  };
+
+
+  useEffect(() => {
+    const id = user.id
+
+      async function getDetails() {
+      await dispatch(getPortfolioDetails(id))
+    }
+  getDetails()
+
+}, [])
 
   const trendingStocks = Object.entries(user.trending);
   const filterArrStocks = trendingStocks.filter((stock) => {
@@ -225,7 +281,7 @@ const NavigationBar = () => {
           </div>
           <div className="feed">
             {/* <div className='three-container-feed'> */}
-            Trending now:
+            Trending now
             {feedData.map((data) => (
               <div className="three-container-feed">
                 {/* <div className='three-container-feed'> */}
@@ -286,11 +342,84 @@ const NavigationBar = () => {
         </div>
       </div>
 
-      <Route path="/discussion/:ticker" exact={true}>
-        <StockDiscussion tickerSearch={tickerSearch} />
-      </Route>
+
+      <div className="main-container">
+      <div className="portfolio">
+            <div className="portfolio-name">
+              Watchlist
+
+     <div onClick={(e) => setEditPortfolio(!showEditPortfolio)} className="comment-icon-container">
+      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      </div>
+              </div>
+            <div>
+
+
+        <Main key={user.id} showEditPortfolio={showEditPortfolio} />
+            </div>
+      </div>
+      <div className="discussion-feed-splash">
+
+    <h1>Welcome to TradeTwits {user.username}!</h1>
+    <h2>See what’s happening now in the markets </h2>
+    <h4>See what actual investors and traders are saying in real time
+        about the stocks you care about for free.</h4>
+        <p>Try searching for stock a to discuss below</p>
+        <div className="search-bar-div-splash">
+            {/* <SearchBar /> */}
+            <div ref={refHandlerSplash} className="search_container">
+              <div className="search__bar">
+                <input
+                  type="text"
+                  id="search-input-splash"
+                  value={searchTermSplash}
+                  placeholder="Ticker or Company Name"
+                  onChange={(e) => setSearchTermSplash(e.target.value)}
+                ></input>
+              </div>
+              <div id="search_results">
+                {searchTermSplash && (
+                  <>
+                    {searchResultsSplash.map((result) => (
+                      <>
+                        <div className="search-result-select">
+                          {stockDiscussion.id && (
+                            <a
+                              onClick={() => {
+                                setSearchTermSplash("");
+                                setTickerSearch(result[0]);
+                                browserHistory.push(`/discussion/${result[0]}`);
+                              }}
+                            >
+                              {" "}
+                              {result[0]} - {result[1]}{" "}
+                            </a>
+                          )}
+                          {!stockDiscussion.id && (
+                            <a
+                              onClick={() => {
+                                setSearchTermSplash("");
+                                setTickerSearch(result[0]);
+                                history.push(`/discussion/${result[0]}`);
+                              }}
+                            >
+                              {" "}
+                              {result[0]} - {result[1]}{" "}
+                            </a>
+                          )}
+                        </div>
+                      </>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          </div>
+              </div>
+
     </>
   );
 };
 
-export default NavigationBar;
+export default Splash;

@@ -1,0 +1,32 @@
+.search-bar-div-splash{
+    margin-right: 45px;
+    border-color: red;
+}
+.search-bar-div-splash:hover{
+    margin-right: 45px;
+    /* transform: scale(1.05); */
+}
+
+.discussion-feed-splash{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+}
+#search-input-splash{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ada9a9;
+    padding: 3% 2%;
+    margin: 1% 1%;
+    background: url("https://icon-library.com/images/white-search-icon-transparent-background/white-search-icon-transparent-background-1.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    outline: 0;
+    background-position: 10px;
+    background-size: 16px;
+    padding-left: 35px;
+    height: 25px;
+    }
