@@ -22,3 +22,12 @@
     width: 16px;
     transform: scaleY(-1);
 }
+
+.co-info-company-name{
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+.top-discuss-name{
+    margin-right: 5px;
+}

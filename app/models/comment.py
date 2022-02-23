@@ -1,6 +1,8 @@
 from .db import db
 # import os
 # import finnhub
+from .stock_discussion import StockDiscussion
+from datetime import datetime
 
 class Comment(db.Model):
     __tablename__ = "comments"
@@ -19,6 +21,12 @@ class Comment(db.Model):
 
 
     def to_dict(self):
+        discussion = StockDiscussion.query.get(self.stock_discussion_id)
+        data =  discussion.to_dict_basic()
+        ticker = data['ticker']
+
+        profile_time = self.time_updated.strftime("%m/%d/%Y")
+
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -28,5 +36,7 @@ class Comment(db.Model):
             "time_updated": self.time_updated,
             "likes": [like.to_dict() for like in self.likes],
             "replies": [reply.to_dict() for reply in self.replies],
-            "user": self.user.to_dict_basic()
+            "user": self.user.to_dict_basic(),
+            "discussion_ticker": ticker,
+            "profile_time": profile_time
         }

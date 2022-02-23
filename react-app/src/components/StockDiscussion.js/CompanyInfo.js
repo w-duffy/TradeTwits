@@ -46,7 +46,6 @@ const handleDeleteTicker = async (e) => {
 let inPortfolio = portfolioDetail.filter(detail =>{
     return detail.ticker == stockDiscussion.ticker
 })
-    let time = new Date().toLocaleString("en-US", {timeZone: "America/New_York"})
 
 
     // let currentTime = time.toISOString().split('T')[0]
@@ -55,7 +54,13 @@ let inPortfolio = portfolioDetail.filter(detail =>{
       <div className="top-container">
           <div className="top-left">
           <div className="co-info-company-name">
-              {stockDiscussion.name} Updated {time}
+              <div className="top-discuss-name">
+              {stockDiscussion.name}
+              </div>
+              <div>
+              - Updated {stockDiscussion.time}
+              </div>
+
           </div>
           <div className="co-info-ticker-p-change">
               <div className="co-info-ticker">

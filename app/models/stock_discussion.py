@@ -88,7 +88,7 @@ class StockDiscussion(db.Model):
             fifty_week_low = "N/A"
 
         today = datetime.now()
-
+        formatted_time = today.strftime("%B %d, %Y %I:%M%p")
         return {
             "id": self.id,
             "name": company_name,
@@ -100,7 +100,11 @@ class StockDiscussion(db.Model):
             "market_cap": market_cap,
             "fifty_week_high": fifty_week_high,
             "fifty_week_low": fifty_week_low,
-            "time": today
+            "time": formatted_time
             # "watchers": [watcher.to_dict() for watcher in portfolio_watchers]
             # "likes": [like.to_dict() for like in self.likes],
+        }
+    def to_dict_basic(self):
+        return{
+            "ticker": self.ticker
         }

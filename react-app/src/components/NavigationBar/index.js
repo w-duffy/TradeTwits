@@ -154,15 +154,15 @@ const NavigationBar = () => {
                   <ul className="profile-ul">
                     <li className="profile-li">
                       <a className="profile-a" href="/my-profile">
-                        Profile
+                        My Profile
                       </a>
                     </li>
 
-                    <li className="profile-li">
+                    {/* <li className="profile-li">
                       <a className="profile-a" href="/my-profile">
                         Edit Profile
                       </a>
-                    </li>
+                    </li> */}
 
                     <li className="profile-li">
                       <a

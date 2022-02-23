@@ -14,6 +14,7 @@ import StockDiscussion from './components/StockDiscussion.js';
 import NavigationBar from './components/NavigationBar';
 import Splash from './components/Splash';
 import LandingPage from './components/LandingPage';
+import MyProfile from './components/MyProflie';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,7 +46,9 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <Splash />
         </ProtectedRoute>
-
+        <ProtectedRoute path='/my-profile' exact={true} >
+          <MyProfile />
+        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
