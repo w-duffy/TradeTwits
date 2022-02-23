@@ -61,6 +61,10 @@ useEffect(() =>{
     const comment = newComment;
     let user_id = user.id;
     let stock_discussion_id = stockDiscussion.id;
+    if(comment.length < 1){
+      window.alert("You cannot submit a blank comment")
+      return;
+    }
     dispatch(addNewComment(comment, user_id, stock_discussion_id));
     setNewComment("");
     setShowForm(!showForm);

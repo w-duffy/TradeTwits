@@ -225,7 +225,7 @@ const NavigationBar = () => {
           </div>
           <div className="feed">
             {/* <div className='three-container-feed'> */}
-            Trending now
+            Trending now:
             {feedData.map((data) => (
               <div className="three-container-feed">
                 {/* <div className='three-container-feed'> */}

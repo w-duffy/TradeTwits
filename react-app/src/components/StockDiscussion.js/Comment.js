@@ -32,6 +32,10 @@ const Comment = ({ comment }) => {
     e.preventDefault();
     let id = commentId;
     let newComment = updatedComment;
+    if(newComment.length < 1){
+      window.alert("You cannot submit a blank comment")
+      return;
+    }
     await dispatch(editDiscussionComment(id, newComment));
     await setShowEditForm(!showEditForm);
   };
@@ -90,6 +94,11 @@ const Comment = ({ comment }) => {
   const handleAddReply = (e) => {
     e.preventDefault();
     const reply = newReply;
+
+    if(reply.length < 1){
+      window.alert("You cannot submit a blank reply")
+      return;
+    }
     let user_id = user.id;
     let comment_id = comment.id;
     dispatch(addNewReply(reply, user_id, comment_id));

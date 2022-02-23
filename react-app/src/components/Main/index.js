@@ -12,6 +12,8 @@ const [newTick, setNewTick] = useState(false)
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
 const refHandler = useRef(null);
+
+const portfolios = useSelector((state) => state.portfolioReducer);
 useEffect(() =>{
     setSearchTerm("")
 },[])
@@ -34,7 +36,13 @@ setSearchResults(finalResult)
   // const portArr = Object.values(user.portfolio)
   const handleAddTicker = (e, tickerName) => {
     e.preventDefault();
-    console.log("ADDTICKER", tickerName)
+    let portCheck = portfolios.filter(portfolio =>{
+      return portfolio.ticker === tickerName
+    })
+    if (portCheck.length > 0){
+      window.alert("You cannot add an existing ticker to your portfolio")
+      return;
+    }
     const ticker = tickerName
     let user_id = user.id
     dispatch(addTicker(ticker, user_id))

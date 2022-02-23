@@ -26,6 +26,10 @@ const Reply = ({ reply }) => {
     let id = replyId
     let commentId = reply.comment_id;
     let editedReply = updatedReply
+    if(editedReply.length < 1){
+      window.alert("You cannot submit a blank reply")
+      return;
+    }
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
 }
