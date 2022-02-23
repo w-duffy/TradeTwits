@@ -3,10 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './landingPage.css'
 import LoginFormModal from "../auth/LoginFormModal";
+import SignUpModal from "../auth/SignUpFormModal";
+import LoginForm from "../auth/LoginForm";
+import { ModalAuth } from "../../Context/ModalAuth";
 
-
-const LandingPage = () => {
+const LandingPage = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
+
+  const [showModal, setShowModal] = useState(prop);
+
+  const hideButtonStyle = {
+    display: 'none',
+}
+
     if(user){
       return  <Redirect to='home' />
     }
@@ -28,9 +37,9 @@ const LandingPage = () => {
                 </div>
                 <div>
 
-            <button id="landing-signup">
-                Sign Up
-            </button>
+                <div className="sign-up-div">
+                    <SignUpModal />
+                </div>
                 </div>
             </div>
         </div>
@@ -45,14 +54,34 @@ const LandingPage = () => {
             See what actual investors and traders are saying in real time about the stocks you care about for free.
             </div>
             <div className="landing-body-signup-button-container">
-                <div>
-                <button className="landing-body-signup-button">
-                    Sign Up
-                </button>
+                <div className="sign-up-button">
+                <SignUpModal />
                 </div>
                 <div>
+
+                <div className="login-sep">
+                    <div className="have-account">
+
                 Already have an Account?
-                <a>login</a>
+                    </div>
+
+                <div>
+
+                <a
+                className="login-a"
+                onClick={() => setShowModal(true)}
+                style={prop ? hideButtonStyle : null}
+                >
+                Log In
+            </a>
+                    </div>
+
+                </div>
+            {showModal && (
+                <ModalAuth onClose={() => setShowModal(false)}>
+                    <LoginForm />
+                </ModalAuth>
+            )}
             </div>
             </div>
         </div>

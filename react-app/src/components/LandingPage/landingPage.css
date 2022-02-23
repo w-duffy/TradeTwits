@@ -66,3 +66,21 @@
     flex-direction: column;
 
 }
+
+.sign-up-div{
+    margin-left: 10px;
+}
+
+.login-a{
+    cursor: pointer;
+}
+
+.login-sep{
+    margin-top: 15px;
+    display: flex;
+
+}
+.have-account{
+    /* margin-top: 10px; */
+    margin-right: 5px;
+}

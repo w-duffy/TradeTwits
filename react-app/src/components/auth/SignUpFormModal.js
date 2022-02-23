@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { ModalAuth } from '../../Context/ModalAuth';
-import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 import './login.css'
 
-function LoginFormModal({ prop = false }) {
+function SignUpModal({ prop = false }) {
     const [showModal, setShowModal] = useState(prop);
 
     const hideButtonStyle = {
@@ -13,19 +13,20 @@ function LoginFormModal({ prop = false }) {
     return (
         <>
             <button
-                className='login-splash-button-l'
+                className='login-splash-button'
+                id='signup-splash'
                 onClick={() => setShowModal(true)}
                 style={prop ? hideButtonStyle : null}
             >
-                Log In
+                Sign Up
             </button>
             {showModal && (
                 <ModalAuth onClose={() => setShowModal(false)}>
-                    <LoginForm />
+                    <SignUpForm />
                 </ModalAuth>
             )}
         </>
     );
 }
 
-export default LoginFormModal;
+export default SignUpModal;

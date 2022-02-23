@@ -57,6 +57,7 @@ function App() {
         </ProtectedRoute>
         <Route path="">
           <h1>Page Not Found</h1>
+          <a href="/">Return Home</a>
         </Route>
 
       </Switch>
