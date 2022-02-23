@@ -51,7 +51,6 @@ const handleAddReplyLike = (e, reply) => {
 
 }
 
-let updatedDateFormatted = new Date(reply.time_updated)
 
 let hasLiked = reply.likes.filter(like =>{
   return like.user_id === user.id
@@ -70,7 +69,7 @@ return (
         {reply.user.username}
         </div>
         <div className="comment-top-row-updated">
-        {updatedDateFormatted.toLocaleDateString()}
+        {reply.time_updated}
         </div>
       </div>
       <div> delete</div>

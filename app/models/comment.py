@@ -25,7 +25,7 @@ class Comment(db.Model):
         data =  discussion.to_dict_basic()
         ticker = data['ticker']
 
-        profile_time = self.time_updated.strftime("%m/%d/%Y")
+        profile_time = self.time_updated.strftime("%m/%d/%y, %I:%M %p")
 
         return {
             "id": self.id,
