@@ -17,7 +17,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     } else {
-      history.push("/discussion")
+      history.push("/home")
     }
   };
 
@@ -30,7 +30,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/home' />;
   }
 
   return (

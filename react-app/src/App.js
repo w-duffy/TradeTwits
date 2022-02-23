@@ -12,7 +12,7 @@ import { authenticate } from './store/session';
 import Main from './components/Main'
 import StockDiscussion from './components/StockDiscussion.js';
 import NavigationBar from './components/NavigationBar';
-
+import Splash from './components/Splash';
 
 
 function App() {
@@ -31,36 +31,37 @@ function App() {
     return null;
   }
 
+  // const user = useSelector((state) => state.session.user);
 
 
-  return (
+    return (
     <BrowserRouter>
 
-    <NavigationBar />
-
-      {/* <NavBar /> */}
       <Switch>
-      <ProtectedRoute path='/home' exact={true}>
-          <Main />
-        </ProtectedRoute>
-        {/* <Route path='/discussion/:ticker' exact={true}>
-          <StockDiscussion />
-        </Route> */}
-        <Route path='/login' exact={true}>
+      <Route path='/login' exact={true}>
           <LoginFormModal />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+
+        <ProtectedRoute path='/home' exact={true} >
+          <Splash />
+        </ProtectedRoute>
+
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Splash Page</h1>
+        <ProtectedRoute path="/discussion/:ticker" exact={true}>
+      <NavigationBar />
         </ProtectedRoute>
+        <Route path="">
+          <h1>Page Not Found</h1>
+        </Route>
+
       </Switch>
     </BrowserRouter>
   );
