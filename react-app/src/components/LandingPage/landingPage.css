@@ -1,0 +1,68 @@
+.landing-page-container{
+    height: 100%;
+}
+.landing-nav-top{
+    z-index: 99;
+    top: 0;
+    background-color: black;
+    border: solid red 1px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 69px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+}
+
+.landing-nav-container{
+    margin-left: 12rem;
+    margin-right: 12rem;
+}
+
+.landing-nav-buttons{
+    display: flex;
+}
+.landing-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.landing-body{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 12rem;
+    margin-right: 12rem;
+    min-height: unset;
+    align-content: center;
+}
+.landing-body-picture{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.landing-links{
+    display: flex;
+    margin-left: 15rem;
+    margin-right: 15rem;
+    justify-content: center;
+}
+.landing-pic{
+    width: 70%;
+}
+
+.landing-main-text{
+    font-size: 44px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.landing-second-text{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.landing-body-signup-button-container{
+    display: flex;
+    flex-direction: column;
+
+}

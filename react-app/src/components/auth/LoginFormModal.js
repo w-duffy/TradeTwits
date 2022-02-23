@@ -13,7 +13,7 @@ function LoginFormModal({ prop = false }) {
     return (
         <>
             <button
-                className='auth-button'
+                className='login-splash-button'
                 onClick={() => setShowModal(true)}
                 style={prop ? hideButtonStyle : null}
             >

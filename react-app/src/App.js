@@ -13,7 +13,7 @@ import Main from './components/Main'
 import StockDiscussion from './components/StockDiscussion.js';
 import NavigationBar from './components/NavigationBar';
 import Splash from './components/Splash';
-
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,11 +38,8 @@ function App() {
     <BrowserRouter>
 
       <Switch>
-      <Route path='/login' exact={true}>
-          <LoginFormModal />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/' exact={true}>
+          <LandingPage />
         </Route>
 
         <ProtectedRoute path='/home' exact={true} >

@@ -23,7 +23,7 @@ const NavigationBar = () => {
   const handleLogout = async () => {
     await dispatch(sessionActions.logout());
     await setShowProfileMenu(!showProfileMenu);
-    await history.push("/login");
+    history.push("/");
   };
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -167,7 +167,7 @@ const NavigationBar = () => {
                     <li className="profile-li">
                       <a
                         className="profile-a"
-                        href="/login"
+                        href="/"
                         onClick={handleLogout}
                       >
                         Sign Out
