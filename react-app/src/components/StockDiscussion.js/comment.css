@@ -1,7 +1,7 @@
 .comment-container{
     display: flex;
     margin-bottom: 24px;
-    border-bottom: 1px red solid;
+    border-bottom: 1px lightgray solid;
     padding-bottom: 15px;
 }
 .comment-body-div-prof-pic{
@@ -54,7 +54,7 @@
 .top-of-modal-message{
     display: flex;
     justify-content: center;
-    border-bottom: 1px red solid;
+    border-bottom: 1px lightgray solid;
     margin-bottom: 15px;
     padding-bottom: 15px;
     font-weight: bolder;

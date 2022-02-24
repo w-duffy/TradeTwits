@@ -248,7 +248,7 @@ const Splash = () => {
               )}
               {user.dow_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.dow_percent_change.toFixed(2)}%
+                  +{user.dow_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
@@ -262,7 +262,7 @@ const Splash = () => {
               )}
               {user.sp_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.sp_percent_change.toFixed(2)}%
+                  +{user.sp_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
@@ -275,7 +275,7 @@ const Splash = () => {
               )}
               {user.nas_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.nas_percent_change.toFixed(2)}%
+                  +{user.nas_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
@@ -304,7 +304,7 @@ const Splash = () => {
 
                     {data[1] > 0 && (
                       <div className="three-p-change-green">
-                        {data[1].toFixed(2)}%
+                        +{data[1].toFixed(2)}%
                       </div>
                     )}
                   </a>
@@ -330,7 +330,7 @@ const Splash = () => {
 
                     {data[1] > 0 && (
                       <div className="three-p-change-green">
-                        {data[1].toFixed(2)}%
+                        +{data[1].toFixed(2)}%
                       </div>
                     )}
                   </a>

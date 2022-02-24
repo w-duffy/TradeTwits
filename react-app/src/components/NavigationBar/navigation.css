@@ -99,7 +99,7 @@
 
 .trending-container {
     display: grid;
-    border: 1px solid white;
+    border: 1px solid lightgray;
     margin-bottom: 25px;
     grid-auto-columns: 1fr;
     grid-template-columns: 0.6fr 1.4fr;
