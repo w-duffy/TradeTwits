@@ -107,7 +107,7 @@ useEffect(() =>{
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
         <div className="discussion-graph">
-          <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
+          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.price} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
       <KeyData stockDiscussion={stockDiscussion} />
