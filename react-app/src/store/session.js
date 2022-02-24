@@ -118,13 +118,13 @@ export const addTicker = (ticker, user_id, name) => async (dispatch) =>{
   })
   if (res.ok){
       const result = await res.json();
-      dispatch(add(result))
+      // dispatch(add(result))
+      dispatch(setUser(result))
       return result
   }
 }
 
 export const editUserProfile = (id, newBio, newProfilePic) => async (dispatch) =>{
-  console.log("IN STORE", id, newBio, newProfilePic)
   const res = await fetch(`/api/users/edit/${id}`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -136,7 +136,6 @@ export const editUserProfile = (id, newBio, newProfilePic) => async (dispatch) =
   })
   if (res.ok){
       const result = await res.json();
-      console.log("IN STORE 2", result)
       dispatch(setUser(result))
       return result
   }

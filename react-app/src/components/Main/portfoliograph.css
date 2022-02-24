@@ -62,6 +62,21 @@
     text-overflow: ellipsis; */
 }
 
+.port-co-name-pchange-r{
+    max-width: 100px;
+    display: inline-flex;
+    color: red;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+}
+.port-co-name-pchange-g{
+    max-width: 100px;
+    display: inline-flex;
+    color: green;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+}
+
 .del-stock {
     grid-area: del-stock;
     width: 25px;

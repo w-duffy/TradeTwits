@@ -23,8 +23,12 @@ class Portfolio(db.Model):
             company_name_upper = data['result'][0]['description']
             company_name_lower = company_name_upper.lower()
             company_name = company_name_lower.title()
-            price = p["l"]
-            percent_change = p['dp']
+            low = p["l"]
+            p_change = p['dp']
+            p_close = p['pc']
+            current = p['c']
+            high = p['h']
+            open = p['o']
 
         except:
             try:
@@ -35,8 +39,13 @@ class Portfolio(db.Model):
                 company_name_upper = data['result'][0]['description']
                 company_name_lower = company_name_upper.lower()
                 company_name = company_name_lower.title()
-                price = p["l"]
-                percent_change = p['dp']
+                low = p["l"]
+                p_change = p['dp']
+                p_close = p['pc']
+                current = p['c']
+                high = p['h']
+                open = p['o']
+
             except:
                 finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
 
@@ -45,14 +54,22 @@ class Portfolio(db.Model):
                 company_name_upper = data['result'][0]['description']
                 company_name_lower = company_name_upper.lower()
                 company_name = company_name_lower.title()
-                price = p["l"]
-                percent_change = p['dp']
-      
+                low = p["l"]
+                p_change = p['dp']
+                p_close = p['pc']
+                current = p['c']
+                high = p['h']
+                open = p['o']
+
         return {
             "id": self.id,
             "user_id": self.user_id,
             "ticker": self.ticker,
             "company_name": company_name,
-            "price": price,
-            "percent_change": percent_change
+            "p_close": p_close,
+            "low": low,
+            "p_change": p_change,
+            "current": current,
+            "high": high,
+            "open": open
         }

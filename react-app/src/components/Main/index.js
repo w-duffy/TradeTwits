@@ -13,7 +13,7 @@ const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
 const refHandler = useRef(null);
 
-const portfolios = useSelector((state) => state.portfolioReducer);
+// const portfolios = useSelector((state) => state.portfolioReducer);
 useEffect(() =>{
     setSearchTerm("")
 },[])
@@ -36,7 +36,7 @@ setSearchResults(finalResult)
   // const portArr = Object.values(user.portfolio)
   const handleAddTicker = (e, tickerName) => {
     e.preventDefault();
-    let portCheck = portfolios.filter(portfolio =>{
+    let portCheck = user.portfolio.filter(portfolio =>{
       return portfolio.ticker === tickerName
     })
     if (portCheck.length > 0){
@@ -48,7 +48,7 @@ setSearchResults(finalResult)
     dispatch(addTicker(ticker, user_id))
     // setTickerName("")
     setShowForm(!showForm)
-    setNewTick(!newTick)
+
 
 }
 

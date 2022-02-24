@@ -124,15 +124,15 @@ const MyProfile = ({ prop = false }) => {
   };
 
 
-  useEffect(() => {
-    const id = user.id
+//   useEffect(() => {
+//     const id = user.id
 
-      async function getDetails() {
-      await dispatch(getPortfolioDetails(id))
-    }
-  getDetails()
+//       async function getDetails() {
+//       await dispatch(getPortfolioDetails(id))
+//     }
+//   getDetails()
 
-}, [])
+// }, [])
 
   const trendingStocks = Object.entries(user.trending);
   const filterArrStocks = trendingStocks.filter((stock) => {
@@ -241,7 +241,7 @@ const MyProfile = ({ prop = false }) => {
                   </ul>
                 )}
               </div>
-              <div>Post</div>
+              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -290,7 +290,7 @@ const MyProfile = ({ prop = false }) => {
           </div>
           <div className="feed">
             {/* <div className='three-container-feed'> */}
-            Trending now
+            {feedData.length} Currently Trending:
             {feedData.map((data) => (
               <div className="three-container-feed">
                 {/* <div className='three-container-feed'> */}

@@ -12,7 +12,7 @@ const CompanyInfo = ({stockDiscussion}) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  const portfolioDetail = useSelector(state => state.portfolioReducer)
+//   const portfolioDetail = useSelector(state => state.portfolioReducer)
 
 
 
@@ -21,7 +21,7 @@ const CompanyInfo = ({stockDiscussion}) => {
     const ticker = stockDiscussion.ticker
     let user_id = user.id
     let id = user.id
-    let portCheck = portfolioDetail.filter(portfolio =>{
+    let portCheck = user.portfolio.filter(portfolio =>{
         return portfolio.ticker === ticker
       })
       if (portCheck.length > 0){
@@ -30,7 +30,7 @@ const CompanyInfo = ({stockDiscussion}) => {
       }
     async function addToPortfolio() {
         await dispatch(addTicker(ticker, user_id))
-        await dispatch(getPortfolioDetails(id))
+        // await dispatch(getPortfolioDetails(id))
     }
     addToPortfolio()
 }
@@ -40,9 +40,9 @@ const handleDeleteTicker = async (e) => {
     let id = user.id
     let ticker = stockDiscussion.ticker
     await dispatch(delPortfolioTicker(ticker, id))
-    await dispatch(getPortfolioDetails(id))
+    // await dispatch(getPortfolioDetails(id))
 }
-
+console.log("CONSOLE", user.portfolio)
 let inPortfolio = user.portfolio.filter(detail =>{
     return detail.ticker == stockDiscussion.ticker
 })
@@ -79,7 +79,7 @@ let inPortfolio = user.portfolio.filter(detail =>{
             {stockDiscussion.percent_change > 0 && (
 
 <div className="co-p-change-green">
-<img src="https://img.icons8.com/office/16/000000/up--v1.png"/> {stockDiscussion.percent_change.toFixed(2)} %
+<img src="https://img.icons8.com/office/16/000000/up--v1.png"/> +{stockDiscussion.percent_change.toFixed(2)} %
 </div>
 )}
                   </div>

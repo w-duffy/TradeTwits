@@ -176,7 +176,7 @@ const NavigationBar = () => {
                   </ul>
                 )}
               </div>
-              <div>Post</div>
+              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -225,7 +225,7 @@ const NavigationBar = () => {
           </div>
           <div className="feed">
             {/* <div className='three-container-feed'> */}
-            Trending now:
+            {feedData.length} Currently Trending:
             {feedData.map((data) => (
               <div className="three-container-feed">
                 {/* <div className='three-container-feed'> */}

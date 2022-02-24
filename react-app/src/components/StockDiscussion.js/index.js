@@ -71,15 +71,15 @@ useEffect(() =>{
     document.body.style.overflow = 'unset';
   };
 
-  useEffect(() => {
-    const id = user.id
+//   useEffect(() => {
+//     const id = user.id
 
-      async function getDetails() {
-      await dispatch(getPortfolioDetails(id))
-    }
-  getDetails()
+//       async function getDetails() {
+//       await dispatch(getPortfolioDetails(id))
+//     }
+//   getDetails()
 
-}, [])
+// }, [])
 
 
   if (isLoaded) {
