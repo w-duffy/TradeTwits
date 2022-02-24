@@ -198,6 +198,40 @@ const Comment = ({ comment, prop = false }) => {
                     </li>
                   </ul>
                 )}
+
+
+
+{showCommentMenu && user.id !== comment.user_id && (
+        <ul className="profile-ul-f">
+          {isFollower.includes(comment.user.id) && (
+                    <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+          {!isFollower.includes(comment.user.id) && (
+                    <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+                )}
+
+
                 {/* </div> */}
       <div className="comment-body-comment">
             {comment.comment}
@@ -250,26 +284,6 @@ const Comment = ({ comment, prop = false }) => {
             {comment.likes.length}
               </div>
           </div>
-        </div>
-        <div>
-        {isFollower.includes(comment.user.id) && (
-          <button
-          onClick={(e) => {
-            handleAddFollow(e, comment.user_id);
-          }}
-            >
-            Unfollow {comment.user.username}
-          </button>
-        )}
-        {!isFollower.includes(comment.user.id) && (
-          <button
-            onClick={(e) => {
-              handleAddFollow(e, comment.user_id);
-            }}
-          >
-            Follow {comment.user.username}
-          </button>
-        )}
         </div>
 
       </div>

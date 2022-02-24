@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { delReply, editReply } from "../../store/replies";
 import { addReplyLike, deleteReplyLike } from "../../store/likes";
+import { ModalAuth } from "../../Context/ModalAuth";
 
-const Reply = ({ reply }) => {
+const Reply = ({ reply, prop = false }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
   // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
   const [updatedReply, setUpdatedReply] = useState("")
+  const [showEditModal, setShowEditModal] = useState(prop);
 
-
+  const hideButtonStyle = {
+    display: 'none',
+}
 
   const user = useSelector((state) => state.session.user);
 
@@ -72,11 +76,53 @@ return (
         {reply.time_updated}
         </div>
       </div>
-      <div> delete</div>
+      <div> delete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
+      </div>
+        {!showEditForm && (
       <div className="comment-body-comment">
-            {reply.reply}
+
+          {reply.reply}
       </div>
+        )}
+             {showEditForm && (
+
+<div className="comment-body-comment">
+<form
+  onSubmit={(e) => {
+    handleEditReply(e, reply.id);
+  }}
+>
+  <div className="add-comment-container">
+    <textarea className="add-comment-textarea-r"
+      name="Edit Comment"
+      placeholder={reply.reply}
+      value={updatedReply}
+      onChange={(e) => setUpdatedReply(e.target.value)}
+      ></textarea>
+<button className="post-comment-button" type="submit">Submit</button>
+  </div>
+</form>
+</div>
+
+)}
 
       <div className="comment-body-bottom-row">
 
@@ -117,23 +163,7 @@ return (
           </button>
         </>
       )}
-      {showEditForm && (
-        <form
-          onSubmit={(e) => {
-            handleEditReply(e, reply.id);
-          }}
-        >
-          <div>
-            <input
-              name="Edit Comment"
-              placeholder={reply.reply}
-              value={updatedReply}
-              onChange={(e) => setUpdatedReply(e.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      )}
+
 
 
 </div>
