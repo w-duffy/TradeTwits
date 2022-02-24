@@ -49,7 +49,7 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
      
 ## Features
 ### 1. Watchlist
-* Logged in users can create watchlist.
+* Logged in users can create a watchlist.
 * Logged in users can view the stocks in their watchlist.
 * Logged in users can delete stocks in their watchlist.
 
