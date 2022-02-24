@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_picture = db.Column(db.String, default="https://api-private.atlassian.com/users/804a32f69779303c8344ba035dd49356/avatar")
+    profile_picture = db.Column(db.String, default="https://w7.pngwing.com/pngs/906/222/png-transparent-computer-icons-user-profile-avatar-french-people-computer-network-heroes-black.png")
     bio = db.Column(db.String, default="My bio...")
 
     portfolio = db.relationship("Portfolio", back_populates="user")
