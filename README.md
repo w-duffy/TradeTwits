@@ -22,7 +22,7 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
       ```
 3. Install Frontend dependencies inside the react-app directory
 
-    * ```npm install```
+     ```npm install```
 
 
 4. Create a .env file base on the .env.example given in the root directory BEWARE the API keys needed are from Finnhub-python and Rapid-API
@@ -36,11 +36,11 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
 
 7. You can start the front end from the react-app directory by:
 
-    * ```npm start```
+     ```npm start```
 
 8. You can start the backend from the python-project-starter by:
 
-    * ```pipenv run flask run```
+     ```pipenv run flask run```
 
 
 
