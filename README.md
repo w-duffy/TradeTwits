@@ -37,11 +37,15 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 
 7. You can start the front end from the react-app directory by:
 
-     ```npm start```
+     ```bash
+     npm start
+     ```
 
 8. You can start the backend from the python-project-starter by:
 
-     ```pipenv run flask run```
+     ```bash
+     pipenv run flask run
+     ```
      
 ## Features
 ### 1. Watchlist
