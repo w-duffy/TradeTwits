@@ -78,6 +78,8 @@ const clickedOffSearch = event => {
       </button>
         </div> */}
       {showEditPortfolio && (
+
+
                <div ref={refHandler} className='search_container'>
                <div className="search__bar">
                    <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
@@ -85,12 +87,14 @@ const clickedOffSearch = event => {
                </div>
                <div id="search_results">
                    {searchTerm && (
-                       <>
+                     <>
                        {searchResults.map((result) => (
                            <>
-                           <div>
-                           <p> {result[0]} - {result[1]} </p>
-                           <button onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>submit</button>
+                           <div className="search-result-select">
+                    
+                           <a onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>
+                           {result[0]} - {result[1]}
+                           </a>
                            </div>
                            </>
                            ))}
@@ -98,6 +102,7 @@ const clickedOffSearch = event => {
                    )}
                </div>
                </div>
+
 
 
 
