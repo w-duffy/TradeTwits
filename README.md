@@ -3,7 +3,7 @@
 
 Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information.
 
-#Get Started
+# Get Started
 
 1. Clone this repository (only this branch)
 
