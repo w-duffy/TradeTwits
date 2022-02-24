@@ -85,7 +85,8 @@
     align-self: center;
     justify-items: center;
     justify-self: center;
-    margin-right: 5px
+    margin-right: 5px;
+    z-index: -10;
 }
 
 .add-stock-button{
@@ -98,5 +99,6 @@
     height: 30px;
     width: 30px;
     cursor: pointer;
+    z-index: -100;
     transform: scale(1.1);
 }

@@ -47,6 +47,7 @@
     padding: 5px;
     resize: none;
     font-size: 15px;
+    color: black;
 }
 
 .add-comment-textarea-r{
@@ -56,6 +57,7 @@
     padding: 5px;
     resize: none;
     font-size: 15px;
+    color: black;
 }
 
 .add-comment-textarea-r2{
@@ -65,6 +67,7 @@
     padding: 5px;
     resize: none;
     font-size: 15px;
+    color: black;
     /* overflow-wrap: normal; */
 }
 

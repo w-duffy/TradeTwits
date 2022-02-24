@@ -1,8 +1,8 @@
 .navbar {
     z-index: 99;
     top: 0;
-    background-color: black;
-    border: solid red 1px;
+    background-color: white;
+    /* border: solid red 1px; */
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -13,8 +13,11 @@
 }
 
 .tradetwits-title{
+    font-size: 18px;
+    font-weight: 600;
     text-decoration: none;
-    color: white
+    cursor: pointer;
+    color: black;
 }
 
 .nav-container{
@@ -51,7 +54,7 @@
     margin-right: 50%;
     position: absolute;
     margin-top: .3%;
-    background-color: rgb(87, 87, 87);
+    background-color:lightgray;
     border: rgb(109, 109, 109) 1px solid;
     color: white;
 }
@@ -62,7 +65,8 @@
     text-decoration: none;
     border-bottom: rgb(109, 109, 109) 1px solid;
     font-size: 1rem;
-    color: white;
+    color: black;
+    cursor: pointer;
 }
 .profile-li:last-child {
     display:flex;
@@ -70,7 +74,8 @@
     text-decoration: none;
     border-bottom: none;
     font-size: 1rem;
-    color: white;
+    color: black;
+    cursor: pointer;
 }
 
 .profile-li:hover {
@@ -79,7 +84,8 @@
     border-bottom: rgb(109, 109, 109) 1px solid;
     background-color: gray;
     font-size: 1rem;
-    color: white;
+    color: black;
+    cursor: pointer;
 
 }
 
@@ -87,7 +93,7 @@
     display:block;
     padding: .75rem 1rem;
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 1rem;
 }
 
@@ -157,12 +163,13 @@
     background-size: 16px;
     padding-left: 35px;
     height: 25px;
+    color: black;
     }
 
     .a-select{
         cursor: pointer;
         text-decoration: none;
-        color: white;
+        color: black;
         display: flex;
         flex-direction: row;
         align-items: center;

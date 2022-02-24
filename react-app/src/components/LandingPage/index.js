@@ -37,9 +37,9 @@ const handleClick = async (e) => {
     <div className="landing-nav-container">
 
     <div className="landing-nav-top">
-        <div className="landing-title">
+        <a href='/' className="landing-title">
             TradeTwits
-        </div>
+        </a>
         <div>
             <div className="landing-nav-buttons">
                 <div>
