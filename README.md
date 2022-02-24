@@ -42,10 +42,9 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
  - Account Registration and Sign-In
 
  - Portfolio/Watchlist
-* Logged in users can create portfolios.
-* Logged in users can view the stocks in their portfolio.
-
-* Users can delete their portfolios.
+    -Logged in users can create portfolios.
+    -Logged in users can view the stocks in their portfolio.
+    -Users can delete their portfolios.
 
  - Comments
    - Users can post comments under memes.
