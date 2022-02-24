@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { delReply, editReply } from "../../store/replies";
 import { addReplyLike, deleteReplyLike } from "../../store/likes";
-import { ModalAuth } from "../../Context/ModalAuth";
 
 const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
@@ -10,12 +9,9 @@ const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
   const [updatedReply, setUpdatedReply] = useState(reply.reply)
-  const [showEditModal, setShowEditModal] = useState(prop);
   const [showCommentMenu, setShowCommentMenu] = useState(false);
 
-  const hideButtonStyle = {
-    display: 'none',
-}
+
 
   const user = useSelector((state) => state.session.user);
 

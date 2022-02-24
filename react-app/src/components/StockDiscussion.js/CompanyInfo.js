@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
 import './companyInfo.css'
 import { addTicker } from "../../store/session";
-import { getPortfolioDetails, delPortfolioTicker } from "../../store/portfolio";
+import { delPortfolioTicker } from "../../store/portfolio";
 
 
 const CompanyInfo = ({stockDiscussion}) => {
@@ -12,7 +10,6 @@ const CompanyInfo = ({stockDiscussion}) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-//   const portfolioDetail = useSelector(state => state.portfolioReducer)
 
 
 
@@ -42,13 +39,11 @@ const handleDeleteTicker = async (e) => {
     await dispatch(delPortfolioTicker(ticker, id))
     // await dispatch(getPortfolioDetails(id))
 }
-console.log("CONSOLE", user.portfolio)
 let inPortfolio = user.portfolio.filter(detail =>{
     return detail.ticker == stockDiscussion.ticker
 })
 
 
-    // let currentTime = time.toISOString().split('T')[0]
     return (
       <>
       <div className="top-container">

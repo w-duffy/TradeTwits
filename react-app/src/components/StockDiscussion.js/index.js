@@ -86,7 +86,7 @@ useEffect(() =>{
 
     return (
       <>
-      <div className="main-container">
+      <div className="main-container-discussion">
       <div className="portfolio">
             <div className="portfolio-name">
               Watchlist
@@ -101,7 +101,7 @@ useEffect(() =>{
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
-      <div className="discussion-feed">
+      <div className="discussion-feed-main">
 
         <div>
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
@@ -148,7 +148,26 @@ useEffect(() =>{
 
               )}
           </div>
-              </div>
+          <div className="news">
+              <div className="news-title">
+                {stockDiscussion.ticker} News
+                </div>
+                {stockDiscussion.company_news.slice(0, 10).map((news) => (
+                  <div className="news-container-here">
+
+                  <a className="a-news" target="_blank" href={news.url}>
+                  <div className="news-headline">
+                    {news.headline}
+                  </div>
+                  <div className="news-source">
+                    Source: {news.source}
+                    </div>
+                </a>
+      
+                  </div>
+                  ))}
+          </div>
+                  </div>
       </>
     );
   } else return <></>;

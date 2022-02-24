@@ -1,18 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
-import {getPortfolioDetails, delPortfolioTicker} from '../../store/portfolio'
+import {delPortfolioTicker} from '../../store/portfolio'
 import { createBrowserHistory } from "history";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 
 function PortfolioGraph({newTick, showEditPortfolio}){
-    const [isLoaded, setIsLoaded] = useState(false)
     const dispatch = useDispatch()
-    const history = useHistory();
+
     const user = useSelector(state => state.session.user)
-    const browserHistory = createBrowserHistory();
-    const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
 
     // const portfolioDetail = useSelector(state => state.portfolioReducer)
 
@@ -35,7 +32,7 @@ function PortfolioGraph({newTick, showEditPortfolio}){
             await dispatch(delPortfolioTicker(ticker, id))
         }
 
-    if (true){
+
         return (
             <div className='main-port-container'>
             {user.portfolio.map(detail => (
@@ -140,7 +137,7 @@ function PortfolioGraph({newTick, showEditPortfolio}){
             ))}
         </div>
     )
-} else return(<></>)
+
 }
 
 export default PortfolioGraph

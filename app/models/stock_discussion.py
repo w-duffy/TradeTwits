@@ -3,7 +3,7 @@ import os
 import finnhub
 from .portfolio import Portfolio
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class StockDiscussion(db.Model):
@@ -92,8 +92,17 @@ class StockDiscussion(db.Model):
         time_graph = today.strftime("%m/%d")
         # for comment in self.comments:
         #     comment.replies.sort(key=lambda r: r.time_created)
+        week_ago = today - timedelta(days = 1)
+        news_time1 = today.strftime("%Y-%m-%d")
+        news_time2 = week_ago.strftime("%Y-%m-%d")
 
-        # print("REPLIESSSS", self.replies)
+        try:
+            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
+
+            company_news = (finnhub_client.company_news(self.ticker, _from=news_time2, to=news_time1))
+
+        except:
+            company_news = []
 
 
         # print("REPLIESSSS111111111", sorted_replies)
@@ -109,7 +118,8 @@ class StockDiscussion(db.Model):
             "fifty_week_high": fifty_week_high,
             "fifty_week_low": fifty_week_low,
             "time": formatted_time,
-            "time_graph": time_graph
+            "time_graph": time_graph,
+            "company_news": company_news
             # "watchers": [watcher.to_dict() for watcher in portfolio_watchers]
             # "likes": [like.to_dict() for like in self.likes],
         }
