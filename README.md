@@ -18,7 +18,9 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
       ```
 3. Install Frontend dependencies inside the react-app directory
 
-     ```npm install```
+     ```bash
+     npm install
+     ```
 
 4. Create a .env file base on the .env.example given in the root directory BEWARE the API keys needed are from Finnhub-python and Rapid-API
 
@@ -26,8 +28,12 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 
 6. Migrate and Seed models into the DB
 
-     ```pipenv run flask db upgrade```
-     ```pipenv run flask seed all```
+     ```bash
+     pipenv run flask db upgrade
+     ```
+     ```bash
+     pipenv run flask seed all
+     ```
 
 7. You can start the front end from the react-app directory by:
 
