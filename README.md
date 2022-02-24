@@ -39,25 +39,34 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
      ```pipenv run flask run```
      
 ## Features
-- Account Registration and Sign-In
+### 1. Portfolio
+* Logged in users can create portfolios.
+* Logged in users can view the stocks in their portfolio.
+* Users can edit their portfolio names, and stocks in the portfolio.
+* Users can delete their portfolios.
 
-- Portfolio/Watchlist
-    -Logged in users can create portfolios.
-    -Logged in users can view the stocks in their portfolio.
-    -Users can delete their portfolios.
+### 2. Stock Discussion/Comments
+* Logged in users can post comments on a discussion page.
+* Logged in users can edit their own comments.
+* Logged in users can delete their own comments.
+* All users can read comments.
 
-- Comments
-   - Users can post comments under memes.
-   - Users can edit their own comments.
-   - Users can delete their own comments.
- - Like
-   - Users can like memes that they find on their feeds.
-   - Users can remove their previous likes.
+## 3. Replies
+* Logged in users can reply to discussion comments.
+* Logged in users can delete their replies.
+* Logged in users can edit their replies.
+* All users can read replies.
 
- <img src="./public/images/documentation/like-and-comment.gif" height=500 alt="Like and comment on memes">
+## 4. Likes 
+* Logged in users can like discussion comments and replies.
+* Logged in users can remove previous likes.
+* All users can see the number of likes on a comment and reply.
 
- - Follow and Feed
-   - Users can follow other users and curate their own feed.
-   - Users can view a feed of memes that can be sorted by most likes, most recent, or most engagement.
-   - Users can post memes to their own personal pages.
+## 5. Follow
+* Logged in users can follow other users.
+* Logged in users can unfollow a user they are following.
+* All users can see who is following a user, and who a user follows.
 
+## 6. Search
+* Logged in users can search for stocks to add to their portfolio.
+* Logged in users can search for stocks to access the stock's discussion page.
