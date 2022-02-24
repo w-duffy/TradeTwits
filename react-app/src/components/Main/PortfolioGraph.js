@@ -53,18 +53,18 @@ function PortfolioGraph({newTick, showEditPortfolio}){
                 <div className='stock-name'>
                     <div>
 
-                {/* <a href={`/discussion/${detail.ticker}`}>
+                <a  className="a-select" href={`/discussion/${detail.ticker}`}>
                 {detail.ticker}
-                </a> */}
+                </a>
 
-<a
+{/* <a
                     className="a-select"
                     onClick={() => {
-                    history.push(`/discussion/${detail.ticker}`);
+                    history.push(`/discussion/${detail.ticker}`)
                     }}
                   >
                     {detail.ticker}
-                  </a>
+                  </a> */}
                 {/* {stockDiscussion.id && (
                   <a
                     className="a-select"
