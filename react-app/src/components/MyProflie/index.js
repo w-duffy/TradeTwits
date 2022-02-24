@@ -15,6 +15,9 @@ import './myProfile.css'
 import Comment from "../StockDiscussion.js/Comment";
 import { ModalAuth } from "../../Context/ModalAuth";
 import EditProfileForm from "./EditProfile";
+import { useParams } from 'react-router-dom';
+
+
 
 const MyProfile = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
@@ -25,7 +28,8 @@ const MyProfile = ({ prop = false }) => {
   const refHandlerSplash = useRef(null);
   const [showEditPortfolio, setEditPortfolio] = useState(false);
   const [showModal, setShowModal] = useState(prop);
-
+  const { userId }  = useParams();
+    console.log("USER ID", userId)
   const hideButtonStyle = {
     display: 'none',
 }
@@ -41,10 +45,12 @@ const MyProfile = ({ prop = false }) => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [userProf, setUserProf] = useState("");
   const [searchTermSplash, setSearchTermSplash] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultsSplash, setSearchResultsSplash] = useState([]);
   const [tickerSearch, setTickerSearch] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
   const browserHistory = createBrowserHistory();
 
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
@@ -139,6 +145,35 @@ const MyProfile = ({ prop = false }) => {
     return tickers.includes(stock[0]);
   });
   const feedData = filterArrStocks.slice(0, 5);
+
+
+
+
+
+
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    (async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      const user2 = await response.json();
+      setUserProf(user2);
+      setIsLoaded(!isLoaded)
+      console.log("USER", user2)
+    })();
+  }, [userId]);
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <div className="nav-container">
@@ -218,13 +253,13 @@ const MyProfile = ({ prop = false }) => {
                 {showProfileMenu && (
                   <ul className="profile-ul">
                     <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
+                      <a className="profile-a" href={`/profile/${user.id}`}>
                         My Profile
                       </a>
                     </li>
 
                     {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
+                      <a className="profile-a" href={`/profile/${user.id}`}>
                         Edit Profile
                       </a>
                     </li> */}
@@ -367,24 +402,28 @@ const MyProfile = ({ prop = false }) => {
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
-        <div className="profile-container-top">
+      {isLoaded && (
+
+          <div className="profile-container-top">
             <div className="top-profile">
                 <div className="prof-pic-top">
                 <img
                       className="profile-picture-on-button-page"
-                      src={user.profile_picture}
+                      src={userProf.profile_picture}
                     ></img>
                 </div>
                 <div className="top-profile-right">
                         <div className="top-profile-username">
-                        {user.username}
+                        {userProf.username}
                         </div>
-                        <div className="edit-profile-button">
+                        {user.id == userProf.id && (
+
+                            <div className="edit-profile-button">
                         <button
                 className='login-splash-button-modal'
                 onClick={() => setShowModal(true)}
                 style={prop ? hideButtonStyle : null}
-            >
+                >
                 Edit Profile
             </button>
             {showModal && (
@@ -394,32 +433,37 @@ const MyProfile = ({ prop = false }) => {
             )}
 
                         </div>
+                    )}
                 </div>
             </div>
-            {user.bio.length > 0 &&(
+
+
+
+
+            {userProf.bio.length > 0 &&(
                 <>
                 <div className="about-user">
-                    About {user.username}:
+                    About {userProf.username}:
                     </div>
-                {user.bio}
+                {userProf.bio}
                 </>
             )}
                 <div className="profile-container-follower">
                         <div className="following-container">
-                            Following {user.following.length}
+                            {userProf.following.length} Following
                         </div>
                         <div className="follower-container">
-                            Followers {user.followers.length}
+                            {userProf.followers.length} Followers
                         </div>
                 </div>
                 <div className="comment-feed-profile">
                     <div className="comment-title">
-                       {user.username}'s Comments
+                       {userProf.username}'s Comments
 
                         </div>
-                {user.comments && (
+                {userProf.comments && (
             <>
-            {user.comments.map((comment) => (
+            {userProf.comments.map((comment) => (
                 <>
             <div className="link-to-discuss">
                 <div>
@@ -465,7 +509,7 @@ const MyProfile = ({ prop = false }) => {
                 </div>
                 <div>
                 {comment.replies.length}
-                  </div> */}
+            </div> */}
                   {/* <div className="comment-icon-container-like">
                        <div>
                        <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
@@ -488,6 +532,7 @@ const MyProfile = ({ prop = false }) => {
 
 
         </div>
+                )}
                </div>
     </>
   );

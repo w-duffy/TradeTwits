@@ -93,3 +93,10 @@
     margin-left: 25px;
     justify-content: center;
 }
+
+.trash-can{
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    transform: scale(1.1);
+}

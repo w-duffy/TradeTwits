@@ -46,7 +46,7 @@ function App() {
         <ProtectedRoute path='/home' exact={true} >
           <Splash />
         </ProtectedRoute>
-        <ProtectedRoute path='/my-profile' exact={true} >
+        <ProtectedRoute path='/profile/:userId' exact={true} >
           <MyProfile />
         </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >

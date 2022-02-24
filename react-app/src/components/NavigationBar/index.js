@@ -153,7 +153,7 @@ const NavigationBar = () => {
                 {showProfileMenu && (
                   <ul className="profile-ul">
                     <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
+                      <a className="profile-a" href={`/profile/${user.id}`}>
                         My Profile
                       </a>
                     </li>

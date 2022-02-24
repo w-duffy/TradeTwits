@@ -45,7 +45,9 @@ function PortfolioGraph({newTick, showEditPortfolio}){
                         <div className='del-stock'>
                     {showEditPortfolio && (
 
-<button onClick={(e) => {handleDeleteTicker(e, detail.ticker)}}>X</button>
+
+<img className="trash-can" onClick={(e) => {handleDeleteTicker(e, detail.ticker)}} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/>
+
                     )}
 </div>
                 <div className='stock-name'>

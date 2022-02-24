@@ -30,3 +30,4 @@ def edit_user(id):
     db.session.add(user)
     db.session.commit()
     return user.to_dict()
+
