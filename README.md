@@ -11,12 +11,12 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
    git clone https://github.com/w-duffy/TradeTwits
    ```
 
-2. Install Backend dependencies inside the python-project-starter directory
+2. Install backend dependencies inside the python-project-starter directory
 
       ```bash
       pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt     
       ```
-3. Install Frontend dependencies inside the react-app directory
+3. Install frontend dependencies inside the react-app directory
 
      ```bash
      npm install
@@ -26,7 +26,7 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 
 5. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
 
-6. Migrate and Seed models into the DB
+6. Migrate and seed the models into your database
 
      ```bash
      pipenv run flask db upgrade
@@ -35,13 +35,13 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
      pipenv run flask seed all
      ```
 
-7. You can start the front end from the react-app directory by:
+7. Start the front end from the react-app directory
 
      ```bash
      npm start
      ```
 
-8. You can start the backend from the python-project-starter by:
+8. Start the backend from the python-project-starter
 
      ```bash
      pipenv run flask run
