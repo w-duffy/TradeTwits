@@ -18,7 +18,7 @@ const Comment = ({ comment, prop = false }) => {
   // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState("");
+  const [updatedComment, setUpdatedComment] = useState(comment.comment);
   const [newReply, setNewReply] = useState("");
   const [showReplyAddForm, setReplyAddShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -202,7 +202,7 @@ const Comment = ({ comment, prop = false }) => {
 
 
 {showCommentMenu && user.id !== comment.user_id && (
-        <ul className="profile-ul-f">
+        <ul className="profile-ul-f1">
           {isFollower.includes(comment.user.id) && (
                     <li className="profile-li-c">
                       <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
@@ -310,13 +310,13 @@ const Comment = ({ comment, prop = false }) => {
         ))}
       </div>
           <div>
-            <input
-            className='login-modal-input'
+            <textarea
+            className="add-comment-textarea-r2"
               name="Edit Comment"
               placeholder={comment.comment}
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
-            ></input>
+            ></textarea>
              <div className='modal-login-button-container'>
             <button className='login-splash-button-modal' type="submit">Submit</button>
             </div>
@@ -359,7 +359,45 @@ const Comment = ({ comment, prop = false }) => {
        </div>
      </div>
      <div>
-     <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-dot-browser-ui-elements-flat-icons-inmotus-design.png"/>
+{user.id !== comment.user_id && (
+
+  <div onClick={openCommentMenu} className="comment-icon-container">
+<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+                  </div>
+       )}
+
+
+{showCommentMenu && user.id !== comment.user_id && (
+        <ul className="profile-ul-f">
+          {isFollower.includes(comment.user.id) && (
+            <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                      Edit Profile
+                      </a>
+                    </li> */}
+          {!isFollower.includes(comment.user.id) && (
+            <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
+
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+
+                )}
      </div>
      </div>
      <div className="comment-body-comment-modal">
@@ -434,7 +472,7 @@ const Comment = ({ comment, prop = false }) => {
 </form>
 </div>
    {comment.replies.map((reply) => (
-       <Reply key={reply.id} reply={reply} />
+       <Reply key={reply.id} reply={reply} handleAddFollow={handleAddFollow} isFollower={isFollower} />
      ))}
     </div>
    </Modal>

@@ -4,13 +4,14 @@ import { delReply, editReply } from "../../store/replies";
 import { addReplyLike, deleteReplyLike } from "../../store/likes";
 import { ModalAuth } from "../../Context/ModalAuth";
 
-const Reply = ({ reply, prop = false }) => {
+const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
   // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedReply, setUpdatedReply] = useState("")
+  const [updatedReply, setUpdatedReply] = useState(reply.reply)
   const [showEditModal, setShowEditModal] = useState(prop);
+  const [showCommentMenu, setShowCommentMenu] = useState(false);
 
   const hideButtonStyle = {
     display: 'none',
@@ -36,6 +37,7 @@ const Reply = ({ reply, prop = false }) => {
     }
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
+    setShowCommentMenu(!showCommentMenu);
 }
 const handleAddReplyLike = (e, reply) => {
   e.preventDefault();
@@ -55,6 +57,9 @@ const handleAddReplyLike = (e, reply) => {
 
 }
 
+const openCommentMenu = () => {
+  setShowCommentMenu(!showCommentMenu);
+};
 
 let hasLiked = reply.likes.filter(like =>{
   return like.user_id === user.id
@@ -76,28 +81,79 @@ return (
         {reply.time_updated}
         </div>
       </div>
-      <div> delete
+      <div>
 
+      <div className="edit-container-c">
 
+<div onClick={openCommentMenu} className="comment-icon-container">
+<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+                  </div>
+          </div>
 
+{/* <div className="ul-container-c"> */}
 
+{showCommentMenu && user.id === reply.user_id && (
+  <ul className="profile-ul-r">
+              <li className="profile-li-c">
+                <div onClick={() => {setShowEditForm(!showEditForm); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                  Edit Reply
+                </div>
+              </li>
 
+              {/* <li className="profile-li">
+                <a className="profile-a" href="/my-profile">
+                  Edit Profile
+                  </a>
+              </li> */}
 
+              <li className="profile-li-c">
+                <div
+                  className="profile-a-c"
 
+                  onClick={(e) => {
+                    handleDeleteReply(e, reply.id);
+                  }}
+                  >
+                  Delete Reply
+                </div>
+              </li>
+            </ul>
+          )}
 
+{showCommentMenu && user.id !== reply.user_id && (
+        <ul className="profile-ul-f">
+          {isFollower.includes(reply.user.id) && (
+                    <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, reply.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+          {!isFollower.includes(reply.user.id) && (
+                    <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
 
-
-
-
-
-
-
-
-
+                        onClick={(e) => {
+                          {handleAddFollow(e, reply.user_id); setShowCommentMenu(!showCommentMenu)}
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+                )}
       </div>
       </div>
+
         {!showEditForm && (
-      <div className="comment-body-comment">
+      <div className="comment-body-comment-r-modal">
 
           {reply.reply}
       </div>
@@ -149,7 +205,7 @@ return (
       </div>
 
 
-      {reply.user_id === user.id && (
+      {/* {reply.user_id === user.id && (
         <>
           <button onClick={(e) => setShowEditForm(!showEditForm)}>
             EDIT reply
@@ -162,7 +218,7 @@ return (
             DELETE reply
           </button>
         </>
-      )}
+      )} */}
 
 
 

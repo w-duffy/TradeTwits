@@ -35,6 +35,13 @@
     margin-top: 15px;
     margin-bottom: 30px;
 }
+
+.comment-body-comment-r-modal{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding-right: 20px;
+}
+
 .comment-body-bottom-row{
     display: flex;
     justify-content: space-between;
@@ -59,6 +66,7 @@
     margin-top: 15px;
     margin-bottom: 30px;
     font-size: 18px;
+    padding-right: 25px;
 }
 
 .comment-top-row-updated{
@@ -204,7 +212,7 @@
 }
 
 
-.profile-ul-f{
+.profile-ul-f1{
     min-width: 100px;
     display: flex;
     flex-direction: column;
@@ -219,4 +227,47 @@
     border: rgb(109, 109, 109) 1px solid;
     color: white;
 
+}
+
+.profile-ul-r{
+    min-width: 125px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 14pt;
+    width: 30px;
+    padding-left: 0px;
+    margin-left: -15%;
+    position: absolute;
+    margin-top: .1%;
+    background-color: rgb(87, 87, 87);
+    border: rgb(109, 109, 109) 1px solid;
+    color: white;
+
+}
+
+.profile-ul-f{
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 14pt;
+    width: 30px;
+    padding-left: 0px;
+    margin-left: -10%;
+    position: absolute;
+    margin-top: .5%;
+    background-color: rgb(87, 87, 87);
+    border: rgb(109, 109, 109) 1px solid;
+    color: white;
+
+}
+.add-comment-textarea-r2{
+    width: 425px;
+    height: 78px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    resize: none;
+    font-size: 15px;
+    /* overflow-wrap: normal; */
 }

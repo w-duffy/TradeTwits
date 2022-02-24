@@ -3,6 +3,7 @@ from .db import db
 # import finnhub
 from .stock_discussion import StockDiscussion
 from datetime import datetime
+from operator import attrgetter
 
 class Comment(db.Model):
     __tablename__ = "comments"

@@ -89,6 +89,14 @@ class StockDiscussion(db.Model):
 
         today = datetime.now()
         formatted_time = today.strftime("%B %d, %Y %I:%M%p")
+
+        # for comment in self.comments:
+        #     comment.replies.sort(key=lambda r: r.time_created)
+
+        # print("REPLIESSSS", self.replies)
+
+
+        # print("REPLIESSSS111111111", sorted_replies)
         return {
             "id": self.id,
             "name": company_name,
