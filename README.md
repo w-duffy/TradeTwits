@@ -3,9 +3,9 @@
 
 Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information.
 
-# Get Started
+## Get Started
 
-1. Clone this repository (only this branch)
+1. Clone this repository 
 
    ```bash
    git clone https://github.com/w-duffy/TradeTwits
@@ -19,7 +19,6 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
 3. Install Frontend dependencies inside the react-app directory
 
      ```npm install```
-
 
 4. Create a .env file base on the .env.example given in the root directory BEWARE the API keys needed are from Finnhub-python and Rapid-API
 
