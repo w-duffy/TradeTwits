@@ -3,11 +3,7 @@
 
 Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information.
 
-## Live Link
-[TradeTwits](http://tradetwits.herokuapp.com/)
-
-
-**Get Started**
+#Get Started
 
 1. Clone this repository (only this branch)
 
@@ -41,6 +37,28 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
 8. You can start the backend from the python-project-starter by:
 
      ```pipenv run flask run```
+     
+## Features
+ - Account Registration and Sign-In
 
+ - Portfolio/Watchlist
+* Logged in users can create portfolios.
+* Logged in users can view the stocks in their portfolio.
 
+* Users can delete their portfolios.
+
+ - Comments
+   - Users can post comments under memes.
+   - Users can edit their own comments.
+   - Users can delete their own comments.
+ - Like
+   - Users can like memes that they find on their feeds.
+   - Users can remove their previous likes.
+
+ <img src="./public/images/documentation/like-and-comment.gif" height=500 alt="Like and comment on memes">
+
+ - Follow and Feed
+   - Users can follow other users and curate their own feed.
+   - Users can view a feed of memes that can be sorted by most likes, most recent, or most engagement.
+   - Users can post memes to their own personal pages.
 
