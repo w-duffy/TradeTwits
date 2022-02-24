@@ -73,7 +73,7 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 * Logged in users can unfollow a user they are following.
 
 ### 6. Search
-* Logged in users can search for stocks to add to their portfolio.
+* Logged in users can search for stocks to add to their watchlist.
 * Logged in users can search for stocks to access the stock's discussion page.
 
 ## Technolgies 
