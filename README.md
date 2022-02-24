@@ -6,7 +6,6 @@ Visit our [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more informatio
 ## Live Link
 [TradeTwits](http://tradetwits.herokuapp.com/)
 
-This is the starter for the Flask React project.
 
 **Get Started**
 
