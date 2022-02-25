@@ -26,6 +26,7 @@ const Comment = ({ comment, prop = false }) => {
   const [showEditModal, setShowEditModal] = useState(prop);
   const [errors, setErrors] = useState([]);
   //   const [showForm, setShowForm] = useState(false);
+  
   const hideButtonStyle = {
     display: 'none',
 }
@@ -51,8 +52,10 @@ const Comment = ({ comment, prop = false }) => {
   };
 
   const handleDeleteComment = async (e, commentId) => {
+    console.log("In Comp 1")
     e.preventDefault();
     let id = commentId;
+    console.log("ID in comp", id)
     await dispatch(delDiscussionComment(id));
     document.body.style.overflow = 'unset';
   };

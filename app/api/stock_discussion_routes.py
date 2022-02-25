@@ -69,6 +69,7 @@ def new_comment():
 @stock_discussion_routes.route("/delete/<int:id>", methods=['DELETE'])
 # @login_required
 def deletePortfolioTicker(id):
+    print("HERERERE")
     comment_to_delete = Comment.query.filter(Comment.id == id).all()
     likes_to_delete = Like.query.filter(Like.comment_id == id).all()
     replies_to_delete = Reply.query.filter(Reply.comment_id == id).all()

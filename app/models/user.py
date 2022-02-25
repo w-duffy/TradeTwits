@@ -87,7 +87,7 @@ class User(db.Model, UserMixin):
             symbol = quote['symbol']
             p_change = quote['regularMarketChangePercent']
             data[symbol] = p_change
-      
+
 
 
 
@@ -129,5 +129,4 @@ class User(db.Model, UserMixin):
             "bio": self.bio,
             "followers": [f.to_dict() for f in self.followers],
             "following": [f.to_dict() for f in self.following],
-            "comments": [comment.to_dict() for comment in self.comments],
         }

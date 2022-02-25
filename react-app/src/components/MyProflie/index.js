@@ -395,7 +395,161 @@ const MyProfile = ({ prop = false }) => {
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
-      {isLoaded && (
+
+      {isLoaded &&  userProf.id === user.id && (
+
+<div className="profile-container-top">
+  <div className="top-profile">
+      <div className="prof-pic-top">
+      <img
+            className="profile-picture-on-button-page"
+            src={user.profile_picture}
+          ></img>
+      </div>
+      <div className="top-profile-right">
+              <div className="top-profile-username">
+              {user.username}
+              </div>
+              {user.id == user.id && (
+
+                  <div className="edit-profile-button">
+              <button
+      className='login-splash-button-modal'
+      onClick={() => setShowModal(true)}
+      style={prop ? hideButtonStyle : null}
+      >
+      Edit Profile
+  </button>
+  {showModal && (
+      <ModalAuth onClose={() => setShowModal(false)}>
+          <EditProfileForm userToEdit={user} showModal={setShowModal} />
+      </ModalAuth>
+  )}
+
+              </div>
+          )}
+      </div>
+  </div>
+
+
+
+
+  {user.bio.length > 0 &&(
+      <>
+      <div className="about-user">
+          About {user.username}:
+          </div>
+      {user.bio}
+      </>
+  )}
+      <div className="profile-container-follower">
+              <div className="following-container">
+                  {user.following.length} Following
+              </div>
+              <div className="follower-container">
+                  {user.followers.length} Followers
+              </div>
+      </div>
+      <div className="comment-feed-profile">
+          <div className="comment-title">
+             {user.username}'s Comments
+
+              </div>
+      {user.comments && (
+  <>
+  {user.comments.map((comment) => (
+      <>
+  <div className="link-to-discuss">
+      <div>
+
+  Discussion:
+      </div>
+      <div>
+
+    <a className="profile-a" href={`/discussion/${comment.discussion_ticker}`}>
+     {comment.discussion_ticker}
+        </a>
+      </div>
+  </div>
+
+    <div className="comment-container">
+    <div className="comment-body-div-prof-pic">
+      <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+    </div>
+    <div className="comment-body-container">
+    <div className="comment-body-first-row">
+    <div className="username-posted">
+      <div className="comment-top-row-username">
+      {comment.user.username} {comment.profile_time}
+      </div>
+      <div className="comment-top-row-updated">
+      {/* {updatedDateFormatted.toLocaleDateString()} */}
+      </div>
+    </div>
+
+    </div>
+    <div className="comment-body-comment">
+          {comment.comment}
+    </div>
+
+    <div className="comment-body-bottom-row">
+      <div>
+
+    <div className="comment-icon-container">
+
+      {/* <div>
+
+    <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
+      </div>
+      <div>
+      {comment.replies.length}
+  </div> */}
+        {/* <div className="comment-icon-container-like">
+             <div>
+             <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+               </div>
+               <div>
+  {comment.likes.length}
+    </div>
+        </div> */}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+      </>
+    ))}
+    </>
+
+    )}
+      </div>
+
+
+</div>
+   )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {isLoaded && user.id !== userProf.id &&(
 
           <div className="profile-container-top">
             <div className="top-profile">

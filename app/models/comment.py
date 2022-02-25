@@ -15,7 +15,7 @@ class Comment(db.Model):
     time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     time_updated = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
 
-    user = db.relationship("User", back_populates="comments")
+    user = db.relationship("User", lazy='subquery', back_populates="comments")
     likes = db.relationship("Like", back_populates="comments")
     replies = db.relationship("Reply", back_populates="comments")
     stock_discussion = db.relationship("StockDiscussion", back_populates="comments")
