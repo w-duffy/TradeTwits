@@ -65,6 +65,10 @@ useEffect(() =>{
       window.alert("You cannot submit a blank comment")
       return;
     }
+    if(comment.length > 255){
+      window.alert("Your comment must be less than 255 characters")
+      return;
+    }
     dispatch(addNewComment(comment, user_id, stock_discussion_id));
     setNewComment("");
     setShowForm(!showForm);
@@ -163,7 +167,7 @@ useEffect(() =>{
                     Source: {news.source}
                     </div>
                 </a>
-      
+
                   </div>
                   ))}
           </div>
