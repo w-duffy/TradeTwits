@@ -59,7 +59,10 @@ let inPortfolio = user.portfolio.filter(detail =>{
           </div>
           <div className="co-info-ticker-p-change">
               <div className="co-info-ticker">
-{stockDiscussion.ticker} - {stockDiscussion.price.toFixed(2)}
+{stockDiscussion.ticker}
+<div className="co-info-ticker-price">
+{stockDiscussion.price.toFixed(2)}
+</div>
               </div>
               <div className="co-info-p-change">
                   <div>

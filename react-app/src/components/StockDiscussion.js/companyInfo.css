@@ -31,3 +31,20 @@
 .top-discuss-name{
     margin-right: 5px;
 }
+
+.co-info-ticker{
+    font-size: 36px;
+    font-weight: 750;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.co-info-ticker-price{
+    font-size: 35px;
+    font-weight: 500;
+    display: flex;
+    padding-left: 7px;
+
+}

@@ -42,6 +42,8 @@
     align-content: flex-start;
     border-bottom: 1px solid lightgray;
     padding-bottom: 5px;
+    font-size: 18px;
+    font-weight: 600;
 
 }
 .discussion-feed{
@@ -287,11 +289,11 @@
 .news-title{
     display: flex;
     justify-content: center;
-    font-weight: 700;
-    margin-bottom: 10px
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 20px
 }
 
 .news-container-here{
     color: black;
 }
-

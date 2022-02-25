@@ -44,10 +44,10 @@ function DiscussionGraph({values, dates, cp, time}){
       const valuesSlicer = values.slice(0, 5)
 
       useEffect(() =>{
-        if(valuesSlicer[0] < valuesSlicer[valuesSlicer.length - 1]){
+        if(valuesSlicer[0] < valuesSlicer[1]){
           setLineColor('rgb(50, 190, 50)')
         }
-        if(valuesSlicer[0] > valuesSlicer[valuesSlicer.length - 1]) {
+        if(valuesSlicer[0] > valuesSlicer[1]) {
            setLineColor('rgb(255, 0, 0)')
         }
       },[values])
