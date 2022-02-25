@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from "../Search";
 import "../NavigationBar/navigation.css";
 import * as sessionActions from "../../store/session";
-import { NavLink, useHistory } from "react-router-dom";
-import StockDiscussion from "../StockDiscussion.js";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { searchOptions, tickers } from "../Search/tickers";
 import { createBrowserHistory } from "history";
-import { getPortfolioDetails } from "../../store/portfolio";
 import Main from "../Main";
 import '../Splash/splash.css'
 import './myProfile.css'
-import Comment from "../StockDiscussion.js/Comment";
 import { ModalAuth } from "../../Context/ModalAuth";
 import EditProfileForm from "./EditProfile";
 import { useParams } from 'react-router-dom';
@@ -49,7 +44,6 @@ const MyProfile = ({ prop = false }) => {
   const [searchTermSplash, setSearchTermSplash] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultsSplash, setSearchResultsSplash] = useState([]);
-  const [tickerSearch, setTickerSearch] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const browserHistory = createBrowserHistory();
 
@@ -211,8 +205,7 @@ const MyProfile = ({ prop = false }) => {
                             <a
                               onClick={() => {
                                 setSearchTerm("");
-                                setTickerSearch(result[0]);
-                                browserHistory.push(`/discussion/${result[0]}`);
+                               browserHistory.push(`/discussion/${result[0]}`);
                               }}
                             >
                               {" "}
@@ -223,7 +216,7 @@ const MyProfile = ({ prop = false }) => {
                             <a
                               onClick={() => {
                                 setSearchTerm("");
-                                setTickerSearch(result[0]);
+
                                 history.push(`/discussion/${result[0]}`);
                               }}
                             >
@@ -334,7 +327,7 @@ const MyProfile = ({ prop = false }) => {
                     className="a-select"
                     onClick={() => {
                       setSearchTerm("");
-                      setTickerSearch(data[0]);
+
                       browserHistory.push(`/discussion/${data[0]}`);
                     }}
                   >
@@ -358,7 +351,7 @@ const MyProfile = ({ prop = false }) => {
                     className="a-select"
                     onClick={() => {
                       setSearchTerm("");
-                      setTickerSearch(data[0]);
+
                       history.push(`/discussion/${data[0]}`);
                     }}
                   >

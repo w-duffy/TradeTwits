@@ -8,7 +8,6 @@ const Main = ({showEditPortfolio}) => {
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
 // const [tickerName, setTickerName] = useState("")
-const [newTick, setNewTick] = useState(false)
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
 const refHandler = useRef(null);
@@ -91,7 +90,7 @@ const clickedOffSearch = event => {
                        {searchResults.map((result) => (
                            <>
                            <div className="search-result-select">
-                    
+
                            <a onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>
                            {result[0]} - {result[1]}
                            </a>
@@ -121,7 +120,7 @@ const clickedOffSearch = event => {
         //   </div>
         // </form>
       )}
-      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} newTick={newTick} />
+      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} />
     </>
   );
 };

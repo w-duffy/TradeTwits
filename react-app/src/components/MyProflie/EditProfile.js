@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
-import { login } from '../../store/session';
 import './myProfile.css'
 import { editUserProfile } from '../../store/session';
 
@@ -12,7 +10,7 @@ const EditProfileForm = ({userToEdit, showModal}) => {
   const [profPic, setProfPic] = useState(userToEdit.profile_picture);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory()
+
 
   const updateBio = (e) => {
     setBio(e.target.value);

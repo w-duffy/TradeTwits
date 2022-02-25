@@ -1,12 +1,11 @@
-import React, {useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
 import {delPortfolioTicker} from '../../store/portfolio'
-import { createBrowserHistory } from "history";
-import { useHistory } from "react-router-dom";
 
 
-function PortfolioGraph({newTick, showEditPortfolio}){
+
+function PortfolioGraph({ showEditPortfolio}){
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.session.user)
@@ -43,7 +42,7 @@ function PortfolioGraph({newTick, showEditPortfolio}){
                     {showEditPortfolio && (
 
 
-<img className="trash-can" onClick={(e) => {handleDeleteTicker(e, detail.ticker)}} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/>
+<img className="trash-can" alt="trash-can" onClick={(e) => {handleDeleteTicker(e, detail.ticker)}} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png"/>
 
                     )}
 </div>
