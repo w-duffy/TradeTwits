@@ -31,6 +31,10 @@ const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
       window.alert("You cannot submit a blank reply")
       return;
     }
+    if(editedReply.length > 255){
+      window.alert("Your reply must be less than 255 characters")
+      return;
+    }
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
     setShowCommentMenu(!showCommentMenu);

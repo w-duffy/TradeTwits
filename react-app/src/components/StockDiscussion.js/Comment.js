@@ -26,7 +26,7 @@ const Comment = ({ comment, prop = false }) => {
   const [showEditModal, setShowEditModal] = useState(prop);
   const [errors, setErrors] = useState([]);
   //   const [showForm, setShowForm] = useState(false);
-  
+
   const hideButtonStyle = {
     display: 'none',
 }
@@ -40,6 +40,10 @@ const Comment = ({ comment, prop = false }) => {
     let errArr = []
     if(newComment.length < 1){
       errArr.push("You cannot submit a blank comment")
+    }
+
+    if(newComment.length > 255){
+      errArr.push("Your comment must be less than 255 characters")
     }
 
     if(errArr.length){
@@ -110,6 +114,11 @@ const Comment = ({ comment, prop = false }) => {
 
     if(reply.length < 1){
       window.alert("You cannot submit a blank reply")
+      return;
+    }
+
+    if(reply.length > 255){
+      window.alert("Your reply must be less than 255 characters")
       return;
     }
     let user_id = user.id;
