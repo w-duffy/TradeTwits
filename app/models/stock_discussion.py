@@ -104,7 +104,8 @@ class StockDiscussion(db.Model):
             company_news = (finnhub_client.company_news(self.ticker, _from=news_time2, to=news_time3))
 
         except:
-            company_news = []
+            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY2"))
+            company_news = (finnhub_client.company_news(self.ticker, _from=news_time2, to=news_time3))
 
 
 
