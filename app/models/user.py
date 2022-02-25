@@ -87,7 +87,7 @@ class User(db.Model, UserMixin):
             symbol = quote['symbol']
             p_change = quote['regularMarketChangePercent']
             data[symbol] = p_change
-        print("QUOOOOOOOOOOOOOOOOTE", data)
+      
 
 
 

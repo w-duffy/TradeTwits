@@ -80,7 +80,7 @@ def deletePortfolioTicker(id):
     for like in likes_to_delete:
         db.session.delete(like)
     delete_object = comment_to_delete[0]
-    print(delete_object.to_dict())
+
     db.session.delete(delete_object)
     db.session.commit()
     return delete_object.to_dict()

@@ -64,7 +64,7 @@ def new_ticker():
     ticker = object['ticker']
     user_id = object['user_id']
     newPortfolio = Portfolio(ticker=ticker, user_id=user_id)
-    print("NEW PORT", newPortfolio)
+
     db.session.add(newPortfolio)
     db.session.commit()
     user = User.query.get(user_id)

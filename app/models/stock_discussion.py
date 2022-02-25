@@ -105,7 +105,7 @@ class StockDiscussion(db.Model):
             company_news = []
 
 
-        # print("REPLIESSSS111111111", sorted_replies)
+
         return {
             "id": self.id,
             "name": company_name,
