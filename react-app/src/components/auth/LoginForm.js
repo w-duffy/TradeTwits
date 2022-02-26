@@ -17,6 +17,7 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     let errArr = []
+    setErrors("")
     if(!email){
       errArr.push("You must enter an email")
     }
