@@ -178,3 +178,10 @@ width: 165px;
     justify-content: center;
     margin-top: 10px;
 }
+
+.login-modal-loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}

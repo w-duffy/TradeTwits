@@ -48,3 +48,12 @@
     padding-left: 7px;
 
 }
+
+.watch-spinner{
+    margin-right: 5px;
+}
+
+.add-co-to-portfolio{
+    display: flex;
+    align-items: center;
+}

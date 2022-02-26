@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './companyInfo.css'
 import { addTicker } from "../../store/session";
 import { delPortfolioTicker } from "../../store/portfolio";
+import { Oval } from  'react-loader-spinner'
 
 
 const CompanyInfo = ({stockDiscussion}) => {
@@ -10,7 +11,7 @@ const CompanyInfo = ({stockDiscussion}) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-
+    const [watchSpinner, setWatchSpinner] = useState(false)
 
 
   const handleAddTicker = (e) => {
@@ -26,7 +27,9 @@ const CompanyInfo = ({stockDiscussion}) => {
         return;
       }
     async function addToPortfolio() {
+        await setWatchSpinner(true)
         await dispatch(addTicker(ticker, user_id))
+        await setWatchSpinner(false)
         // await dispatch(getPortfolioDetails(id))
     }
     addToPortfolio()
@@ -36,7 +39,9 @@ const handleDeleteTicker = async (e) => {
     e.preventDefault()
     let id = user.id
     let ticker = stockDiscussion.ticker
+    await setWatchSpinner(true)
     await dispatch(delPortfolioTicker(ticker, id))
+    await setWatchSpinner(false)
     // await dispatch(getPortfolioDetails(id))
 }
 let inPortfolio = user.portfolio.filter(detail =>{
@@ -87,9 +92,18 @@ let inPortfolio = user.portfolio.filter(detail =>{
               {/* <div className="amount-of-watchers">
               Amount of watchers
               </div> */}
+
+
               <div className="add-co-to-portfolio">
+              {watchSpinner &&(
+                            <div className="watch-spinner">
+
+                        <Oval color="#00BFFF" height={25} width={25} />
+                        </div>
+                            )}
                 {inPortfolio.length === 0 && (
                     <button className="watch-button" onClick={(e) => {handleAddTicker(e)}}>
+
                         <div>
                         <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>
                                      </div>
@@ -97,20 +111,30 @@ let inPortfolio = user.portfolio.filter(detail =>{
 
                         Watch
                         </div>
+
                         </button>
                 )}
                 {inPortfolio.length > 0 && (
+                    <>
+
                     <button className="watch-button-unwatch" onClick={(e) => {handleDeleteTicker(e)}}>
+
                         <div>
 
                         <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>                        </div>
                         <div>
                         Unwatch
                         </div>
+
                         </button>
+                    </>
                 )}
+
               </div>
           </div>
+
+
+
       </div>
       </>
     );

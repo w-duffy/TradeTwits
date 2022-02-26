@@ -138,3 +138,14 @@ margin-bottom: 150px;
         cursor: pointer;
         color: black;
     }
+
+    .landing-page-spinner{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+.loading-text{
+    font-size: 20px;
+}

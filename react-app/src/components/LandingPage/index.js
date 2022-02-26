@@ -11,28 +11,34 @@ import aa from '../../images/logo-aa.png'
 import linkedin from '../../images/logo-linkedin.png'
 import memehub from '../../images/logo-memehub.png'
 import * as sessionActions from "../../store/session"
+import { Oval } from  'react-loader-spinner'
 
 const LandingPage = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const [showModal, setShowModal] = useState(prop);
-
+  const [landingLoader, setLandingLoader] = useState(false)
   const hideButtonStyle = {
     display: 'none',
 }
 
 const handleClick = async (e) => {
+  // await setLandingLoader(true)
+  await setLandingLoader(true)
   await dispatch(sessionActions.login('demo@aa.io', 'password'))
+  // await setLandingLoader(false)
   history.push('/home')
 }
 
     if(user){
       return  <Redirect to='/home' />
     }
+
   return (
     <>
     {/* <div className="landing-page-container"> */}
+
 
     <div className="landing-nav-container">
 
@@ -53,14 +59,29 @@ const handleClick = async (e) => {
                 </div>
                 </div>
                 <div className="sign-up-div">
-                <button onClick={handleClick} className='login-splash-button'>Demo</button>
+                <button onClick={handleClick} className='login-splash-button'>Demo
 
+                </button>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    {landingLoader && (
+
+    <div className="landing-page-spinner">
+    <div className="loading-text">
+Loading latest stock data...
+</div>
+<div>
+    <Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+    </div>
+)}
     <div className="landing-body">
+    {!landingLoader && (
+      <>
         <div className="landing-text">
             <div className="landing-main-text">
             See what’s happening now in the markets
@@ -103,6 +124,8 @@ const handleClick = async (e) => {
         <div className="landing-body-picture">
             <img className="landing-pic" src="https://coreybradshaw.files.wordpress.com/2014/02/group-communication.jpg" />
         </div>
+      </>
+      )}
     </div>
     <div className="landing-links">
 
