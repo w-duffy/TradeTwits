@@ -3,7 +3,7 @@ import os
 import finnhub
 from .portfolio import Portfolio
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class StockDiscussion(db.Model):
@@ -28,7 +28,7 @@ class StockDiscussion(db.Model):
             company_name_upper = data['result'][0]['description']
             company_name_lower = company_name_upper.lower()
             company_name = company_name_lower.title()
-            price = p["l"]
+            price = p["c"]
             percent_change = p['dp']
 
         except:
@@ -40,7 +40,7 @@ class StockDiscussion(db.Model):
                 company_name_upper = data['result'][0]['description']
                 company_name_lower = company_name_upper.lower()
                 company_name = company_name_lower.title()
-                price = p["l"]
+                price = p["c"]
                 percent_change = p['dp']
             except:
                 finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
@@ -50,7 +50,7 @@ class StockDiscussion(db.Model):
                 company_name_upper = data['result'][0]['description']
                 company_name_lower = company_name_upper.lower()
                 company_name = company_name_lower.title()
-                price = p["l"]
+                price = p["c"]
                 percent_change = p['dp']
                 company_stats = {}
 
@@ -88,6 +88,26 @@ class StockDiscussion(db.Model):
             fifty_week_low = "N/A"
 
         today = datetime.now()
+        formatted_time = today.strftime("%B %d, %Y %I:%M%p")
+        time_graph = today.strftime("%m/%d")
+        # for comment in self.comments:
+        #     comment.replies.sort(key=lambda r: r.time_created)
+        week_ago = today - timedelta(days = 1)
+        week_ago2 = today - timedelta(days = 5)
+        news_time1 = today.strftime("%Y-%m-%d")
+        news_time2 = week_ago.strftime("%Y-%m-%d")
+        news_time3 = week_ago2.strftime("%Y-%m-%d")
+
+        try:
+            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
+
+            company_news = (finnhub_client.company_news(self.ticker, _from=news_time2, to=news_time1))
+
+        except:
+            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY2"))
+            company_news = (finnhub_client.company_news(self.ticker, _from=news_time2, to=news_time1))
+
+
 
         return {
             "id": self.id,
@@ -100,7 +120,13 @@ class StockDiscussion(db.Model):
             "market_cap": market_cap,
             "fifty_week_high": fifty_week_high,
             "fifty_week_low": fifty_week_low,
-            "time": today
+            "time": formatted_time,
+            "time_graph": time_graph,
+            "company_news": company_news
             # "watchers": [watcher.to_dict() for watcher in portfolio_watchers]
             # "likes": [like.to_dict() for like in self.likes],
+        }
+    def to_dict_basic(self):
+        return{
+            "ticker": self.ticker
         }

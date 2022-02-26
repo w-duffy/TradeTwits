@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import './landingPage.css'
 import LoginFormModal from "../auth/LoginFormModal";
 import SignUpModal from "../auth/SignUpFormModal";
@@ -10,18 +10,25 @@ import github from '../../images/logo-github.png'
 import aa from '../../images/logo-aa.png'
 import linkedin from '../../images/logo-linkedin.png'
 import memehub from '../../images/logo-memehub.png'
+import * as sessionActions from "../../store/session"
 
 const LandingPage = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
-
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [showModal, setShowModal] = useState(prop);
 
   const hideButtonStyle = {
     display: 'none',
 }
 
+const handleClick = async (e) => {
+  await dispatch(sessionActions.login('demo@aa.io', 'password'))
+  history.push('/home')
+}
+
     if(user){
-      return  <Redirect to='home' />
+      return  <Redirect to='/home' />
     }
   return (
     <>
@@ -30,9 +37,9 @@ const LandingPage = ({ prop = false }) => {
     <div className="landing-nav-container">
 
     <div className="landing-nav-top">
-        <div className="landing-title">
+        <a href='/' className="landing-title">
             TradeTwits
-        </div>
+        </a>
         <div>
             <div className="landing-nav-buttons">
                 <div>
@@ -44,6 +51,10 @@ const LandingPage = ({ prop = false }) => {
                 <div className="sign-up-div">
                     <SignUpModal />
                 </div>
+                </div>
+                <div className="sign-up-div">
+                <button onClick={handleClick} className='login-splash-button'>Demo</button>
+
                 </div>
             </div>
         </div>

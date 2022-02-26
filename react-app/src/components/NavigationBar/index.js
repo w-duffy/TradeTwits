@@ -153,16 +153,16 @@ const NavigationBar = () => {
                 {showProfileMenu && (
                   <ul className="profile-ul">
                     <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Profile
+                      <a className="profile-a" href={`/profile/${user.id}`}>
+                        My Profile
                       </a>
                     </li>
 
-                    <li className="profile-li">
+                    {/* <li className="profile-li">
                       <a className="profile-a" href="/my-profile">
                         Edit Profile
                       </a>
-                    </li>
+                    </li> */}
 
                     <li className="profile-li">
                       <a
@@ -176,7 +176,7 @@ const NavigationBar = () => {
                   </ul>
                 )}
               </div>
-              <div>Post</div>
+              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -191,7 +191,7 @@ const NavigationBar = () => {
               )}
               {user.dow_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.dow_percent_change.toFixed(2)}%
+                  +{user.dow_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
@@ -205,7 +205,7 @@ const NavigationBar = () => {
               )}
               {user.sp_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.sp_percent_change.toFixed(2)}%
+                  +{user.sp_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
@@ -218,14 +218,14 @@ const NavigationBar = () => {
               )}
               {user.nas_percent_change > 0 && (
                 <div className="three-p-change-green">
-                  {user.nas_percent_change.toFixed(2)}%
+                  +{user.nas_percent_change.toFixed(2)}%
                 </div>
               )}
             </div>
           </div>
           <div className="feed">
             {/* <div className='three-container-feed'> */}
-            Trending now:
+            {feedData.length} Currently Trending:
             {feedData.map((data) => (
               <div className="three-container-feed">
                 {/* <div className='three-container-feed'> */}
@@ -247,7 +247,7 @@ const NavigationBar = () => {
 
                     {data[1] > 0 && (
                       <div className="three-p-change-green">
-                        {data[1].toFixed(2)}%
+                        +{data[1].toFixed(2)}%
                       </div>
                     )}
                   </a>
@@ -273,7 +273,7 @@ const NavigationBar = () => {
 
                     {data[1] > 0 && (
                       <div className="three-p-change-green">
-                        {data[1].toFixed(2)}%
+                        +{data[1].toFixed(2)}%
                       </div>
                     )}
                   </a>

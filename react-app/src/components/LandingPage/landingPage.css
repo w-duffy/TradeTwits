@@ -130,3 +130,11 @@ margin-bottom: 150px;
       mix-blend-mode: multiply;
 
     }
+
+    .landing-title{
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+    }

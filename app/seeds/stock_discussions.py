@@ -509,7 +509,7 @@ def seed_stock_discussions():
 'NWS'
 ]
     for ticker in tickers:
-        print("TICKERRRRR", ticker)
+      
         stock_discussion1 = StockDiscussion(ticker=ticker)
         db.session.add(stock_discussion1)
 

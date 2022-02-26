@@ -19,16 +19,17 @@ def get_portfolio_stats(ticker):
 def get_discussion_graph(ticker):
     all_details = []
     portfolio_detail = {}
-    url = "https://alpha-vantage.p.rapidapi.com/query"
-
-    querystring = {"function":"TIME_SERIES_DAILY","symbol": ticker.upper(),"outputsize":"compact","datatype":"json"}
-    headers = {
-    'x-rapidapi-host': "alpha-vantage.p.rapidapi.com",
-    'x-rapidapi-key': os.environ.get("RAPID_API_KEY")
-    }
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    object = response.json()
     try:
+        url = "https://alpha-vantage.p.rapidapi.com/query"
+
+        querystring = {"function":"TIME_SERIES_DAILY","symbol": ticker.upper(),"outputsize":"compact",  "datatype":"json"}
+        headers = {
+        'x-rapidapi-host': "alpha-vantage.p.rapidapi.com",
+        'x-rapidapi-key': os.environ.get("RAPID_API_KEY")
+        }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        object = response.json()
+
         values_to_destructure = object["Time Series (Daily)"]
     #dummy data if APi doesn't work
     except:
@@ -68,6 +69,7 @@ def new_comment():
 @stock_discussion_routes.route("/delete/<int:id>", methods=['DELETE'])
 # @login_required
 def deletePortfolioTicker(id):
+    print("HERERERE")
     comment_to_delete = Comment.query.filter(Comment.id == id).all()
     likes_to_delete = Like.query.filter(Like.comment_id == id).all()
     replies_to_delete = Reply.query.filter(Reply.comment_id == id).all()
@@ -79,7 +81,7 @@ def deletePortfolioTicker(id):
     for like in likes_to_delete:
         db.session.delete(like)
     delete_object = comment_to_delete[0]
-    print(delete_object.to_dict())
+
     db.session.delete(delete_object)
     db.session.commit()
     return delete_object.to_dict()

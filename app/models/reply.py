@@ -17,13 +17,16 @@ class Reply(db.Model):
     comments = db.relationship("Comment", back_populates="replies")
 
     def to_dict(self):
+
+        profile_time = self.time_updated.strftime("%m/%d/%y, %I:%M %p")
+
         return {
             "id": self.id,
             "user_id": self.user_id,
             "comment_id": self.comment_id,
             "reply": self.reply,
             "time_created": self.time_created,
-            "time_updated": self.time_updated,
+            "time_updated": profile_time,
             "likes": [like.to_dict() for like in self.likes],
             "user": self.user.to_dict_basic()
         }

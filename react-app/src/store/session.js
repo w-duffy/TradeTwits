@@ -118,10 +118,29 @@ export const addTicker = (ticker, user_id, name) => async (dispatch) =>{
   })
   if (res.ok){
       const result = await res.json();
-      dispatch(add(result))
+      // dispatch(add(result))
+      dispatch(setUser(result))
       return result
   }
 }
+
+export const editUserProfile = (id, newBio, newProfilePic) => async (dispatch) =>{
+  const res = await fetch(`/api/users/edit/${id}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+          id,
+          newBio,
+          newProfilePic
+      })
+  })
+  if (res.ok){
+      const result = await res.json();
+      dispatch(setUser(result))
+      return result
+  }
+}
+
 
 export default function reducer(state = initialState, action) {
   let newState;

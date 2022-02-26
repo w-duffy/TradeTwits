@@ -1,3 +1,4 @@
+import { setUser } from "./session"
 const SET_PORTFOLIO = "portfolio/SET_PORTFOLIO"
 const REMOVE_PORTFOLIO_TICKER = "portfolio/REMOVE_PORTFOLIO_TICKER"
 
@@ -37,8 +38,8 @@ export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
     })
     if(res.ok){
         const details = await res.json();
-
-        dispatch(delTicker(details['ticker']))
+        dispatch(setUser(details))
+        // dispatch(delTicker(details['ticker']))
     }
 }
 

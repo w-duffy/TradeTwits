@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from "../Search";
 import "../NavigationBar/navigation.css";
 import * as sessionActions from "../../store/session";
-import { NavLink, useHistory } from "react-router-dom";
-import StockDiscussion from "../StockDiscussion.js";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { searchOptions, tickers } from "../Search/tickers";
 import { createBrowserHistory } from "history";
-import { getPortfolioDetails } from "../../store/portfolio";
 import Main from "../Main";
-import './splash.css'
+import '../Splash/splash.css'
+import './myProfile.css'
+import { ModalAuth } from "../../Context/ModalAuth";
+import EditProfileForm from "./EditProfile";
+import { useParams } from 'react-router-dom';
 
 
-const Splash = () => {
+
+const MyProfile = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ const Splash = () => {
   const refHandler = useRef(null);
   const refHandlerSplash = useRef(null);
   const [showEditPortfolio, setEditPortfolio] = useState(false);
+  const [showModal, setShowModal] = useState(prop);
+  const { userId }  = useParams();
+    console.log("USER ID", userId)
+  const hideButtonStyle = {
+    display: 'none',
+}
 
   const openProfileMenu = () => {
     setShowProfileMenu(!showProfileMenu);
@@ -33,10 +40,11 @@ const Splash = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [userProf, setUserProf] = useState("");
   const [searchTermSplash, setSearchTermSplash] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultsSplash, setSearchResultsSplash] = useState([]);
-  const [tickerSearch, setTickerSearch] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
   const browserHistory = createBrowserHistory();
 
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
@@ -131,6 +139,35 @@ const Splash = () => {
     return tickers.includes(stock[0]);
   });
   const feedData = filterArrStocks.slice(0, 5);
+
+
+
+
+
+
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    (async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      const user2 = await response.json();
+      setUserProf(user2);
+      setIsLoaded(!isLoaded)
+      console.log("USER", user2)
+    })();
+  }, [userId]);
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <div className="nav-container">
@@ -168,8 +205,7 @@ const Splash = () => {
                             <a
                               onClick={() => {
                                 setSearchTerm("");
-                                setTickerSearch(result[0]);
-                                browserHistory.push(`/discussion/${result[0]}`);
+                               browserHistory.push(`/discussion/${result[0]}`);
                               }}
                             >
                               {" "}
@@ -180,7 +216,7 @@ const Splash = () => {
                             <a
                               onClick={() => {
                                 setSearchTerm("");
-                                setTickerSearch(result[0]);
+
                                 history.push(`/discussion/${result[0]}`);
                               }}
                             >
@@ -216,7 +252,7 @@ const Splash = () => {
                     </li>
 
                     {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
+                      <a className="profile-a" href={`/profile/${user.id}`}>
                         Edit Profile
                       </a>
                     </li> */}
@@ -291,7 +327,7 @@ const Splash = () => {
                     className="a-select"
                     onClick={() => {
                       setSearchTerm("");
-                      setTickerSearch(data[0]);
+
                       browserHistory.push(`/discussion/${data[0]}`);
                     }}
                   >
@@ -315,7 +351,7 @@ const Splash = () => {
                     className="a-select"
                     onClick={() => {
                       setSearchTerm("");
-                      setTickerSearch(data[0]);
+
                       history.push(`/discussion/${data[0]}`);
                     }}
                   >
@@ -359,68 +395,294 @@ const Splash = () => {
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
-      <div className="discussion-feed-splash">
 
-    <h1>Welcome to TradeTwits {user.username}!</h1>
-    <h2>See what’s happening now in the markets </h2>
-    <h4>See what actual investors and traders are saying in real time
-        about the stocks you care about for free.</h4>
-        <p>Try searching for stock a to discuss below</p>
-        <div className="search-bar-div-splash">
-            {/* <SearchBar /> */}
-            <div ref={refHandlerSplash} className="search_container">
-              <div className="search__bar">
-                <input
-                  type="text"
-                  id="search-input-splash"
-                  value={searchTermSplash}
-                  placeholder="Ticker or Company Name"
-                  onChange={(e) => setSearchTermSplash(e.target.value)}
-                ></input>
+      {isLoaded &&  userProf.id === user.id && (
+
+<div className="profile-container-top">
+  <div className="top-profile">
+      <div className="prof-pic-top">
+      <img
+            className="profile-picture-on-button-page"
+            src={user.profile_picture}
+          ></img>
+      </div>
+      <div className="top-profile-right">
+              <div className="top-profile-username">
+              {user.username}
               </div>
-              <div id="search_results">
-                {searchTermSplash && (
-                  <>
-                    {searchResultsSplash.map((result) => (
-                      <>
-                        <div className="search-result-select">
-                          {stockDiscussion.id && (
-                            <a
-                              onClick={() => {
-                                setSearchTermSplash("");
-                                setTickerSearch(result[0]);
-                                browserHistory.push(`/discussion/${result[0]}`);
-                              }}
-                            >
-                              {" "}
-                              {result[0]} - {result[1]}{" "}
-                            </a>
-                          )}
-                          {!stockDiscussion.id && (
-                            <a
-                              onClick={() => {
-                                setSearchTermSplash("");
-                                setTickerSearch(result[0]);
-                                history.push(`/discussion/${result[0]}`);
-                              }}
-                            >
-                              {" "}
-                              {result[0]} - {result[1]}{" "}
-                            </a>
-                          )}
+              {user.id == user.id && (
+
+                  <div className="edit-profile-button">
+              <button
+      className='login-splash-button-modal'
+      onClick={() => setShowModal(true)}
+      style={prop ? hideButtonStyle : null}
+      >
+      Edit Profile
+  </button>
+  {showModal && (
+      <ModalAuth onClose={() => setShowModal(false)}>
+          <EditProfileForm userToEdit={user} showModal={setShowModal} />
+      </ModalAuth>
+  )}
+
+              </div>
+          )}
+      </div>
+  </div>
+
+
+
+
+  {user.bio.length > 0 &&(
+      <>
+      <div className="about-user">
+          About {user.username}:
+          </div>
+      {user.bio}
+      </>
+  )}
+      <div className="profile-container-follower">
+              <div className="following-container">
+                  {user.following.length} Following
+              </div>
+              <div className="follower-container">
+                  {user.followers.length} Followers
+              </div>
+      </div>
+      <div className="comment-feed-profile">
+          <div className="comment-title">
+             {user.username}'s Comments
+
+              </div>
+      {user.comments && (
+  <>
+  {user.comments.map((comment) => (
+      <>
+  <div className="link-to-discuss">
+      <div>
+
+  Discussion:
+      </div>
+      <div>
+
+    <a className="profile-a" href={`/discussion/${comment.discussion_ticker}`}>
+     {comment.discussion_ticker}
+        </a>
+      </div>
+  </div>
+
+    <div className="comment-container">
+    <div className="comment-body-div-prof-pic">
+      <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+    </div>
+    <div className="comment-body-container">
+    <div className="comment-body-first-row">
+    <div className="username-posted">
+      <div className="comment-top-row-username">
+      {comment.user.username} {comment.profile_time}
+      </div>
+      <div className="comment-top-row-updated">
+      {/* {updatedDateFormatted.toLocaleDateString()} */}
+      </div>
+    </div>
+
+    </div>
+    <div className="comment-body-comment">
+          {comment.comment}
+    </div>
+
+    <div className="comment-body-bottom-row">
+      <div>
+
+    <div className="comment-icon-container">
+
+      {/* <div>
+
+    <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
+      </div>
+      <div>
+      {comment.replies.length}
+  </div> */}
+        {/* <div className="comment-icon-container-like">
+             <div>
+             <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+               </div>
+               <div>
+  {comment.likes.length}
+    </div>
+        </div> */}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+      </>
+    ))}
+    </>
+
+    )}
+      </div>
+
+
+</div>
+   )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {isLoaded && user.id !== userProf.id &&(
+
+          <div className="profile-container-top">
+            <div className="top-profile">
+                <div className="prof-pic-top">
+                <img
+                      className="profile-picture-on-button-page"
+                      src={userProf.profile_picture}
+                    ></img>
+                </div>
+                <div className="top-profile-right">
+                        <div className="top-profile-username">
+                        {userProf.username}
                         </div>
-                      </>
-                    ))}
-                  </>
-                )}
-              </div>
+                        {user.id == userProf.id && (
+
+                            <div className="edit-profile-button">
+                        <button
+                className='login-splash-button-modal'
+                onClick={() => setShowModal(true)}
+                style={prop ? hideButtonStyle : null}
+                >
+                Edit Profile
+            </button>
+            {showModal && (
+                <ModalAuth onClose={() => setShowModal(false)}>
+                    <EditProfileForm userToEdit={user} showModal={setShowModal} />
+                </ModalAuth>
+            )}
+
+                        </div>
+                    )}
+                </div>
             </div>
-          </div>
-          </div>
+
+
+
+
+            {userProf.bio.length > 0 &&(
+                <>
+                <div className="about-user">
+                    About {userProf.username}:
+                    </div>
+                {userProf.bio}
+                </>
+            )}
+                <div className="profile-container-follower">
+                        <div className="following-container">
+                            {userProf.following.length} Following
+                        </div>
+                        <div className="follower-container">
+                            {userProf.followers.length} Followers
+                        </div>
+                </div>
+                <div className="comment-feed-profile">
+                    <div className="comment-title">
+                       {userProf.username}'s Comments
+
+                        </div>
+                {userProf.comments && (
+            <>
+            {userProf.comments.map((comment) => (
+                <>
+            <div className="link-to-discuss">
+                <div>
+
+            Discussion:
+                </div>
+                <div>
+
+              <a className="profile-a" href={`/discussion/${comment.discussion_ticker}`}>
+               {comment.discussion_ticker}
+                  </a>
+                </div>
+            </div>
+
+              <div className="comment-container">
+              <div className="comment-body-div-prof-pic">
+                <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+              </div>
+              <div className="comment-body-container">
+              <div className="comment-body-first-row">
+              <div className="username-posted">
+                <div className="comment-top-row-username">
+                {comment.user.username} {comment.profile_time}
+                </div>
+                <div className="comment-top-row-updated">
+                {/* {updatedDateFormatted.toLocaleDateString()} */}
+                </div>
               </div>
 
+              </div>
+              <div className="comment-body-comment">
+                    {comment.comment}
+              </div>
+
+              <div className="comment-body-bottom-row">
+                <div>
+
+              <div className="comment-icon-container">
+
+                {/* <div>
+
+              <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
+                </div>
+                <div>
+                {comment.replies.length}
+            </div> */}
+                  {/* <div className="comment-icon-container-like">
+                       <div>
+                       <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                         </div>
+                         <div>
+            {comment.likes.length}
+              </div>
+                  </div> */}
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+                </>
+              ))}
+              </>
+
+              )}
+                </div>
+
+
+        </div>
+                )}
+               </div>
     </>
   );
 };
 
-export default Splash;
+export default MyProfile;

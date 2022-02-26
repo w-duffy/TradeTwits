@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { delReply, editReply } from "../../store/replies";
 import { addReplyLike, deleteReplyLike } from "../../store/likes";
 
-const Reply = ({ reply }) => {
+const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
   // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedReply, setUpdatedReply] = useState("")
+  const [updatedReply, setUpdatedReply] = useState(reply.reply)
+  const [showCommentMenu, setShowCommentMenu] = useState(false);
 
 
 
@@ -30,8 +31,13 @@ const Reply = ({ reply }) => {
       window.alert("You cannot submit a blank reply")
       return;
     }
+    if(editedReply.length > 255){
+      window.alert("Your reply must be less than 255 characters")
+      return;
+    }
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
+    setShowCommentMenu(!showCommentMenu);
 }
 const handleAddReplyLike = (e, reply) => {
   e.preventDefault();
@@ -51,7 +57,9 @@ const handleAddReplyLike = (e, reply) => {
 
 }
 
-let updatedDateFormatted = new Date(reply.time_updated)
+const openCommentMenu = () => {
+  setShowCommentMenu(!showCommentMenu);
+};
 
 let hasLiked = reply.likes.filter(like =>{
   return like.user_id === user.id
@@ -70,14 +78,107 @@ return (
         {reply.user.username}
         </div>
         <div className="comment-top-row-updated">
-        {updatedDateFormatted.toLocaleDateString()}
+        {reply.time_updated}
         </div>
       </div>
-      <div> delete</div>
+      <div>
+
+      <div className="edit-container-c">
+
+<div onClick={openCommentMenu} className="comment-icon-container">
+<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+                  </div>
+          </div>
+
+{/* <div className="ul-container-c"> */}
+
+{showCommentMenu && user.id === reply.user_id && (
+  <ul className="profile-ul-r">
+              <li className="profile-li-c">
+                <div onClick={() => {setShowEditForm(!showEditForm); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                  Edit Reply
+                </div>
+              </li>
+
+              {/* <li className="profile-li">
+                <a className="profile-a" href="/my-profile">
+                  Edit Profile
+                  </a>
+              </li> */}
+
+              <li className="profile-li-c">
+                <div
+                  className="profile-a-c"
+
+                  onClick={(e) => {
+                    handleDeleteReply(e, reply.id);
+                  }}
+                  >
+                  Delete Reply
+                </div>
+              </li>
+            </ul>
+          )}
+
+{showCommentMenu && user.id !== reply.user_id && (
+        <ul className="profile-ul-f">
+          {isFollower.includes(reply.user.id) && (
+                    <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, reply.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+          {!isFollower.includes(reply.user.id) && (
+                    <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          {handleAddFollow(e, reply.user_id); setShowCommentMenu(!showCommentMenu)}
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+                )}
       </div>
-      <div className="comment-body-comment">
-            {reply.reply}
       </div>
+
+        {!showEditForm && (
+      <div className="comment-body-comment-r-modal">
+
+          {reply.reply}
+      </div>
+        )}
+             {showEditForm && (
+
+<div className="comment-body-comment">
+<form
+  onSubmit={(e) => {
+    handleEditReply(e, reply.id);
+  }}
+>
+  <div className="add-comment-container">
+    <textarea className="add-comment-textarea-r"
+      name="Edit Comment"
+      placeholder={reply.reply}
+      value={updatedReply}
+      onChange={(e) => setUpdatedReply(e.target.value)}
+      ></textarea>
+<button className="post-comment-button" type="submit">Submit</button>
+  </div>
+</form>
+</div>
+
+)}
 
       <div className="comment-body-bottom-row">
 
@@ -104,7 +205,7 @@ return (
       </div>
 
 
-      {reply.user_id === user.id && (
+      {/* {reply.user_id === user.id && (
         <>
           <button onClick={(e) => setShowEditForm(!showEditForm)}>
             EDIT reply
@@ -117,24 +218,8 @@ return (
             DELETE reply
           </button>
         </>
-      )}
-      {showEditForm && (
-        <form
-          onSubmit={(e) => {
-            handleEditReply(e, reply.id);
-          }}
-        >
-          <div>
-            <input
-              name="Edit Comment"
-              placeholder={reply.reply}
-              value={updatedReply}
-              onChange={(e) => setUpdatedReply(e.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      )}
+      )} */}
+
 
 
 </div>

@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +17,17 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/edit/<int:id>', methods=["POST"])
+@login_required
+def edit_user(id):
+    object = request.json
+    new_bio = object['newBio']
+    new_prof_pic = object['newProfilePic']
+    user = User.query.get(id)
+    user.bio = new_bio
+    user.profile_picture = new_prof_pic
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict()
+

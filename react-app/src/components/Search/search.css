@@ -32,11 +32,11 @@
     align-items: left;
     overflow: hidden;
     list-style: none;
-    width: 17.85%;
+    width: 14.85%;
     position: absolute;
     margin-top: 2%;
     background-color: rgb(87, 87, 87);
-
+    z-index: 500;
     color: white;
 }
 
@@ -44,12 +44,14 @@
     padding: 5px;
     border: rgb(109, 109, 109) 1px solid;
     cursor: pointer;
+    z-index: 500;
 }
 
 .search-result-select:hover{
     padding: 5px;
     border: rgb(109, 109, 109) 1px solid;
     background-color: gray;
+    z-index: 500;
 }
 
 /* div{

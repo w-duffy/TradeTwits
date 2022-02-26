@@ -11,17 +11,22 @@ import { addCommentLike, deleteCommentLike } from "../../store/likes";
 import { addNewReply } from "../../store/replies";
 import './comment.css'
 import { Modal } from "../../Context/Modal";
-const Comment = ({ comment }) => {
+import { ModalAuth } from "../../Context/ModalAuth";
+
+const Comment = ({ comment, prop = false }) => {
   // const [isLoaded, setIsLoaded] = useState(false)
   // const ticker = useParams()
   const dispatch = useDispatch();
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState("");
+  const [updatedComment, setUpdatedComment] = useState(comment.comment);
   const [newReply, setNewReply] = useState("");
   const [showReplyAddForm, setReplyAddShowForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
+  const [showCommentMenu, setShowCommentMenu] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(prop);
+  const [errors, setErrors] = useState([]);
   //   const [showForm, setShowForm] = useState(false);
+
   const hideButtonStyle = {
     display: 'none',
 }
@@ -32,17 +37,29 @@ const Comment = ({ comment }) => {
     e.preventDefault();
     let id = commentId;
     let newComment = updatedComment;
+    let errArr = []
     if(newComment.length < 1){
-      window.alert("You cannot submit a blank comment")
-      return;
+      errArr.push("You cannot submit a blank comment")
+    }
+
+    if(newComment.length > 255){
+      errArr.push("Your comment must be less than 255 characters")
+    }
+
+    if(errArr.length){
+      return setErrors(errArr)
     }
     await dispatch(editDiscussionComment(id, newComment));
     await setShowEditForm(!showEditForm);
+    setShowEditModal(false)
+    setShowCommentMenu(!showCommentMenu);
   };
 
   const handleDeleteComment = async (e, commentId) => {
+    console.log("In Comp 1")
     e.preventDefault();
     let id = commentId;
+    console.log("ID in comp", id)
     await dispatch(delDiscussionComment(id));
     document.body.style.overflow = 'unset';
   };
@@ -99,6 +116,11 @@ const Comment = ({ comment }) => {
       window.alert("You cannot submit a blank reply")
       return;
     }
+
+    if(reply.length > 255){
+      window.alert("Your reply must be less than 255 characters")
+      return;
+    }
     let user_id = user.id;
     let comment_id = comment.id;
     dispatch(addNewReply(reply, user_id, comment_id));
@@ -121,10 +143,15 @@ const Comment = ({ comment }) => {
   }
 
 
- let updatedDateFormatted = new Date(comment.time_updated)
  let hasLiked = comment.likes.filter(like =>{
    return like.user_id === user.id
  })
+
+
+ const openCommentMenu = () => {
+  setShowCommentMenu(!showCommentMenu);
+};
+
 
 
   return (
@@ -142,13 +169,82 @@ const Comment = ({ comment }) => {
         {comment.user.username}
         </div>
         <div className="comment-top-row-updated">
-        {updatedDateFormatted.toLocaleDateString()}
+        {comment.profile_time}
         </div>
       </div>
-      <div className="comment-icon-container">
+
+
+      <div className="edit-container-c">
+
+      <div onClick={openCommentMenu} className="comment-icon-container">
       <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+                        </div>
+                </div>
       </div>
-      </div>
+      {/* <div className="ul-container-c"> */}
+
+      {showCommentMenu && user.id === comment.user_id && (
+        <ul className="profile-ul-c">
+                    <li className="profile-li-c">
+                      <div onClick={() => setShowEditModal(!showEditModal)} className="profile-a-c">
+                        Edit Comment
+                      </div>
+                    </li>
+
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+
+                    <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          handleDeleteComment(e, comment.id);
+                        }}
+                        >
+                        Delete Comment
+                      </div>
+                    </li>
+                  </ul>
+                )}
+
+
+
+{showCommentMenu && user.id !== comment.user_id && (
+        <ul className="profile-ul-f1">
+          {isFollower.includes(comment.user.id) && (
+                    <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+          {!isFollower.includes(comment.user.id) && (
+                    <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+                )}
+
+
+                {/* </div> */}
       <div className="comment-body-comment">
             {comment.comment}
       </div>
@@ -160,7 +256,8 @@ const Comment = ({ comment }) => {
         <div>
 
       <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
-        </div>
+      </div>
+
         <div>
         {comment.replies.length}
           </div>
@@ -200,61 +297,48 @@ const Comment = ({ comment }) => {
               </div>
           </div>
         </div>
-        <div>
-        {isFollower.includes(comment.user.id) && (
-          <button
-          onClick={(e) => {
-            handleAddFollow(e, comment.user_id);
-          }}
-            >
-            Unfollow {comment.user.username}
-          </button>
-        )}
-        {!isFollower.includes(comment.user.id) && (
-          <button
-            onClick={(e) => {
-              handleAddFollow(e, comment.user_id);
-            }}
-          >
-            Follow {comment.user.username}
-          </button>
-        )}
-        </div>
 
       </div>
 
 
-      {comment.user_id === user.id && (
-        <>
-          <button onClick={(e) => setShowEditForm(!showEditForm)}>
-            EDIT COMMENT
-          </button>
-          <button
-            onClick={(e) => {
-              handleDeleteComment(e, comment.id);
-            }}
-            >
-            DELETE COMMENT
-          </button>
+            {showEditModal && (
+              <>
+              <ModalAuth onClose={() => setShowEditModal(false)}>
+                <>
+
+
         </>
-      )}
-      {showEditForm && (
+        <div className='login-modal-title'>
+      Edit Comment
+    </div>
         <form
-          onSubmit={(e) => {
-            handleEditComment(e, comment.id);
+        onSubmit={(e) => {
+          handleEditComment(e, comment.id);
           }}
         >
+                <div className="error-login">
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+      </div>
           <div>
-            <input
+            <textarea
+            className="add-comment-textarea-r2"
               name="Edit Comment"
               placeholder={comment.comment}
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
+            ></textarea>
+             <div className='modal-login-button-container'>
+            <button className='login-splash-button-modal' type="submit">Submit</button>
+            </div>
           </div>
         </form>
-      )}
+
+      </ModalAuth>
+
+                </>
+        )}
 
       <br></br>
 {/*
@@ -283,11 +367,49 @@ const Comment = ({ comment }) => {
        {comment.user.username}
        </div>
        <div className="comment-top-row-updated">
-         {updatedDateFormatted.toLocaleDateString()}
+         {comment.profile_time}
        </div>
      </div>
      <div>
-     <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-dot-browser-ui-elements-flat-icons-inmotus-design.png"/>
+{user.id !== comment.user_id && (
+
+  <div onClick={openCommentMenu} className="comment-icon-container">
+<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+                  </div>
+       )}
+
+
+{showCommentMenu && user.id !== comment.user_id && (
+        <ul className="profile-ul-f">
+          {isFollower.includes(comment.user.id) && (
+            <li className="profile-li-c">
+                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
+                        Unfollow
+                      </div>
+                    </li>
+ )}
+                    {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                      Edit Profile
+                      </a>
+                    </li> */}
+          {!isFollower.includes(comment.user.id) && (
+            <li className="profile-li-c">
+                      <div
+                        className="profile-a-c"
+
+                        onClick={(e) => {
+                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
+
+                        }}
+                        >
+                        Follow
+                      </div>
+                    </li>
+                      )}
+                  </ul>
+
+                )}
      </div>
      </div>
      <div className="comment-body-comment-modal">
@@ -295,25 +417,7 @@ const Comment = ({ comment }) => {
      </div>
 
      <div className="comment-body-bottom-row">
-       {/* <div> */}
 
-     {/* <button onClick={(e) => setReplyAddShowForm(!showReplyAddForm)}>
-       Reply to {comment.user.username}'s post
-     </button> */}
-
-      {/* //  <form onSubmit={handleAddReply}>
-      //    <div>
-      //      <input */}
-      {/* //        name="Add Reply"
-      //        placeholder="Enter your reply here.."
-      //        value={newReply}
-      //        onChange={(e) => setNewReply(e.target.value)}
-      //      ></input>
-      //      <button type="submit">Submit</button>
-      //    </div>
-      //  </form> */}
-
-       {/* </div> */}
        <div className="comment-icon-container"
             onClick={(e) => {
               handleAddLike(e, comment);
@@ -333,7 +437,7 @@ const Comment = ({ comment }) => {
             {comment.likes.length}
               </div>
           </div>
-       <div>
+       {/* <div>
        {isFollower.includes(comment.user.id) && (
          <button
          onClick={(e) => {
@@ -352,45 +456,9 @@ const Comment = ({ comment }) => {
            Follow {comment.user.username}
          </button>
        )}
-       </div>
+       </div> */}
 
      </div>
-
-
-     {comment.user_id === user.id && (
-       <>
-         <button onClick={(e) => setShowEditForm(!showEditForm)}>
-           EDIT COMMENT
-         </button>
-         <button
-           onClick={(e) => {
-             handleDeleteComment(e, comment.id);
-            }}
-            >
-           DELETE COMMENT
-         </button>
-       </>
-     )}
-     {showEditForm && (
-       <form
-         onSubmit={(e) => {
-           handleEditComment(e, comment.id);
-         }}
-       >
-         <div>
-           <input
-             name="Edit Comment"
-             placeholder={comment.comment}
-             value={updatedComment}
-             onChange={(e) => setUpdatedComment(e.target.value)}
-           ></input>
-           <button type="submit">Submit</button>
-         </div>
-       </form>
-     )}
-
-
-
 
      <br></br>
     </div>
@@ -416,7 +484,7 @@ const Comment = ({ comment }) => {
 </form>
 </div>
    {comment.replies.map((reply) => (
-       <Reply key={reply.id} reply={reply} />
+       <Reply key={reply.id} reply={reply} handleAddFollow={handleAddFollow} isFollower={isFollower} />
      ))}
     </div>
    </Modal>

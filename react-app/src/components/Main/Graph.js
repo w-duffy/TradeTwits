@@ -13,7 +13,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-function Graph({values, dates}){
+function Graph({pClose, high, low, openP,  current}){
     ChartJS.register(
         CategoryScale,
         LinearScale,
@@ -38,8 +38,12 @@ function Graph({values, dates}){
 
       const [lineColor, setLineColor] = useState("")
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
-      const daySlicer = dates.slice(0, 30)
-      const valuesSlicer = values.slice(0, 30)
+      // const daySlicer = dates.slice(0, 30)
+      const daySlicer = ["Previous Close", "Open", 'Current']
+      // const daySlicer = ["Previous Close", "High", "Low", "Open", 'Current']
+      const valuesSlicer = [pClose,  openP,  current]
+      // const valuesSlicer = [pClose, high, low, openP,  current]
+      // const valuesSlicer = values.slice(0, 30)
 
       useEffect(() =>{
         if(valuesSlicer[0] < valuesSlicer[valuesSlicer.length - 1]){
@@ -48,14 +52,14 @@ function Graph({values, dates}){
         if(valuesSlicer[0] > valuesSlicer[valuesSlicer.length - 1]) {
            setLineColor('rgb(255, 0, 0)')
         }
-      },[values])
+      },[current])
 
       const data = {
-        labels: daySlicer.reverse(),
+        labels: daySlicer,
         datasets: [
           {
             label: 'Value',
-            data: valuesSlicer.reverse(),
+            data: valuesSlicer,
             fill: true,
             backgroundColor: 'rgb(0, 0, 0)',
             borderColor: lineColor,

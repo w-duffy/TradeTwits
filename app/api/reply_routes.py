@@ -42,16 +42,16 @@ def delete_reply(id):
 # @login_required
 def edit_discussion_comment(id):
     object = request.json
-    print("OBJECT", object)
+
     new_reply = object['editedReply']
     comment_id = object['commentId']
     today = datetime.now()
     reply_to_edit = Reply.query.get(id)
-    print("REPLY", reply_to_edit)
+
     reply_to_edit.reply = new_reply
     reply_to_edit.time_updated = today
     db.session.add(reply_to_edit)
     db.session.commit()
     updated_comment_with_new_reply = Comment.query.get(comment_id)
-    print("UPDATED COMMENT", updated_comment_with_new_reply)
+
     return updated_comment_with_new_reply.to_dict()

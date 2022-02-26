@@ -65,28 +65,32 @@ useEffect(() =>{
       window.alert("You cannot submit a blank comment")
       return;
     }
+    if(comment.length > 255){
+      window.alert("Your comment must be less than 255 characters")
+      return;
+    }
     dispatch(addNewComment(comment, user_id, stock_discussion_id));
     setNewComment("");
     setShowForm(!showForm);
     document.body.style.overflow = 'unset';
   };
 
-  useEffect(() => {
-    const id = user.id
+//   useEffect(() => {
+//     const id = user.id
 
-      async function getDetails() {
-      await dispatch(getPortfolioDetails(id))
-    }
-  getDetails()
+//       async function getDetails() {
+//       await dispatch(getPortfolioDetails(id))
+//     }
+//   getDetails()
 
-}, [])
+// }, [])
 
 
   if (isLoaded) {
 
     return (
       <>
-      <div className="main-container">
+      <div className="main-container-discussion">
       <div className="portfolio">
             <div className="portfolio-name">
               Watchlist
@@ -101,13 +105,13 @@ useEffect(() =>{
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
-      <div className="discussion-feed">
+      <div className="discussion-feed-main">
 
         <div>
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
         <div className="discussion-graph">
-          <DiscussionGraph key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
+          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.price} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
       <KeyData stockDiscussion={stockDiscussion} />
@@ -148,7 +152,26 @@ useEffect(() =>{
 
               )}
           </div>
-              </div>
+          <div className="news">
+              <div className="news-title">
+                {stockDiscussion.ticker} News
+                </div>
+                {stockDiscussion.company_news.slice(0, 10).map((news) => (
+                  <div className="news-container-here">
+
+                  <a className="a-news" target="_blank" href={news.url}>
+                  <div className="news-headline">
+                    {news.headline}
+                  </div>
+                  <div className="news-source">
+                    Source: {news.source}
+                    </div>
+                </a>
+
+                  </div>
+                  ))}
+          </div>
+                  </div>
       </>
     );
   } else return <></>;

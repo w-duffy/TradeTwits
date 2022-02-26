@@ -8,12 +8,11 @@ const Main = ({showEditPortfolio}) => {
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
 // const [tickerName, setTickerName] = useState("")
-const [newTick, setNewTick] = useState(false)
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
 const refHandler = useRef(null);
 
-const portfolios = useSelector((state) => state.portfolioReducer);
+// const portfolios = useSelector((state) => state.portfolioReducer);
 useEffect(() =>{
     setSearchTerm("")
 },[])
@@ -36,7 +35,7 @@ setSearchResults(finalResult)
   // const portArr = Object.values(user.portfolio)
   const handleAddTicker = (e, tickerName) => {
     e.preventDefault();
-    let portCheck = portfolios.filter(portfolio =>{
+    let portCheck = user.portfolio.filter(portfolio =>{
       return portfolio.ticker === tickerName
     })
     if (portCheck.length > 0){
@@ -48,7 +47,7 @@ setSearchResults(finalResult)
     dispatch(addTicker(ticker, user_id))
     // setTickerName("")
     setShowForm(!showForm)
-    setNewTick(!newTick)
+
 
 }
 
@@ -78,6 +77,8 @@ const clickedOffSearch = event => {
       </button>
         </div> */}
       {showEditPortfolio && (
+
+
                <div ref={refHandler} className='search_container'>
                <div className="search__bar">
                    <input type="text" id="search-input" value={searchTerm} placeholder="Ticker or Company Name" onChange={(e)=>setSearchTerm(e.target.value)}></input>
@@ -85,12 +86,14 @@ const clickedOffSearch = event => {
                </div>
                <div id="search_results">
                    {searchTerm && (
-                       <>
+                     <>
                        {searchResults.map((result) => (
                            <>
-                           <div>
-                           <p> {result[0]} - {result[1]} </p>
-                           <button onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>submit</button>
+                           <div className="search-result-select">
+
+                           <a onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>
+                           {result[0]} - {result[1]}
+                           </a>
                            </div>
                            </>
                            ))}
@@ -98,6 +101,7 @@ const clickedOffSearch = event => {
                    )}
                </div>
                </div>
+
 
 
 
@@ -116,7 +120,7 @@ const clickedOffSearch = event => {
         //   </div>
         // </form>
       )}
-      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} newTick={newTick} />
+      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} />
     </>
   );
 };

@@ -22,3 +22,29 @@
     width: 16px;
     transform: scaleY(-1);
 }
+
+.co-info-company-name{
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+.top-discuss-name{
+    margin-right: 5px;
+}
+
+.co-info-ticker{
+    font-size: 36px;
+    font-weight: 750;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.co-info-ticker-price{
+    font-size: 35px;
+    font-weight: 500;
+    display: flex;
+    padding-left: 7px;
+
+}
