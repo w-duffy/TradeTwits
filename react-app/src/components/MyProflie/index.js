@@ -504,7 +504,7 @@ Loading profile data...
     </div>
 
     </div>
-    <div className="comment-body-comment">
+    <div className="comment-body-comment-c">
           {comment.comment}
     </div>
 
@@ -657,7 +657,7 @@ Loading profile data...
               </div>
 
               </div>
-              <div className="comment-body-comment">
+              <div className="comment-body-comment-c">
                     {comment.comment}
               </div>
 
