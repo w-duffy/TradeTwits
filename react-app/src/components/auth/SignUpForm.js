@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -14,6 +14,17 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [landingLoader, setLandingLoader] = useState(false)
+  const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('/api/users/');
+  //     const responseData = await response.json();
+  //     setUsers(responseData.users);
+  //   }
+  //   fetchData();
+  // }, []);
+  // console.log(users)
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -49,9 +60,10 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       await setLandingLoader(true)
       const data = await dispatch(signUp(username, email, password));
+      console.log("DATA", data)
       if (data) {
+        await setErrors([data])
         await setLandingLoader(false)
-        setErrors(data)
       }
     }
   };
