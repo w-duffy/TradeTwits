@@ -7,6 +7,7 @@ COPY react-app/. .
 ENV REACT_APP_BASE_URL=https://tradetwits.herokuapp.com/
 
 # Build our React App
+RUN npm install react-loader-spinner
 RUN npm install
 RUN npm run build
 

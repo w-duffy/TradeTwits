@@ -23,16 +23,16 @@ def seed_comments():
         user_id=3, comment="Sweet Stocks", stock_discussion_id=1, time_created=today, time_updated=day_before3)
 
     user_comment5 = Comment(
-    user_id=1, comment="Great post for XOM", stock_discussion_id=2, time_created=today, time_updated=today)
+    user_id=1, comment="Great post for MSFT", stock_discussion_id=2, time_created=today, time_updated=today)
 
     user_comment6 = Comment(
-        user_id=1, comment="Nice insight on XOM", stock_discussion_id=2, time_created=day_before, time_updated=day_before)
+        user_id=1, comment="Nice insight on MSFT", stock_discussion_id=2, time_created=day_before, time_updated=day_before)
 
     user_comment7 = Comment(
         user_id=2, comment="Awesome!!", stock_discussion_id=2, time_created=day_before, time_updated=day_before2)
 
     user_comment8 = Comment(
-        user_id=3, comment="XOM is a sweet stock", stock_discussion_id=2, time_created=today, time_updated=day_before3)
+        user_id=3, comment="MSFT is a sweet stock", stock_discussion_id=2, time_created=today, time_updated=day_before3)
 
 
     db.session.add(user_comment1)

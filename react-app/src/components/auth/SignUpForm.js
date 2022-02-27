@@ -26,7 +26,7 @@ const SignUpForm = () => {
       errArr.push("You must enter an email")
     }
     if(!email.includes('@')){
-      errArr.push("You must enter a valid email")
+      errArr.push("Your email format is not valid")
     }
     if(email.length < 3){
       errArr.push("You must enter a valid email")
