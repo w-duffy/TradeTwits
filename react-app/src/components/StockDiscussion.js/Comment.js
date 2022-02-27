@@ -32,7 +32,6 @@ const Comment = ({ comment, prop = false }) => {
 }
   const user = useSelector((state) => state.session.user);
 
-  // console.log("STOCK DIOSCUSS IN COMP", stockDiscussion)
   const handleEditComment = async (e, commentId) => {
     e.preventDefault();
     let id = commentId;
@@ -56,17 +55,14 @@ const Comment = ({ comment, prop = false }) => {
   };
 
   const handleDeleteComment = async (e, commentId) => {
-    console.log("In Comp 1")
     e.preventDefault();
     let id = commentId;
-    console.log("ID in comp", id)
     await dispatch(delDiscussionComment(id));
     document.body.style.overflow = 'unset';
   };
 
   const handleAddLike = (e, comment) => {
     e.preventDefault();
-    console.log(comment);
     let commentId = comment.id;
     let user_id = user.id;
 
@@ -87,7 +83,6 @@ const Comment = ({ comment, prop = false }) => {
 
   const handleAddFollow = (e, id) => {
     e.preventDefault();
-    console.log(id);
     let userToFollowId = id;
     let user_id = user.id;
 

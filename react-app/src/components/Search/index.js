@@ -16,7 +16,6 @@ function SearchBar() {
   useEffect(() => {
     setSearchTerm("");
   }, []);
-  console.log("HISTORYYY", stockDiscussion);
 
   useEffect(
     async (e) => {

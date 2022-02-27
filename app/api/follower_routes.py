@@ -9,7 +9,6 @@ follower_routes = Blueprint("follower", __name__)
 @follower_routes.route('/<int:id>')
 def get_follower(id):
     err = User.query.get(id)
-    print("ERRRRRRRRRRRR", err)
     if err is None:
         return {"error": 'error'}
     followers = Follower.query.filter(Follower.user_id == id).all()
@@ -25,7 +24,6 @@ def get_follower(id):
 @follower_routes.route('/following/<int:id>')
 def get_following(id):
     err = User.query.get(id)
-    print("ERRRRRRRRRRRR", err)
     if err is None:
         return {"error": "error"}
     followers = Follower.query.filter(Follower.follower_id == id).all()

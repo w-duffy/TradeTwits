@@ -161,7 +161,6 @@ const MyProfile = ({ prop = false }) => {
       await dispatch(addNewFollower(userToFollowId, user_id));
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      // console.log(my_followers)
       await setUserFollowers(my_followers)
       await setIsFollowerUpdated(false)
 
@@ -173,7 +172,6 @@ const MyProfile = ({ prop = false }) => {
       await dispatch(deleteNewFollower(followId, user_id, userToFollowId));
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      // console.log(my_followers)
       await setUserFollowers(my_followers)
       await setIsFollowerUpdated(false)
     }
@@ -191,7 +189,6 @@ const MyProfile = ({ prop = false }) => {
       await setIsDiscussionLoaded(true)
       const response = await fetch(`/api/users/${userId}`);
       const user2 = await response.json();
-      console.log(user2)
       setUserProf(user2);
       setIsLoaded(!isLoaded)
       await setIsDiscussionLoaded(false)
@@ -210,7 +207,6 @@ const MyProfile = ({ prop = false }) => {
       await setIsFollowersLoaded(true)
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      // console.log(my_followers)
       await setUserFollowers(my_followers)
       await setIsFollowersLoaded(false)
     })();
@@ -223,7 +219,6 @@ const MyProfile = ({ prop = false }) => {
         window.alert("User does not exist")
         history.push('/home')
       }
-      // console.log(my_followers)
       await setUserFollowing(my_following)
       await setIsFollowersLoaded(false)
     })();
