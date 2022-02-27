@@ -132,7 +132,7 @@ Loading latest stock data...
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
         <div className="discussion-graph">
-          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.price} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
+          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.time_graph} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
       <KeyData stockDiscussion={stockDiscussion} />

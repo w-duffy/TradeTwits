@@ -42,14 +42,18 @@ function DiscussionGraph({values, dates, cp, time}){
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
       const daySlicer = dates.slice(0, 5)
       const valuesSlicer = values.slice(0, 5)
-        valuesSlicer.push(cp)
-        daySlicer.push(time)
+        valuesSlicer.unshift(cp)
+        daySlicer.unshift(time)
       useEffect(() =>{
         if(valuesSlicer[valuesSlicer.length - 1] > valuesSlicer[valuesSlicer.length - 2]){
           setLineColor('rgb(50, 190, 50)')
         }
+
         if(valuesSlicer[valuesSlicer.length - 1] < valuesSlicer[valuesSlicer.length - 2]) {
            setLineColor('rgb(255, 0, 0)')
+        }
+        if(valuesSlicer[valuesSlicer.length - 1] == valuesSlicer[valuesSlicer.length - 2]){
+          setLineColor('rgb(50, 190, 50)')
         }
       },[values])
 
@@ -59,7 +63,7 @@ function DiscussionGraph({values, dates, cp, time}){
           {
             label: 'Value',
             data: valuesSlicer.reverse(),
-            fill: true,
+            fill: false,
             backgroundColor: 'rgb(0, 0, 0)',
             borderColor: lineColor,
             borderWidth: '1.5',

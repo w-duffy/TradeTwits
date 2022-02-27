@@ -57,9 +57,11 @@
     }
 .port-co-name{
     max-width: 100px;
-    display: inline-flex;
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
+    /* display: inline-flex; */
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+    /* font-size: 12px; */
 }
 
 .port-co-name-pchange-r{
