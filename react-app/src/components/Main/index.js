@@ -4,7 +4,7 @@ import PortfolioGraph from "./PortfolioGraph";
 import { addTicker } from '../../store/session';
 import { searchOptions } from '../Search/tickers'
 
-const Main = ({showEditPortfolio}) => {
+const Main = ({showEditPortfolio, handleWatchlistRoute}) => {
   const [loaded, setLoaded] = useState(true);
 
 const dispatch = useDispatch()
@@ -130,7 +130,7 @@ const clickedOffSearch = event => {
         //   </div>
         // </form>
       )}
-      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} loaded={loaded} />
+      <PortfolioGraph key={user.id} handleWatchlistRoute={handleWatchlistRoute} showEditPortfolio={showEditPortfolio} loaded={loaded} />
     </>
   );
 };

@@ -11,6 +11,7 @@ import './myProfile.css'
 import { ModalAuth } from "../../Context/ModalAuth";
 import EditProfileForm from "./EditProfile";
 import { useParams } from 'react-router-dom';
+import { Oval } from  'react-loader-spinner'
 
 
 
@@ -46,6 +47,7 @@ const MyProfile = ({ prop = false }) => {
   const [searchResultsSplash, setSearchResultsSplash] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const browserHistory = createBrowserHistory();
+  const [isDiscussionLoaded, setIsDiscussionLoaded] = useState(false);
 
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
 
@@ -151,11 +153,13 @@ const MyProfile = ({ prop = false }) => {
       return;
     }
     (async () => {
+      await setIsDiscussionLoaded(true)
       const response = await fetch(`/api/users/${userId}`);
       const user2 = await response.json();
       setUserProf(user2);
       setIsLoaded(!isLoaded)
-      console.log("USER", user2)
+      await setIsDiscussionLoaded(false)
+
     })();
   }, [userId]);
 
@@ -395,8 +399,20 @@ const MyProfile = ({ prop = false }) => {
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
       </div>
+      {isDiscussionLoaded && (
 
-      {isLoaded &&  userProf.id === user.id && (
+<div className="landing-page-spinner">
+<div className="loading-text">
+Loading profile data...
+</div>
+<div>
+<Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+</div>
+)}
+
+      {isLoaded && !isDiscussionLoaded && userProf.id === user.id && (
 
 <div className="profile-container-top">
   <div className="top-profile">
@@ -549,7 +565,7 @@ const MyProfile = ({ prop = false }) => {
 
 
 
-      {isLoaded && user.id !== userProf.id &&(
+      {isLoaded && !isDiscussionLoaded && user.id !== userProf.id &&(
 
           <div className="profile-container-top">
             <div className="top-profile">

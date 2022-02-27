@@ -2,14 +2,18 @@ import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Graph from './Graph';
 import {delPortfolioTicker} from '../../store/portfolio'
+import { createBrowserHistory } from "history";
 
 import { Oval } from  'react-loader-spinner'
 
-function PortfolioGraph({ showEditPortfolio, loaded}){
+
+function PortfolioGraph({ showEditPortfolio, loaded, handleWatchlistRoute}){
     const dispatch = useDispatch()
     const [delLoader, setDelLoader] = useState(false);
+    const browserHistory = createBrowserHistory();
 
     const user = useSelector(state => state.session.user)
+    const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
 
     // const portfolioDetail = useSelector(state => state.portfolioReducer)
 
@@ -54,11 +58,19 @@ function PortfolioGraph({ showEditPortfolio, loaded}){
 
                 <div className='stock-name'>
                     <div>
+                    {stockDiscussion.id && (
 
-                <a  className="a-select" href={`/discussion/${detail.ticker}`}>
+                      <a  className="a-select" onClick={(e) => {handleWatchlistRoute(e, detail.ticker); browserHistory.push(`/discussion/${detail.ticker}`)}}>
                 {detail.ticker}
                 </a>
+                  )}
+                {/* href={`/discussion/${detail.ticker}`} */}
+                {!stockDiscussion.id && (
 
+<a  className="a-select" href={`/discussion/${detail.ticker}`}>
+{detail.ticker}
+</a>
+)}
 {/* <a
                     className="a-select"
                     onClick={() => {

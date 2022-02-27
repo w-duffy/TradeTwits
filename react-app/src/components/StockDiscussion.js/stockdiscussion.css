@@ -297,3 +297,8 @@
 .news-container-here{
     color: black;
 }
+
+.no-news-div{
+    display: flex;
+    justify-content: center;
+}
