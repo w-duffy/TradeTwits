@@ -161,8 +161,17 @@ const MyProfile = ({ prop = false }) => {
       await setIsDiscussionLoaded(false)
 
     })();
-  }, [userId]);
 
+    // (async () => {
+
+    //   const res = await fetch(`/api/follower/${userId}`);
+    //   const my_followers = await res.json();
+    //   console.log(my_followers)
+
+    // })();
+
+
+  }, [userId]);
 
 
 
@@ -696,6 +705,9 @@ Loading profile data...
 
         </div>
                 )}
+                <div>
+                  test
+                </div>
                </div>
     </>
   );
