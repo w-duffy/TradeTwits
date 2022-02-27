@@ -4,7 +4,7 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', bio="This is my bio", profile_picture="https://financialtribune.com/sites/default/files/styles/360x260/public/field/image/17january/warren_buffett.png?itok=YGYUtu3A")
+        username='Demo', email='demo@aa.io', password='password', bio="Demo, born February 24, 2022, is an American business magnate, investor, and philanthropist. He is currently the chairman and CEO of Herkshire Bathaway. He is considered one of the most successful investors in the world and has a net worth of over $114 billion as of February 2022, making him the world's eighth-wealthiest person.", profile_picture="https://financialtribune.com/sites/default/files/styles/360x260/public/field/image/17january/warren_buffett.png?itok=YGYUtu3A")
     will = User(
         username='will', email='will@aa.io', password='password', bio="This is my bio", profile_picture="https://i.ibb.co/hs9s0dX/T03-GU501-J-U026-FTGTV4-Z-fe9950702ece-512-1.jpg")
     bobbie = User(
