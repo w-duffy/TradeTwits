@@ -54,6 +54,12 @@
 
 .edit-profile-button{
     margin-top: 15px;
+    display: flex;
+
+}
+
+.update-follow-spinner{
+    margin-left: 5px;
 }
 .profile-picture-on-button-page{
     height: 75px;
@@ -65,4 +71,22 @@
     font-weight: 600;
     margin-top: 10px;
     margin-bottom: 5px;
+}
+
+.follower-container-right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+.follower-username{
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.following-container-r{
+    margin-top: 50px;
 }

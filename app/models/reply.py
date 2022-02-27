@@ -12,9 +12,9 @@ class Reply(db.Model):
     time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
     time_updated = db.Column(db.DateTime(timezone=True), server_default=db.func.now(), nullable=False)
 
-    user = db.relationship("User", back_populates="replies")
-    likes = db.relationship("Like", back_populates="replies")
-    comments = db.relationship("Comment", back_populates="replies")
+    user = db.relationship("User", lazy='subquery', back_populates="replies")
+    likes = db.relationship("Like", lazy='subquery', back_populates="replies")
+    comments = db.relationship("Comment", lazy='subquery', back_populates="replies")
 
     def to_dict(self):
 

@@ -37,7 +37,7 @@ const Reply = ({ reply, isFollower, handleAddFollow, prop = false }) => {
     }
     await dispatch(editReply(id, editedReply, commentId))
     await setShowEditForm(!showEditForm)
-    setShowCommentMenu(!showCommentMenu);
+    // await setShowCommentMenu(!showCommentMenu);
 }
 const handleAddReplyLike = (e, reply) => {
   e.preventDefault();

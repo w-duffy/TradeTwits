@@ -93,7 +93,7 @@ class StockDiscussion(db.Model):
         # for comment in self.comments:
         #     comment.replies.sort(key=lambda r: r.time_created)
         week_ago = today - timedelta(days = 1)
-        week_ago2 = today - timedelta(days = 5)
+        week_ago2 = today - timedelta(days = 30)
         news_time1 = today.strftime("%Y-%m-%d")
         news_time2 = week_ago.strftime("%Y-%m-%d")
         news_time3 = week_ago2.strftime("%Y-%m-%d")

@@ -8,18 +8,33 @@ follower_routes = Blueprint("follower", __name__)
 
 @follower_routes.route('/<int:id>')
 def get_follower(id):
-    print("here")
-    print("id", id)
+    err = User.query.get(id)
+    print("ERRRRRRRRRRRR", err)
+    if err is None:
+        return {"error": 'error'}
     followers = Follower.query.filter(Follower.user_id == id).all()
-    print("FOLOWERS1", followers)
     my_followers = []
     for follower in followers:
-        print("FOLLOWER2", follower.to_dict())
         user = User.query.get(follower.follower_id)
-        print("USER", user.to_dict_basic())
         my_followers.append(user)
-    print("MY FOLLOWERS", my_followers)
     return jsonify([f.to_dict_basic() for f in my_followers])
+
+
+
+
+@follower_routes.route('/following/<int:id>')
+def get_following(id):
+    err = User.query.get(id)
+    print("ERRRRRRRRRRRR", err)
+    if err is None:
+        return {"error": "error"}
+    followers = Follower.query.filter(Follower.follower_id == id).all()
+    my_followers = []
+    for follower in followers:
+        user = User.query.get(follower.user_id)
+        my_followers.append(user)
+    return jsonify([f.to_dict_basic() for f in my_followers])
+
 
 @follower_routes.route('/new', methods=['POST'])
 # @login_required
