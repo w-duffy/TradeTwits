@@ -2,7 +2,7 @@
     /* height: 100%; */
 }
 .landing-nav-top{
-    z-index: 99;
+    z-index: 99 ;
     position: fixed;
     top: 0;
     /* background-color: black; */

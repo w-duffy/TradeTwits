@@ -9,7 +9,6 @@ def seed_stock_discussions():
 'GOOG',
 'TSLA',
 'NVDA',
-'BRKB',
 'FB',
 'JPM',
 'UNH',
@@ -509,7 +508,7 @@ def seed_stock_discussions():
 'NWS'
 ]
     for ticker in tickers:
-      
+
         stock_discussion1 = StockDiscussion(ticker=ticker)
         db.session.add(stock_discussion1)
 
