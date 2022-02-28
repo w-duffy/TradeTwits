@@ -3,7 +3,7 @@
 
 <img src="https://i.ibb.co/JdFv8C1/Screenshot-2022-02-24-215015.png" />
 
-Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information.
+Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more information.
 
 ## Get Started
 
