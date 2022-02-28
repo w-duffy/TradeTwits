@@ -93,4 +93,4 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain-wordmark.svg" height=40/>
 
 ## Conclusion and Next Steps
-testetset
+While I am mostly happy with TradeTwit's functionality, there are a few additional features I would like to include in the future.  I would like to add the ability to reference users and discussions via a hashtagging system (i.e. @user or #ticker).  Additionally, I would like to expand the search and stock discussion features to include a broader range of stocks since I am currently limited to the S&P500.
