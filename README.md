@@ -91,3 +91,6 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki) for more information
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height=40/>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original-wordmark.svg" height=40/>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain-wordmark.svg" height=40/>
+
+## Conclusion and Next Steps
+testetset
