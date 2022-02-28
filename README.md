@@ -5,6 +5,14 @@
 
 Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more information.
 
+## Application Structure
+
+### Backend
+The app is built using Python and SQLAlchemy on the backend with a postgreSQL database.
+
+### Frontend
+The font end is built using React.js and Redux.
+
 ## Get Started
 
 1. Clone this repository 
