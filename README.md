@@ -1,7 +1,7 @@
 # TradeTwits
 [TradeTwits](http://tradetwits.herokuapp.com/) a full-stack application, is an online platform for users to discuss stocks and see real-time stock information.
 
-<img src="https://i.ibb.co/JdFv8C1/Screenshot-2022-02-24-215015.png" />
+![image](https://user-images.githubusercontent.com/82291955/155923508-f2e05b67-c4bc-40e4-a1ea-6273f2e01dd2.png)
 
 Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more information.
 
