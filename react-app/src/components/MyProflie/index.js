@@ -446,6 +446,8 @@ const MyProfile = ({ prop = false }) => {
 
       <div className="main-container">
       <div className="portfolio">
+        <div className="port-border">
+
             <div className="portfolio-name">
               Watchlist
 
@@ -458,6 +460,7 @@ const MyProfile = ({ prop = false }) => {
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
       {isDiscussionLoaded && (
 
@@ -538,7 +541,9 @@ Loading profile data...
   <div className="link-to-discuss">
       <div>
 
-  Discussion:
+
+    Discussion:
+
       </div>
       <div>
 
@@ -716,7 +721,9 @@ Loading profile data...
             <div className="link-to-discuss">
                 <div>
 
-            Discussion:
+
+    Discussion:
+
                 </div>
                 <div>
 
@@ -798,7 +805,7 @@ Loading followers...
 <>
 {isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
   <>
-  <div>
+  <div  className="news-border-t">
   <div>
      Followers: {userFollowers.length}
   </div>
@@ -820,7 +827,7 @@ Loading followers...
     <>
   {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
     <>
-  <div>
+  <div  className="news-border-t">
   <div>
     Followers: {user.followers.length}
   </div>
@@ -850,8 +857,8 @@ Loading followers...
   <>
 {isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
   <>
-  <div>
-  <div className="following-container-r">
+  <div className="news-border-r">
+  <div className="following-container">
      Following: {userProf.following.length}
   </div>
   {userFollowing.map((follower) =>(
@@ -872,8 +879,8 @@ Loading followers...
     <>
   {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
     <>
-  <div>
-  <div className="following-container-r">
+  <div className="news-border-r">
+  <div className="following-container">
     Following: {user.following.length}
   </div>
   {userFollowing.map((follower) =>(

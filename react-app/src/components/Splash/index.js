@@ -345,6 +345,7 @@ const Splash = () => {
 
       <div className="main-container">
       <div className="portfolio">
+      <div className="port-border">
             <div className="portfolio-name">
               Watchlist
 
@@ -357,6 +358,7 @@ const Splash = () => {
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
       <div className="discussion-feed-splash">
 

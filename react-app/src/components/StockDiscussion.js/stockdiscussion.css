@@ -284,6 +284,7 @@
     padding-top: 5px;
     color: black;
     padding-bottom: 5px;
+    font-size: 14px;
 }
 
 .news-title{
@@ -291,7 +292,9 @@
     justify-content: center;
     font-weight: 500;
     margin-bottom: 10px;
-    font-size: 20px
+    font-size: 20px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 5px;
 }
 
 .news-container-here{

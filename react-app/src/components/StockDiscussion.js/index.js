@@ -99,6 +99,7 @@ useEffect(() =>{
       <>
       <div className="main-container-discussion">
       <div className="portfolio">
+      <div className="port-border">
             <div className="portfolio-name">
               Watchlist
 
@@ -111,6 +112,7 @@ useEffect(() =>{
 
         <Main key={user.id} handleWatchlistRoute={handleWatchlistRoute} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
       <div className="discussion-feed-main">
         <>
@@ -181,6 +183,8 @@ Loading latest stock data...
           {!isDiscussionLoaded && (
 
             <div className="news">
+              <div className="news-border">
+
               <div className="news-title">
                 {stockDiscussion.ticker} News
                 </div>
@@ -199,12 +203,13 @@ Loading latest stock data...
                     {news.headline}
                   </div>
                   <div className="news-source">
-                    Source: {news.source}
+                  <i>Source: {news.source}</i>
                     </div>
                 </a>
 
                   </div>
                   ))}
+                  </div>
 
           </div>
                   )}
