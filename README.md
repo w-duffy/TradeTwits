@@ -5,14 +5,6 @@
 
 Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more information.
 
-## Application Structure
-
-### Backend
-The app is built using Python and SQLAlchemy on the backend with a postgreSQL database.
-
-### Frontend
-The font end is built using React.js and Redux.
-
 ## Get Started
 
 1. Clone this repository 
@@ -101,3 +93,5 @@ The font end is built using React.js and Redux.
 <img src="https://react-chartjs-2.js.org/img/favicon.ico" height=40/>
 ## Conclusion and Next Steps
 While I am mostly happy with TradeTwit's functionality, there are a few additional features I would like to include in the future.  I would like to add the ability to reference users and discussions via a hashtagging system (i.e. @user or #ticker).  Additionally, I would like to expand the search and stock discussion features to include a broader range of stocks since I am currently limited to the S&P500.
+## Contact
+Email - w.duffy@outlook.com
