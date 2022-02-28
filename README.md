@@ -79,7 +79,7 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more 
 * Logged in users can search for stocks to access the stock's discussion page.
 
 ## Built With
-<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"  height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height=40/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height=40/> <img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"  height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height=40/>
 <img src="https://camo.githubusercontent.com/f7b8dd3ec5e0959272f5015575d66b6b6231329b1b597cca76d665453eb10f6b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f73716c616c6368656d792f73716c616c6368656d792d6f726967696e616c2e737667" height=40/>
 <img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"  height=40/>
 <img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"  height=40/>
@@ -89,7 +89,7 @@ Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain-wordmark.svg" height=40/>
 <img src="https://react-chartjs-2.js.org/img/favicon.ico" height=40/>
 
-Javascript | Python | React | Redux | SQLAlchemy | PostgreSQL | CSS | HTML / JSX | Git | Flask | Docker | React-Chartjs-2
+Python | Javascript | React | Redux | SQLAlchemy | PostgreSQL | CSS | HTML / JSX | Git | Flask | Docker | React-Chartjs-2
 ## Conclusion and Next Steps
 While I am mostly happy with TradeTwit's functionality, there are a few additional features I would like to include in the future.  I would like to add the ability to reference users and discussions via a hashtagging system (i.e. @user or #ticker).  Additionally, I would like to expand the search and stock discussion features to include a broader range of stocks since I am currently limited to the S&P500.
 ## Contact
