@@ -1,12 +1,4 @@
-/* .portfolio-details-container{
-    display: flex;
-    height: 50px;
-    justify-content: space-evenly;
-} */
 
-/* .map-graph{
-    width: 110px;
-} */
 .main-port-container{
     display: flex;
     flex-direction: column;
@@ -48,7 +40,6 @@
   .stock-price {
       grid-area: stock-price;
       display: flex;
-      /* flex-direction: flex-end; */
       justify-content: flex-end;
       flex-direction: column;
       justify-content: space-evenly;
@@ -57,10 +48,7 @@
     }
 .port-co-name{
     max-width: 100px;
-    /* display: inline-flex; */
     overflow: hidden;
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
     font-size: 14px;
 }
 
