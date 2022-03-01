@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { Oval } from  'react-loader-spinner'
+import './login.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -11,11 +13,23 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const [landingLoader, setLandingLoader] = useState(false)
+  const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('/api/users/');
+  //     const responseData = await response.json();
+  //     setUsers(responseData.users);
+  //   }
+  //   fetchData();
+  // }, []);
+  // console.log(users)
 
   const onSignUp = async (e) => {
     e.preventDefault();
     let errArr = []
-
+    setErrors("")
     if(!username){
       errArr.push("You must enter a username")
     }
@@ -23,7 +37,7 @@ const SignUpForm = () => {
       errArr.push("You must enter an email")
     }
     if(!email.includes('@')){
-      errArr.push("You must enter a valid email")
+      errArr.push("Your email format is not valid")
     }
     if(email.length < 3){
       errArr.push("You must enter a valid email")
@@ -44,9 +58,12 @@ const SignUpForm = () => {
     }
 
     if (password === repeatPassword) {
+      await setLandingLoader(true)
       const data = await dispatch(signUp(username, email, password));
+      console.log("DATA", data)
       if (data) {
-        setErrors(data)
+        await setErrors([data])
+        await setLandingLoader(false)
       }
     }
   };
@@ -73,20 +90,22 @@ const SignUpForm = () => {
 
   return (
     <>
-        <div className='login-modal-title'>
+    {!landingLoader && (
+      <>
+      <div className='login-modal-title'>
       Join TradeTwits.  It's Free!
     </div>
     <form onSubmit={onSignUp}>
       <div className="error-login">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
-        ))}
+          ))}
       </div>
       <div>
         <label></label>
         <input
         className='login-modal-input'
-          type='text'
+        type='text'
           name='username'
           placeholder='Username'
           onChange={updateUsername}
@@ -108,12 +127,12 @@ const SignUpForm = () => {
         <label></label>
         <input
         className='login-modal-input'
-          type='password'
-          name='password'
+        type='password'
+        name='password'
           placeholder='Password'
           onChange={updatePassword}
           value={password}
-        ></input>
+          ></input>
       </div>
       <div>
         <label></label>
@@ -125,12 +144,27 @@ const SignUpForm = () => {
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
-        ></input>
+          ></input>
       </div>
       <div className='modal-login-button-container'>
       <button className='login-splash-button-modal' type='submit'>Sign Up</button>
       </div>
     </form>
+      </>
+      )}
+    {landingLoader && (
+      <>
+            <div className='login-modal-loader'>
+            Loading latest stock data..
+            </div>
+          <div className='login-modal-loader'>
+            <div>
+
+          <Oval color="#00BFFF" height={50} width={50} />
+              </div>
+          </div>
+            </>
+            )}
           </>
   );
 };

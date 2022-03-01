@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './myProfile.css'
 import { editUserProfile } from '../../store/session';
+import { Oval } from  'react-loader-spinner'
 
 
 const EditProfileForm = ({userToEdit, showModal}) => {
@@ -10,6 +11,7 @@ const EditProfileForm = ({userToEdit, showModal}) => {
   const [profPic, setProfPic] = useState(userToEdit.profile_picture);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const [landingLoader, setLandingLoader] = useState(false)
 
 
   const updateBio = (e) => {
@@ -48,8 +50,9 @@ const EditProfileForm = ({userToEdit, showModal}) => {
     if(errArr.length){
       return setErrors(errArr)
     }
-
+    await setLandingLoader(true)
     await dispatch(editUserProfile(id, newBio, newProfilePic));
+    await setLandingLoader(false)
     showModal(false)
   };
 
@@ -59,6 +62,8 @@ const EditProfileForm = ({userToEdit, showModal}) => {
 
   return (
     <>
+       {!landingLoader && (
+         <>
     <div className='login-modal-title'>
       Edit Profile
     </div>
@@ -66,7 +71,7 @@ const EditProfileForm = ({userToEdit, showModal}) => {
       <div className="error-login">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
-        ))}
+          ))}
       </div>
       <div>
         <label htmlFor='bio'>Input your new bio below</label>
@@ -88,13 +93,28 @@ const EditProfileForm = ({userToEdit, showModal}) => {
           placeholder='profile-picture'
           value={profPic}
           onChange={updateProfilePic}
-        />
+          />
         <div className='modal-login-button-container'>
 
         <button className='login-splash-button-modal' type='submit'>Submit</button>
         </div>
       </div>
     </form>
+    </>
+          )}
+                    {landingLoader && (
+            <>
+            <div className='login-modal-loader'>
+              Updating your bio..
+            </div>
+          <div className='login-modal-loader'>
+            <div>
+
+          <Oval color="#00BFFF" height={50} width={50} />
+              </div>
+          </div>
+            </>
+            )}
     </>
   );
 };

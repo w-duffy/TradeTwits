@@ -37,6 +37,11 @@ const NavigationBar = () => {
     setSearchTerm("");
   }, []);
 
+  const handleWatchlistRoute = async (e, t) => {
+    e.preventDefault()
+    setTickerSearch(t);
+  };
+
   useEffect(
     async (e) => {
       if (searchTerm === "") {
@@ -287,7 +292,7 @@ const NavigationBar = () => {
       </div>
 
       <Route path="/discussion/:ticker" exact={true}>
-        <StockDiscussion tickerSearch={tickerSearch} />
+        <StockDiscussion handleWatchlistRoute={handleWatchlistRoute} tickerSearch={tickerSearch} />
       </Route>
     </>
   );

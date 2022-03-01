@@ -46,7 +46,6 @@ export const addReplyLike = (replyId, user_id, commentId) => async (dispatch) =>
     })
     if (res.ok){
         const newReplyLikeComment = await res.json();
-        console.log("In comp2", newReplyLikeComment)
         dispatch(editComment(newReplyLikeComment))
         return newReplyLikeComment
     }

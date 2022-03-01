@@ -16,7 +16,7 @@ class Portfolio(db.Model):
     def to_dict(self):
 
         try:
-            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY2"))
+            finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
 
             p = finnhub_client.quote(self.ticker.upper())
             data = finnhub_client.symbol_lookup(self.ticker.upper())
@@ -47,7 +47,7 @@ class Portfolio(db.Model):
                 open = p['o']
 
             except:
-                finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY"))
+                finnhub_client = finnhub.Client(os.environ.get("FINNHUB_API_KEY2"))
 
                 p = finnhub_client.quote(self.ticker.upper())
                 data = finnhub_client.symbol_lookup(self.ticker.upper())

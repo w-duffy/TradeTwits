@@ -32,12 +32,13 @@
     align-items: left;
     overflow: hidden;
     list-style: none;
-    width: 14.85%;
+    width: 14.87%;
     position: absolute;
     margin-top: 2%;
     background-color: rgb(87, 87, 87);
     z-index: 500;
     color: white;
+    margin-left: 2px;
 }
 
 .search-result-select{

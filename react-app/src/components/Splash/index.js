@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SearchBar from "../Search";
 import "../NavigationBar/navigation.css";
 import * as sessionActions from "../../store/session";
-import { NavLink, useHistory } from "react-router-dom";
-import StockDiscussion from "../StockDiscussion.js";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { searchOptions, tickers } from "../Search/tickers";
 import { createBrowserHistory } from "history";
-import { getPortfolioDetails } from "../../store/portfolio";
 import Main from "../Main";
 import './splash.css'
 
 
 const Splash = () => {
+
   const user = useSelector((state) => state.session.user);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const dispatch = useDispatch();
@@ -131,6 +128,8 @@ const Splash = () => {
     return tickers.includes(stock[0]);
   });
   const feedData = filterArrStocks.slice(0, 5);
+
+
   return (
     <>
       <div className="nav-container">
@@ -346,6 +345,7 @@ const Splash = () => {
 
       <div className="main-container">
       <div className="portfolio">
+      <div className="port-border">
             <div className="portfolio-name">
               Watchlist
 
@@ -358,6 +358,7 @@ const Splash = () => {
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
       <div className="discussion-feed-splash">
 

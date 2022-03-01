@@ -1,10 +1,37 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 # import requests
 # import os
 from app.models import db, Follower, User
 from datetime import datetime
 
 follower_routes = Blueprint("follower", __name__)
+
+@follower_routes.route('/<int:id>')
+def get_follower(id):
+    err = User.query.get(id)
+    if err is None:
+        return {"error": 'error'}
+    followers = Follower.query.filter(Follower.user_id == id).all()
+    my_followers = []
+    for follower in followers:
+        user = User.query.get(follower.follower_id)
+        my_followers.append(user)
+    return jsonify([f.to_dict_basic() for f in my_followers])
+
+
+
+
+@follower_routes.route('/following/<int:id>')
+def get_following(id):
+    err = User.query.get(id)
+    if err is None:
+        return {"error": "error"}
+    followers = Follower.query.filter(Follower.follower_id == id).all()
+    my_followers = []
+    for follower in followers:
+        user = User.query.get(follower.user_id)
+        my_followers.append(user)
+    return jsonify([f.to_dict_basic() for f in my_followers])
 
 
 @follower_routes.route('/new', methods=['POST'])

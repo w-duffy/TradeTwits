@@ -10,9 +10,9 @@ class Like(db.Model):
     comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"))
     reply_id = db.Column(db.Integer, db.ForeignKey("replies.id"))
 
-    user = db.relationship("User", back_populates="likes")
-    comments = db.relationship("Comment", back_populates="likes")
-    replies = db.relationship("Reply", back_populates="likes")
+    user = db.relationship("User", lazy='subquery', back_populates="likes")
+    comments = db.relationship("Comment", lazy='subquery', back_populates="likes")
+    replies = db.relationship("Reply", lazy='subquery', back_populates="likes")
     # stock_discussion = db.relationship("StockDiscussion", back_populates="likes")
 
 

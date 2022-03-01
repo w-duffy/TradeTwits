@@ -5,7 +5,7 @@
     padding-bottom: 15px;
 }
 .comment-body-div-prof-pic{
-    margin-right: 25px;
+    margin-right: 12px;
 }
 .comment-body-prof-pic{
     height: 50px;
@@ -22,6 +22,8 @@
 
 .comment-top-row-username{
     margin-right: 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
 .comment-body-first-row{
     display: flex;
@@ -34,12 +36,26 @@
 .comment-body-comment{
     margin-top: 15px;
     margin-bottom: 30px;
+    max-width: 500px;
+    word-wrap: break-word;
+
+}
+
+.comment-body-comment-c{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    max-width: 450px;
+    word-wrap: break-word;
+
 }
 
 .comment-body-comment-r-modal{
     margin-top: 15px;
     margin-bottom: 30px;
     padding-right: 20px;
+    word-wrap: break-word;
+
+    max-width: 500px;
 }
 
 .comment-body-bottom-row{
@@ -72,7 +88,7 @@
 .comment-top-row-updated{
     font-size: 12px;
     align-content: flex-end;
-    align-self: center;
+    align-self: flex-end;
     align-items: center;
     justify-content: flex-end;
 }
@@ -167,7 +183,7 @@
     font-size: 14pt;
     width: 8%;
     padding-left: 0px;
-    margin-left: 19.5%;
+    margin-left: 20%;
     position: absolute;
     margin-top: .1%;
     background-color: lightgray;
@@ -223,7 +239,7 @@
     font-size: 14pt;
     width: 15px;
     padding-left: 0px;
-    margin-left: 22.2%;
+    margin-left: 22.8%;
     position: absolute;
     margin-top: .1%;
     background-color: lightgray;
@@ -257,7 +273,7 @@
     font-size: 14pt;
     width: 30px;
     padding-left: 0px;
-    margin-left: -10%;
+    margin-left: -11%;
     position: absolute;
     margin-top: .5%;
     background-color: lightgray;

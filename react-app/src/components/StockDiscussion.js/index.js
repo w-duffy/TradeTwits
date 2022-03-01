@@ -16,10 +16,13 @@ import KeyData from "./KeyData";
 import './comment.css'
 import { tickers } from "../Search/tickers";
 import { useHistory } from "react-router-dom";
+import { Oval } from  'react-loader-spinner'
 
-const StockDiscussion = ({tickerSearch}) => {
+
+const StockDiscussion = ({tickerSearch, handleWatchlistRoute}) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isDiscussionLoaded, setIsDiscussionLoaded] = useState(false);
   const ticker = useParams();
   const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
@@ -41,14 +44,18 @@ useEffect(() =>{
   useEffect(() => {
     async function getDiscussion() {
       if(!tickerSearch){
+        await setIsDiscussionLoaded(true)
         await dispatch(getDiscussionDetails(ticker.ticker));
         await dispatch(getStockDiscussionGraph(ticker.ticker))
-        setIsLoaded(true);
+        await setIsDiscussionLoaded(false)
+        await setIsLoaded(true);
       }
       if(tickerSearch) {
+        await setIsDiscussionLoaded(true)
         await dispatch(getDiscussionDetails(tickerSearch));
         await dispatch(getStockDiscussionGraph(tickerSearch))
-        setIsLoaded(true);
+        await setIsDiscussionLoaded(false)
+        await setIsLoaded(true);
       }
     }
     getDiscussion();
@@ -92,6 +99,7 @@ useEffect(() =>{
       <>
       <div className="main-container-discussion">
       <div className="portfolio">
+      <div className="port-border">
             <div className="portfolio-name">
               Watchlist
 
@@ -102,16 +110,31 @@ useEffect(() =>{
             <div>
 
 
-        <Main key={user.id} showEditPortfolio={showEditPortfolio} />
+        <Main key={user.id} handleWatchlistRoute={handleWatchlistRoute} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
       <div className="discussion-feed-main">
+        <>
+        {isDiscussionLoaded && (
 
+          <div className="landing-page-spinner">
+    <div className="loading-text">
+Loading latest stock data...
+</div>
+<div>
+    <Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+    </div>
+        )}
+      {!isDiscussionLoaded && (
+        <>
         <div>
           <CompanyInfo key={stockDiscussion.id} stockDiscussion={stockDiscussion} />
         </div>
         <div className="discussion-graph">
-          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.price} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
+          <DiscussionGraph cp={stockDiscussion.price} time={stockDiscussion.time_graph} key={stockDiscussion.id} values={stockDiscussionGraph[0].values} dates={stockDiscussionGraph[0].dates} />
         </div>
         <br></br>
       <KeyData stockDiscussion={stockDiscussion} />
@@ -150,13 +173,29 @@ useEffect(() =>{
               ))}
               </>
 
-              )}
+)}
+
+  </>
+)}
+                    </>
           </div>
-          <div className="news">
+          <>
+          {!isDiscussionLoaded && (
+
+            <div className="news">
+              <div className="news-border">
+
               <div className="news-title">
                 {stockDiscussion.ticker} News
                 </div>
-                {stockDiscussion.company_news.slice(0, 10).map((news) => (
+                {stockDiscussion.company_news.length === 0 && (
+                  <>
+                  <div className="no-news-div">
+                    No news for {stockDiscussion.ticker} available
+                  </div>
+                  </>
+                )}
+                {stockDiscussion.company_news.length > 0 && stockDiscussion.company_news.slice(0, 10).map((news) => (
                   <div className="news-container-here">
 
                   <a className="a-news" target="_blank" href={news.url}>
@@ -164,17 +203,32 @@ useEffect(() =>{
                     {news.headline}
                   </div>
                   <div className="news-source">
-                    Source: {news.source}
+                  <i>Source: {news.source}</i>
                     </div>
                 </a>
 
                   </div>
                   ))}
+                  </div>
+
           </div>
+                  )}
+                  </>
+
                   </div>
       </>
     );
-  } else return <></>;
+  } else return <>
+    <div className="landing-page-spinner">
+    <div className="loading-text">
+Loading latest stock data...
+</div>
+<div>
+    <Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+    </div>
+  </>;
 };
 
 export default StockDiscussion;

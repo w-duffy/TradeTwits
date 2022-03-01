@@ -11,7 +11,8 @@ import './myProfile.css'
 import { ModalAuth } from "../../Context/ModalAuth";
 import EditProfileForm from "./EditProfile";
 import { useParams } from 'react-router-dom';
-
+import { Oval } from  'react-loader-spinner'
+import { addNewFollower, deleteNewFollower } from "../../store/followers";
 
 
 const MyProfile = ({ prop = false }) => {
@@ -24,7 +25,7 @@ const MyProfile = ({ prop = false }) => {
   const [showEditPortfolio, setEditPortfolio] = useState(false);
   const [showModal, setShowModal] = useState(prop);
   const { userId }  = useParams();
-    console.log("USER ID", userId)
+
   const hideButtonStyle = {
     display: 'none',
 }
@@ -41,11 +42,16 @@ const MyProfile = ({ prop = false }) => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [userProf, setUserProf] = useState("");
+  const [userFollowers, setUserFollowers] = useState([]);
+  const [userFollowing, setUserFollowing] = useState([]);
   const [searchTermSplash, setSearchTermSplash] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultsSplash, setSearchResultsSplash] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const browserHistory = createBrowserHistory();
+  const [isDiscussionLoaded, setIsDiscussionLoaded] = useState(false);
+  const [isFollowersLoaded, setIsFollowersLoaded] = useState(false);
+  const [isFollowerUpdated, setIsFollowerUpdated] = useState(false);
 
   const stockDiscussion = useSelector((state) => state.stockDiscussionReducer);
 
@@ -142,7 +148,36 @@ const MyProfile = ({ prop = false }) => {
 
 
 
+  const handleAddFollow = async (e, id) => {
+    e.preventDefault();
+    let userToFollowId = userProf.id;
+    let user_id = user.id;
 
+    let currentlyFollowed = user.following.filter((follow) => {
+      return follow.user_id === userToFollowId;
+    });
+    setIsFollowerUpdated(true)
+    if (currentlyFollowed.length === 0) {
+      await dispatch(addNewFollower(userToFollowId, user_id));
+      const res = await fetch(`/api/follower/${userId}`);
+      const my_followers = await res.json();
+      await setUserFollowers(my_followers)
+      await setIsFollowerUpdated(false)
+
+    }
+
+    if (currentlyFollowed.length > 0) {
+      let followId = currentlyFollowed[0].id;
+
+      await dispatch(deleteNewFollower(followId, user_id, userToFollowId));
+      const res = await fetch(`/api/follower/${userId}`);
+      const my_followers = await res.json();
+      await setUserFollowers(my_followers)
+      await setIsFollowerUpdated(false)
+    }
+
+    // setNewTick(!newTick)
+  };
 
 
 
@@ -151,22 +186,51 @@ const MyProfile = ({ prop = false }) => {
       return;
     }
     (async () => {
+      await setIsDiscussionLoaded(true)
       const response = await fetch(`/api/users/${userId}`);
       const user2 = await response.json();
       setUserProf(user2);
       setIsLoaded(!isLoaded)
-      console.log("USER", user2)
+      await setIsDiscussionLoaded(false)
+
     })();
-  }, [userId]);
+
+  }, []);
+
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+
+    (async () => {
+      await setIsFollowersLoaded(true)
+      const res = await fetch(`/api/follower/${userId}`);
+      const my_followers = await res.json();
+      await setUserFollowers(my_followers)
+      await setIsFollowersLoaded(false)
+    })();
+
+    (async () => {
+      await setIsFollowersLoaded(true)
+      const res = await fetch(`/api/follower/following/${userId}`);
+      const my_following = await res.json();
+      if(my_following.error){
+        window.alert("User does not exist")
+        history.push('/home')
+      }
+      await setUserFollowing(my_following)
+      await setIsFollowersLoaded(false)
+    })();
+
+
+  }, [dispatch]);
 
 
 
-
-
-
-
-
-
+  let isFollower = user.following.map((follow) => {
+    return follow.user_id;
+  });
 
   return (
     <>
@@ -382,6 +446,8 @@ const MyProfile = ({ prop = false }) => {
 
       <div className="main-container">
       <div className="portfolio">
+        <div className="port-border">
+
             <div className="portfolio-name">
               Watchlist
 
@@ -394,9 +460,22 @@ const MyProfile = ({ prop = false }) => {
 
         <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
+        </div>
       </div>
+      {isDiscussionLoaded && (
 
-      {isLoaded &&  userProf.id === user.id && (
+<div className="landing-page-spinner">
+<div className="loading-text">
+Loading profile data...
+</div>
+<div>
+<Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+</div>
+)}
+
+      {isLoaded && !isDiscussionLoaded && userProf.id === user.id && (
 
 <div className="profile-container-top">
   <div className="top-profile">
@@ -442,14 +521,14 @@ const MyProfile = ({ prop = false }) => {
       {user.bio}
       </>
   )}
-      <div className="profile-container-follower">
+      {/* <div className="profile-container-follower">
               <div className="following-container">
                   {user.following.length} Following
               </div>
               <div className="follower-container">
                   {user.followers.length} Followers
               </div>
-      </div>
+      </div> */}
       <div className="comment-feed-profile">
           <div className="comment-title">
              {user.username}'s Comments
@@ -462,7 +541,9 @@ const MyProfile = ({ prop = false }) => {
   <div className="link-to-discuss">
       <div>
 
-  Discussion:
+
+    Discussion:
+
       </div>
       <div>
 
@@ -480,15 +561,15 @@ const MyProfile = ({ prop = false }) => {
     <div className="comment-body-first-row">
     <div className="username-posted">
       <div className="comment-top-row-username">
-      {comment.user.username} {comment.profile_time}
+      {comment.user.username}
       </div>
       <div className="comment-top-row-updated">
-      {/* {updatedDateFormatted.toLocaleDateString()} */}
+      {comment.profile_time}
       </div>
     </div>
 
     </div>
-    <div className="comment-body-comment">
+    <div className="comment-body-comment-c">
           {comment.comment}
     </div>
 
@@ -549,7 +630,7 @@ const MyProfile = ({ prop = false }) => {
 
 
 
-      {isLoaded && user.id !== userProf.id &&(
+      {isLoaded && !isDiscussionLoaded && user.id !== userProf.id && (
 
           <div className="profile-container-top">
             <div className="top-profile">
@@ -563,23 +644,48 @@ const MyProfile = ({ prop = false }) => {
                         <div className="top-profile-username">
                         {userProf.username}
                         </div>
-                        {user.id == userProf.id && (
+                        {user.id !== userProf.id && (
+                          <>
+                          {isFollower.includes(userProf.id) && (
 
                             <div className="edit-profile-button">
-                        <button
-                className='login-splash-button-modal'
-                onClick={() => setShowModal(true)}
-                style={prop ? hideButtonStyle : null}
-                >
-                Edit Profile
-            </button>
-            {showModal && (
-                <ModalAuth onClose={() => setShowModal(false)}>
-                    <EditProfileForm userToEdit={user} showModal={setShowModal} />
-                </ModalAuth>
-            )}
+                            <button
+                            className='login-splash-button-modal'
+                            onClick={(e) => handleAddFollow(e)}
 
-                        </div>
+                            >
+                            Unfollow
+                            </button>
+
+                            {isFollowerUpdated && (
+                            <div className="update-follow-spinner">
+                              <Oval color="#00BFFF" height={25} width={25} />
+                              </div>
+                              )}
+
+                            </div>
+                            )}
+
+                          {!isFollower.includes(userProf.id) && (
+
+                            <div className="edit-profile-button">
+                            <button
+                            className='login-splash-button-modal'
+                            onClick={(e) => handleAddFollow(e)}
+
+                            >
+                            Follow
+                            </button>
+                            {isFollowerUpdated && (
+                              <div className="update-follow-spinner">
+                              <Oval color="#00BFFF" height={25} width={25} />
+                              </div>
+                            )}
+
+                            </div>
+                            )}
+                            </>
+
                     )}
                 </div>
             </div>
@@ -595,14 +701,14 @@ const MyProfile = ({ prop = false }) => {
                 {userProf.bio}
                 </>
             )}
-                <div className="profile-container-follower">
+                {/* <div className="profile-container-follower">
                         <div className="following-container">
                             {userProf.following.length} Following
                         </div>
                         <div className="follower-container">
                             {userProf.followers.length} Followers
                         </div>
-                </div>
+                </div> */}
                 <div className="comment-feed-profile">
                     <div className="comment-title">
                        {userProf.username}'s Comments
@@ -615,7 +721,9 @@ const MyProfile = ({ prop = false }) => {
             <div className="link-to-discuss">
                 <div>
 
-            Discussion:
+
+    Discussion:
+
                 </div>
                 <div>
 
@@ -633,15 +741,15 @@ const MyProfile = ({ prop = false }) => {
               <div className="comment-body-first-row">
               <div className="username-posted">
                 <div className="comment-top-row-username">
-                {comment.user.username} {comment.profile_time}
+                {comment.user.username}
                 </div>
                 <div className="comment-top-row-updated">
-                {/* {updatedDateFormatted.toLocaleDateString()} */}
+                {comment.profile_time}
                 </div>
               </div>
 
               </div>
-              <div className="comment-body-comment">
+              <div className="comment-body-comment-c">
                     {comment.comment}
               </div>
 
@@ -680,6 +788,130 @@ const MyProfile = ({ prop = false }) => {
 
         </div>
                 )}
+      {isFollowersLoaded && (
+
+<div className="landing-page-spinner">
+<div className="loading-text">
+Loading followers...
+</div>
+<div>
+<Oval color="#00BFFF" height={100} width={100} />
+</div>
+
+</div>
+)}
+<div>
+
+<>
+{isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
+  <>
+  <div  className="news-border-t">
+  <div>
+     Followers: {userFollowers.length}
+  </div>
+  {userFollowers.map((follower) =>(
+    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
+      <div>
+    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
+    </div>
+    <div className="follower-username">
+      {follower.username}
+      </div>
+    </div>
+
+))}
+    </div>
+  </>
+  )}
+  </>
+    <>
+  {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
+    <>
+  <div  className="news-border-t">
+  <div>
+    Followers: {user.followers.length}
+  </div>
+  {userFollowers.map((follower) =>(
+    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
+      <div>
+    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
+    </div>
+    <div className="follower-username">
+      {follower.username}
+      </div>
+    </div>
+
+))}
+    </div>
+  </>
+  )}
+  </>
+
+
+
+
+
+
+<div>
+
+  <>
+{isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
+  <>
+  <div className="news-border-r">
+  <div className="following-container">
+     Following: {userProf.following.length}
+  </div>
+  {userFollowing.map((follower) =>(
+    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
+      <div>
+    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
+    </div>
+    <div className="follower-username">
+      {follower.username}
+      </div>
+    </div>
+
+))}
+    </div>
+  </>
+  )}
+  </>
+    <>
+  {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
+    <>
+  <div className="news-border-r">
+  <div className="following-container">
+    Following: {user.following.length}
+  </div>
+  {userFollowing.map((follower) =>(
+    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
+      <div>
+    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
+    </div>
+    <div className="follower-username">
+      {follower.username}
+      </div>
+    </div>
+
+))}
+    </div>
+  </>
+  )}
+  </>
+
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+
+
                </div>
     </>
   );

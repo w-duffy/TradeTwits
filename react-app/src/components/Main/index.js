@@ -4,7 +4,9 @@ import PortfolioGraph from "./PortfolioGraph";
 import { addTicker } from '../../store/session';
 import { searchOptions } from '../Search/tickers'
 
-const Main = ({showEditPortfolio}) => {
+const Main = ({showEditPortfolio, handleWatchlistRoute}) => {
+  const [loaded, setLoaded] = useState(true);
+
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
 // const [tickerName, setTickerName] = useState("")
@@ -35,18 +37,25 @@ setSearchResults(finalResult)
   // const portArr = Object.values(user.portfolio)
   const handleAddTicker = (e, tickerName) => {
     e.preventDefault();
-    let portCheck = user.portfolio.filter(portfolio =>{
-      return portfolio.ticker === tickerName
-    })
-    if (portCheck.length > 0){
-      window.alert("You cannot add an existing ticker to your portfolio")
-      return;
-    }
-    const ticker = tickerName
-    let user_id = user.id
-    dispatch(addTicker(ticker, user_id))
-    // setTickerName("")
-    setShowForm(!showForm)
+    (async() => {
+
+      await setLoaded(false)
+      let portCheck = user.portfolio.filter(portfolio =>{
+        return portfolio.ticker === tickerName
+      })
+      if (portCheck.length > 0){
+        window.alert("You cannot add an existing ticker to your portfolio")
+        await setLoaded(true)
+        return;
+      }
+      const ticker = tickerName
+      let user_id = user.id
+      await dispatch(addTicker(ticker, user_id))
+      // setTickerName("")
+      await setShowForm(!showForm)
+      await setLoaded(true)
+    })();
+      // setLoaded(true)
 
 
 }
@@ -92,13 +101,14 @@ const clickedOffSearch = event => {
                            <div className="search-result-select">
 
                            <a onClick={(e) => {setSearchTerm(""); handleAddTicker(e, result[0])}}>
-                           {result[0]} - {result[1]}
-                           </a>
-                           </div>
-                           </>
-                           ))}
-                       </>
-                   )}
+
+                               {result[0]} - {result[1]}
+                               </a>
+                               </div>
+                               </>
+                               ))}
+                               </>
+                               )}
                </div>
                </div>
 
@@ -120,7 +130,7 @@ const clickedOffSearch = event => {
         //   </div>
         // </form>
       )}
-      <PortfolioGraph key={user.id} showEditPortfolio={showEditPortfolio} />
+      <PortfolioGraph key={user.id} handleWatchlistRoute={handleWatchlistRoute} showEditPortfolio={showEditPortfolio} loaded={loaded} />
     </>
   );
 };
