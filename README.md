@@ -1,134 +1,96 @@
-# Flask React Project
+# TradeTwits
+[TradeTwits](http://tradetwits.herokuapp.com/) a full-stack application, is an online platform for users to discuss stocks and see real-time stock information.
 
-This is the starter for the Flask React project.
+<img src="https://i.ibb.co/qdbHzQm/1111.png" />
 
-## Getting started
+Visit my [wiki](https://github.com/w-duffy/TradeTwits/wiki/TradeTwits) for more information.
 
-1. Clone this repository (only this branch)
+## Get Started
+
+1. Clone this repository 
 
    ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
+   git clone https://github.com/w-duffy/TradeTwits
    ```
 
-2. Install dependencies
+2. Install backend dependencies inside the python-project-starter directory
 
       ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt     
       ```
+3. Install frontend dependencies inside the react-app directory
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+     ```bash
+     npm install
+     ```
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+4. Create a .env file base on the .env.example given in the root directory. The API keys needed are from [finnhub](https://finnhub.io/) and [Alpha Advantage](https://rapidapi.com/alphavantage/api/alpha-vantage/)
 
-   ```bash
-   pipenv shell
-   ```
+5. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
 
-   ```bash
-   flask db upgrade
-   ```
+6. Migrate and seed the models into your database
 
-   ```bash
-   flask seed all
-   ```
+     ```bash
+     pipenv run flask db upgrade
+     ```
+     ```bash
+     pipenv run flask seed all
+     ```
 
-   ```bash
-   flask run
-   ```
+7. Start the front end from the react-app directory
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+     ```bash
+     npm start
+     ```
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+8. Start the backend from the python-project-starter
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+     ```bash
+     pipenv run flask run
+     ```
+     
+## Features
+### 1. Watchlist
+* Logged in users can create a watchlist.
+* Logged in users can view the stocks in their watchlist.
+* Logged in users can delete stocks in their watchlist.
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+### 2. Comments
+* Logged in users can post comments on a discussion page.
+* Logged in users can edit their own comments.
+* Logged in users can delete their own comments.
 
-## Deploy to Heroku
 
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
+### 3. Replies
+* Logged in users can reply to discussion comments.
+* Logged in users can delete their replies.
+* Logged in users can edit their replies.
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+### 4. Likes 
+* Logged in users can like discussion comments and replies.
+* Logged in users can remove previous likes.
 
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
+### 5. Follow
+* Logged in users can follow other users.
+* Logged in users can unfollow a user they are following.
 
-   ```bash
-   heroku login
-   ```
+### 6. Search
+* Logged in users can search for stocks to add to their watchlist.
+* Logged in users can search for stocks to access the stock's discussion page.
 
-6. Login to the heroku container registry
+## Built With
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height=40/> <img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"  height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height=40/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height=40/>
+<img src="https://camo.githubusercontent.com/f7b8dd3ec5e0959272f5015575d66b6b6231329b1b597cca76d665453eb10f6b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f73716c616c6368656d792f73716c616c6368656d792d6f726967696e616c2e737667" height=40/>
+<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"  height=40/>
+<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"  height=40/>
+<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"  height=40/>
+<img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"  height=40/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original-wordmark.svg" height=40/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain-wordmark.svg" height=40/>
+<img src="https://react-chartjs-2.js.org/img/favicon.ico" height=40/>
 
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
+Python | Javascript | React | Redux | SQLAlchemy | PostgreSQL | CSS | HTML / JSX | Git | Flask | Docker | React-Chartjs-2
+## Conclusion and Next Steps
+While I am mostly happy with TradeTwit's functionality, there are a few additional features I would like to include in the future.  I would like to add the ability to reference users and discussions via a hashtagging system (i.e. @user or #ticker).  Additionally, I would like to expand the search and stock discussion features to include a broader range of stocks since I am currently limited to the S&P500.
+## Contact
+Email - w.duffy@outlook.com
