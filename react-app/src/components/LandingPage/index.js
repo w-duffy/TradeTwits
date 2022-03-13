@@ -103,13 +103,13 @@ Loading latest stock data...
 
                 <div>
 
-                <a
+                <div
                 className="login-a"
                 onClick={() => setShowModal(true)}
                 style={prop ? hideButtonStyle : null}
                 >
                 Log In
-            </a>
+            </div>
                     </div>
 
                 </div>
@@ -122,7 +122,7 @@ Loading latest stock data...
             </div>
         </div>
         <div className="landing-body-picture">
-            <img className="landing-pic" src="https://coreybradshaw.files.wordpress.com/2014/02/group-communication.jpg" />
+            <img className="landing-pic" alt="landing-pic" src="https://coreybradshaw.files.wordpress.com/2014/02/group-communication.jpg" />
         </div>
       </>
       )}
@@ -131,7 +131,7 @@ Loading latest stock data...
 
 
         <div className="Links">
-            <a href="https://github.com/w-duffy/TradeTwits" target="_blank">
+            <a href="https://github.com/w-duffy/TradeTwits" target="_blank" rel="noreferrer">
               <img
                 src={github}
                 alt="github"
@@ -140,6 +140,7 @@ Loading latest stock data...
             <a
               href="https://www.linkedin.com/in/will-duffy-a46a7a8a/"
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 src={
@@ -151,13 +152,14 @@ Loading latest stock data...
             <a
               href="https://www.appacademy.io/enterprise/hiring?utm_medium=ppc&utm_source=google&utm_campaign=14640069351&gclid=Cj0KCQiA8vSOBhCkARIsAGdp6RTVy85MXjwkVGN3f0-ripxBOp9676sXnVJ-uqyIB-7mNQSywGsWiLcaAijhEALw_wcB"
               target="_blank"
+              rel="noreferrer"
             >
               <img className="aa"
                 src={aa}
                 alt="App Academy"
               />
             </a>
-            <a href="https://memehub-medium-clone.herokuapp.com/" target="_blank">
+            <a href="https://memehub-medium-clone.herokuapp.com/" target="_blank" rel="noreferrer">
               <img className="memehub"
                 src={memehub}
                 alt="MemeHub"
