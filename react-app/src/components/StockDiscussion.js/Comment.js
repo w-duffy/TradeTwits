@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import {
   editDiscussionComment,
   delDiscussionComment,
@@ -27,9 +26,9 @@ const Comment = ({ comment, prop = false }) => {
   const [errors, setErrors] = useState([]);
   //   const [showForm, setShowForm] = useState(false);
 
-  const hideButtonStyle = {
-    display: 'none',
-}
+//   const hideButtonStyle = {
+//     display: 'none',
+// }
   const user = useSelector((state) => state.session.user);
 
   const handleEditComment = async (e, commentId) => {
@@ -155,7 +154,7 @@ const Comment = ({ comment, prop = false }) => {
 
       <div className="comment-container">
       <div className="comment-body-div-prof-pic">
-        <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+        <img className="comment-body-prof-pic" alt="profile-pic" src={comment.user.profile_picture}></img>
       </div>
       <div className="comment-body-container">
       <div className="comment-body-first-row">
@@ -172,7 +171,7 @@ const Comment = ({ comment, prop = false }) => {
       <div className="edit-container-c">
 
       <div onClick={openCommentMenu} className="comment-icon-container">
-      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      <img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
                         </div>
                 </div>
       </div>
@@ -250,7 +249,7 @@ const Comment = ({ comment, prop = false }) => {
       <div className="comment-icon-container" onClick={openModal}>
         <div>
 
-      <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
+      <img className="comment-icon" alt="comment-pic" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
       </div>
 
         <div>
@@ -279,12 +278,12 @@ const Comment = ({ comment, prop = false }) => {
             >
               {hasLiked.length === 0 && (
                 <div>
-              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
               </div>
                 )}
                 {hasLiked.length > 0 && (
                     <div>
-                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                  <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
                     </div>
                 )}
               <div>
@@ -353,7 +352,7 @@ const Comment = ({ comment, prop = false }) => {
 
      <div className="comment-container">
      <div className="comment-body-div-prof-pic">
-       <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
+       <img className="comment-body-prof-pic" alt="comment-pic" src={comment.user.profile_picture}></img>
      </div>
      <div className="comment-body-container">
      <div className="comment-body-first-row">
@@ -369,7 +368,7 @@ const Comment = ({ comment, prop = false }) => {
 {user.id !== comment.user_id && (
 
   <div onClick={openCommentMenu} className="comment-icon-container">
-<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+<img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
                   </div>
        )}
 
@@ -420,12 +419,12 @@ const Comment = ({ comment, prop = false }) => {
             >
               {hasLiked.length === 0 && (
                 <div>
-              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
               </div>
                 )}
                 {hasLiked.length > 0 && (
                     <div>
-                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                  <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
                     </div>
                 )}
               <div>
@@ -462,7 +461,7 @@ const Comment = ({ comment, prop = false }) => {
 <form onSubmit={handleAddReply}>
 <div className="larger-comment-container">
 
-              <img className="comment-prof-pic" src={user.profile_picture}>
+              <img className="comment-prof-pic" alt="comment-pic" src={user.profile_picture}>
 
 </img>
 <div className="add-comment-container">

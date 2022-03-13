@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { searchOptions } from "./tickers";
 import { useHistory } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./search.css";
 function SearchBar() {

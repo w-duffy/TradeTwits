@@ -271,6 +271,7 @@ const MyProfile = ({ prop = false }) => {
                   <div className="profile-button" onClick={openProfileMenu}>
                     <img
                       className="profile-picture-on-button"
+                      alt="profile-pic"
                       src={user.profile_picture}
                     ></img>
                   </div>
@@ -407,6 +408,7 @@ const MyProfile = ({ prop = false }) => {
               >
                 <img
                   className="edit-icon"
+                  alt="edit-pic"
                   src="https://img.icons8.com/ios/50/000000/more.png"
                 />
               </div>
@@ -431,12 +433,13 @@ const MyProfile = ({ prop = false }) => {
               <div className="prof-pic-top">
                 <img
                   className="profile-picture-on-button-page"
+                  alt="profile-pic"
                   src={user.profile_picture}
                 ></img>
               </div>
               <div className="top-profile-right">
                 <div className="top-profile-username">{user.username}</div>
-                {user.id == user.id && (
+                {user.id && (
                   <div className="edit-profile-button">
                     <button
                       className="login-splash-button-modal"
@@ -485,6 +488,7 @@ const MyProfile = ({ prop = false }) => {
                       <div className="comment-container">
                         <div className="comment-body-div-prof-pic">
                           <img
+                           alt="profile-pic"
                             className="comment-body-prof-pic"
                             src={comment.user.profile_picture}
                           ></img>
@@ -524,6 +528,7 @@ const MyProfile = ({ prop = false }) => {
             <div className="top-profile">
               <div className="prof-pic-top">
                 <img
+                  alt="profile-pic"
                   className="profile-picture-on-button-page"
                   src={userProf.profile_picture}
                 ></img>
@@ -598,6 +603,7 @@ const MyProfile = ({ prop = false }) => {
                       <div className="comment-container">
                         <div className="comment-body-div-prof-pic">
                           <img
+                          alt="profile-pic"
                             className="comment-body-prof-pic"
                             src={comment.user.profile_picture}
                           ></img>
@@ -654,6 +660,7 @@ const MyProfile = ({ prop = false }) => {
                     >
                       <div>
                         <img
+                        alt="comment-pic"
                           className="comment-body-prof-pic"
                           src={follower.profile_picture}
                         ></img>
@@ -681,6 +688,7 @@ const MyProfile = ({ prop = false }) => {
                     >
                       <div>
                         <img
+                        alt="prof-pic"
                           className="comment-body-prof-pic"
                           src={follower.profile_picture}
                         ></img>
@@ -712,6 +720,7 @@ const MyProfile = ({ prop = false }) => {
                       >
                         <div>
                           <img
+                          alt="prof-pic"
                             className="comment-body-prof-pic"
                             src={follower.profile_picture}
                           ></img>
@@ -741,6 +750,7 @@ const MyProfile = ({ prop = false }) => {
                       >
                         <div>
                           <img
+                          alt="prof-pic"
                             className="comment-body-prof-pic"
                             src={follower.profile_picture}
                           ></img>

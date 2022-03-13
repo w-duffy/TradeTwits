@@ -19,12 +19,12 @@ export const getPortfolioDetails = (id) => async (dispatch) => {
     }
 }
 
-const delTicker = (ticker) => {
-    return {
-        type: REMOVE_PORTFOLIO_TICKER,
-        ticker
-    }
-}
+// const delTicker = (ticker) => {
+//     return {
+//         type: REMOVE_PORTFOLIO_TICKER,
+//         ticker
+//     }
+// }
 
 export const delPortfolioTicker = (ticker, id) => async (dispatch) => {
 

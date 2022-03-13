@@ -52,7 +52,7 @@ function Graph({pClose, high, low, openP,  current}){
         if(valuesSlicer[0] > valuesSlicer[valuesSlicer.length - 1]) {
            setLineColor('rgb(255, 0, 0)')
         }
-      },[current])
+      },[])
 
       const data = {
         labels: daySlicer,
