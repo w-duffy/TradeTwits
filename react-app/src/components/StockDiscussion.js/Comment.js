@@ -8,7 +8,7 @@ import Reply from "./Reply";
 import { addNewFollower, deleteNewFollower } from "../../store/followers";
 import { addCommentLike, deleteCommentLike } from "../../store/likes";
 import { addNewReply } from "../../store/replies";
-import './comment.css'
+import "./comment.css";
 import { Modal } from "../../Context/Modal";
 import { ModalAuth } from "../../Context/ModalAuth";
 
@@ -26,30 +26,30 @@ const Comment = ({ comment, prop = false }) => {
   const [errors, setErrors] = useState([]);
   //   const [showForm, setShowForm] = useState(false);
 
-//   const hideButtonStyle = {
-//     display: 'none',
-// }
+  //   const hideButtonStyle = {
+  //     display: 'none',
+  // }
   const user = useSelector((state) => state.session.user);
 
   const handleEditComment = async (e, commentId) => {
     e.preventDefault();
     let id = commentId;
     let newComment = updatedComment;
-    let errArr = []
-    if(newComment.length < 1){
-      errArr.push("You cannot submit a blank comment")
+    let errArr = [];
+    if (newComment.length < 1) {
+      errArr.push("You cannot submit a blank comment");
     }
 
-    if(newComment.length > 255){
-      errArr.push("Your comment must be less than 255 characters")
+    if (newComment.length > 255) {
+      errArr.push("Your comment must be less than 255 characters");
     }
 
-    if(errArr.length){
-      return setErrors(errArr)
+    if (errArr.length) {
+      return setErrors(errArr);
     }
     await dispatch(editDiscussionComment(id, newComment));
     await setShowEditForm(!showEditForm);
-    setShowEditModal(false)
+    setShowEditModal(false);
     setShowCommentMenu(!showCommentMenu);
   };
 
@@ -57,7 +57,7 @@ const Comment = ({ comment, prop = false }) => {
     e.preventDefault();
     let id = commentId;
     await dispatch(delDiscussionComment(id));
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   };
 
   const handleAddLike = (e, comment) => {
@@ -106,13 +106,13 @@ const Comment = ({ comment, prop = false }) => {
     e.preventDefault();
     const reply = newReply;
 
-    if(reply.length < 1){
-      window.alert("You cannot submit a blank reply")
+    if (reply.length < 1) {
+      window.alert("You cannot submit a blank reply");
       return;
     }
 
-    if(reply.length > 255){
-      window.alert("Your reply must be less than 255 characters")
+    if (reply.length > 255) {
+      window.alert("Your reply must be less than 255 characters");
       return;
     }
     let user_id = user.id;
@@ -127,136 +127,141 @@ const Comment = ({ comment, prop = false }) => {
     return follow.user_id;
   });
   const openModal = () => {
-    setShowModal(true)
-    document.body.style.overflow = 'hidden'
-  }
+    setShowModal(true);
+    document.body.style.overflow = "hidden";
+  };
 
   const closeModal = () => {
-    setShowModal(false)
-    document.body.style.overflow = 'unset';
-  }
+    setShowModal(false);
+    document.body.style.overflow = "unset";
+  };
 
+  let hasLiked = comment.likes.filter((like) => {
+    return like.user_id === user.id;
+  });
 
- let hasLiked = comment.likes.filter(like =>{
-   return like.user_id === user.id
- })
-
-
- const openCommentMenu = () => {
-  setShowCommentMenu(!showCommentMenu);
-};
-
-
+  const openCommentMenu = () => {
+    setShowCommentMenu(!showCommentMenu);
+  };
 
   return (
     <>
-
-
       <div className="comment-container">
-      <div className="comment-body-div-prof-pic">
-        <img className="comment-body-prof-pic" alt="profile-pic" src={comment.user.profile_picture}></img>
-      </div>
-      <div className="comment-body-container">
-      <div className="comment-body-first-row">
-      <div className="username-posted">
-        <div className="comment-top-row-username">
-        {comment.user.username}
+        <div className="comment-body-div-prof-pic">
+          <img
+            className="comment-body-prof-pic"
+            alt="profile-pic"
+            src={comment.user.profile_picture}
+          ></img>
         </div>
-        <div className="comment-top-row-updated">
-        {comment.profile_time}
-        </div>
-      </div>
+        <div className="comment-body-container">
+          <div className="comment-body-first-row">
+            <div className="username-posted">
+              <div className="comment-top-row-username">
+                {comment.user.username}
+              </div>
+              <div className="comment-top-row-updated">
+                {comment.profile_time}
+              </div>
+            </div>
 
-
-      <div className="edit-container-c">
-
-      <div onClick={openCommentMenu} className="comment-icon-container">
-      <img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
-                        </div>
-                </div>
-      </div>
-      {/* <div className="ul-container-c"> */}
-
-      {showCommentMenu && user.id === comment.user_id && (
-        <ul className="profile-ul-c">
-                    <li className="profile-li-c">
-                      <div onClick={() => setShowEditModal(!showEditModal)} className="profile-a-c">
-                        Edit Comment
-                      </div>
-                    </li>
-
-                    {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                        </a>
-                    </li> */}
-
-                    <li className="profile-li-c">
-                      <div
-                        className="profile-a-c"
-
-                        onClick={(e) => {
-                          handleDeleteComment(e, comment.id);
-                        }}
-                        >
-                        Delete Comment
-                      </div>
-                    </li>
-                  </ul>
-                )}
-
-
-
-{showCommentMenu && user.id !== comment.user_id && (
-        <ul className="profile-ul-f1">
-          {isFollower.includes(comment.user.id) && (
-                    <li className="profile-li-c">
-                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
-                        Unfollow
-                      </div>
-                    </li>
- )}
-                    {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                        </a>
-                    </li> */}
-          {!isFollower.includes(comment.user.id) && (
-                    <li className="profile-li-c">
-                      <div
-                        className="profile-a-c"
-
-                        onClick={(e) => {
-                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
-                        }}
-                        >
-                        Follow
-                      </div>
-                    </li>
-                      )}
-                  </ul>
-                )}
-
-
-                {/* </div> */}
-      <div className="comment-body-comment">
-            {comment.comment}
-      </div>
-
-      <div className="comment-body-bottom-row">
-        <div>
-
-      <div className="comment-icon-container" onClick={openModal}>
-        <div>
-
-      <img className="comment-icon" alt="comment-pic" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
-      </div>
-
-        <div>
-        {comment.replies.length}
+            <div className="edit-container-c">
+              <div onClick={openCommentMenu} className="comment-icon-container">
+                <img
+                  className="edit-icon"
+                  alt="edit-pic"
+                  src="https://img.icons8.com/ios/50/000000/more.png"
+                />
+              </div>
+            </div>
           </div>
-      </div>
-      {/* {true && (
+          {/* <div className="ul-container-c"> */}
+
+          {showCommentMenu && user.id === comment.user_id && (
+            <ul className="profile-ul-c">
+              <li className="profile-li-c">
+                <div
+                  onClick={() => setShowEditModal(!showEditModal)}
+                  className="profile-a-c"
+                >
+                  Edit Comment
+                </div>
+              </li>
+
+              {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+
+              <li className="profile-li-c">
+                <div
+                  className="profile-a-c"
+                  onClick={(e) => {
+                    handleDeleteComment(e, comment.id);
+                  }}
+                >
+                  Delete Comment
+                </div>
+              </li>
+            </ul>
+          )}
+
+          {showCommentMenu && user.id !== comment.user_id && (
+            <ul className="profile-ul-f1">
+              {isFollower.includes(comment.user.id) && (
+                <li className="profile-li-c">
+                  <div
+                    onClick={(e) => {
+                      handleAddFollow(e, comment.user_id);
+                      setShowCommentMenu(!showCommentMenu);
+                    }}
+                    className="profile-a-c"
+                  >
+                    Unfollow
+                  </div>
+                </li>
+              )}
+              {/* <li className="profile-li">
+                      <a className="profile-a" href="/my-profile">
+                        Edit Profile
+                        </a>
+                    </li> */}
+              {!isFollower.includes(comment.user.id) && (
+                <li className="profile-li-c">
+                  <div
+                    className="profile-a-c"
+                    onClick={(e) => {
+                      {
+                        handleAddFollow(e, comment.user_id);
+                        setShowCommentMenu(!showCommentMenu);
+                      }
+                    }}
+                  >
+                    Follow
+                  </div>
+                </li>
+              )}
+            </ul>
+          )}
+
+          {/* </div> */}
+          <div className="comment-body-comment">{comment.comment}</div>
+
+          <div className="comment-body-bottom-row">
+            <div>
+              <div className="comment-icon-container" onClick={openModal}>
+                <div>
+                  <img
+                    className="comment-icon"
+                    alt="comment-pic"
+                    src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"
+                  />
+                </div>
+
+                <div>{comment.replies.length}</div>
+              </div>
+              {/* {true && (
         <form onSubmit={handleAddReply}>
           <div>
             <input
@@ -269,169 +274,188 @@ const Comment = ({ comment, prop = false }) => {
           </div>
         </form>
       )} */}
-        </div>
-        <div>
-        <div className="comment-icon-container-like"
-            onClick={(e) => {
-              handleAddLike(e, comment);
-            }}
-            >
-              {hasLiked.length === 0 && (
-                <div>
-              <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
-              </div>
+            </div>
+            <div>
+              <div
+                className="comment-icon-container-like"
+                onClick={(e) => {
+                  handleAddLike(e, comment);
+                }}
+              >
+                {hasLiked.length === 0 && (
+                  <div>
+                    <img
+                      className="comment-like-pic"
+                      alt="like-pic"
+                      src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"
+                    />
+                  </div>
                 )}
                 {hasLiked.length > 0 && (
-                    <div>
-                  <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
-                    </div>
+                  <div>
+                    <img
+                      className="comment-like-pic"
+                      alt="like-pic"
+                      src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"
+                    />
+                  </div>
                 )}
-              <div>
-            {comment.likes.length}
+                <div>{comment.likes.length}</div>
               </div>
-          </div>
-        </div>
-
-      </div>
-
-
-            {showEditModal && (
-              <>
-              <ModalAuth onClose={() => setShowEditModal(false)}>
-                <>
-
-
-        </>
-        <div className='login-modal-title'>
-      Edit Comment
-    </div>
-        <form
-        onSubmit={(e) => {
-          handleEditComment(e, comment.id);
-          }}
-        >
-                <div className="error-login">
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-          <div>
-            <textarea
-            className="add-comment-textarea-r2"
-              name="Edit Comment"
-              placeholder={comment.comment}
-              value={updatedComment}
-              onChange={(e) => setUpdatedComment(e.target.value)}
-            ></textarea>
-             <div className='modal-login-button-container'>
-            <button className='login-splash-button-modal' type="submit">Submit</button>
             </div>
           </div>
-        </form>
 
-      </ModalAuth>
+          {showEditModal && (
+            <>
+              <ModalAuth onClose={() => setShowEditModal(false)}>
+                <></>
+                <div className="login-modal-title">Edit Comment</div>
+                <form
+                  onSubmit={(e) => {
+                    handleEditComment(e, comment.id);
+                  }}
+                >
+                  <div className="error-login">
+                    {errors.map((error, ind) => (
+                      <div key={ind}>{error}</div>
+                    ))}
+                  </div>
+                  <div>
+                    <textarea
+                      className="add-comment-textarea-r2"
+                      name="Edit Comment"
+                      placeholder={comment.comment}
+                      value={updatedComment}
+                      onChange={(e) => setUpdatedComment(e.target.value)}
+                    ></textarea>
+                    <div className="modal-login-button-container">
+                      <button
+                        className="login-splash-button-modal"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </ModalAuth>
+            </>
+          )}
 
-                </>
-        )}
-
-      <br></br>
-{/*
+          <br></br>
+          {/*
       {comment.replies.map((reply) => (
         <Reply key={reply.id} reply={reply} />
       ))} */}
-              </div>
-    </div>
-    {showModal && (
-      <Modal onClose={closeModal}>
-        <div className="top-of-modal-message">
-
-        Message
-
         </div>
-        <div className="comment-modal-container">
-
-     <div className="comment-container">
-     <div className="comment-body-div-prof-pic">
-       <img className="comment-body-prof-pic" alt="comment-pic" src={comment.user.profile_picture}></img>
-     </div>
-     <div className="comment-body-container">
-     <div className="comment-body-first-row">
-     <div className="username-posted">
-       <div className="comment-top-row-username">
-       {comment.user.username}
-       </div>
-       <div className="comment-top-row-updated">
-         {comment.profile_time}
-       </div>
-     </div>
-     <div>
-{user.id !== comment.user_id && (
-
-  <div onClick={openCommentMenu} className="comment-icon-container">
-<img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      </div>
+      {showModal && (
+        <Modal onClose={closeModal}>
+          <div className="top-of-modal-message">Message</div>
+          <div className="comment-modal-container">
+            <div className="comment-container">
+              <div className="comment-body-div-prof-pic">
+                <img
+                  className="comment-body-prof-pic"
+                  alt="comment-pic"
+                  src={comment.user.profile_picture}
+                ></img>
+              </div>
+              <div className="comment-body-container">
+                <div className="comment-body-first-row">
+                  <div className="username-posted">
+                    <div className="comment-top-row-username">
+                      {comment.user.username}
+                    </div>
+                    <div className="comment-top-row-updated">
+                      {comment.profile_time}
+                    </div>
                   </div>
-       )}
-
-
-{showCommentMenu && user.id !== comment.user_id && (
-        <ul className="profile-ul-f">
-          {isFollower.includes(comment.user.id) && (
-            <li className="profile-li-c">
-                      <div onClick={(e) => {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}} className="profile-a-c">
-                        Unfollow
+                  <div>
+                    {user.id !== comment.user_id && (
+                      <div
+                        onClick={openCommentMenu}
+                        className="comment-icon-container"
+                      >
+                        <img
+                          className="edit-icon"
+                          alt="edit-pic"
+                          src="https://img.icons8.com/ios/50/000000/more.png"
+                        />
                       </div>
-                    </li>
- )}
-                    {/* <li className="profile-li">
+                    )}
+
+                    {showCommentMenu && user.id !== comment.user_id && (
+                      <ul className="profile-ul-f">
+                        {isFollower.includes(comment.user.id) && (
+                          <li className="profile-li-c">
+                            <div
+                              onClick={(e) => {
+                                handleAddFollow(e, comment.user_id);
+                                setShowCommentMenu(!showCommentMenu);
+                              }}
+                              className="profile-a-c"
+                            >
+                              Unfollow
+                            </div>
+                          </li>
+                        )}
+                        {/* <li className="profile-li">
                       <a className="profile-a" href="/my-profile">
                       Edit Profile
                       </a>
                     </li> */}
-          {!isFollower.includes(comment.user.id) && (
-            <li className="profile-li-c">
-                      <div
-                        className="profile-a-c"
+                        {!isFollower.includes(comment.user.id) && (
+                          <li className="profile-li-c">
+                            <div
+                              className="profile-a-c"
+                              onClick={(e) => {
+                                {
+                                  handleAddFollow(e, comment.user_id);
+                                  setShowCommentMenu(!showCommentMenu);
+                                }
+                              }}
+                            >
+                              Follow
+                            </div>
+                          </li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+                <div className="comment-body-comment-modal">
+                  {comment.comment}
+                </div>
 
-                        onClick={(e) => {
-                          {handleAddFollow(e, comment.user_id); setShowCommentMenu(!showCommentMenu)}
-
-                        }}
-                        >
-                        Follow
+                <div className="comment-body-bottom-row">
+                  <div
+                    className="comment-icon-container"
+                    onClick={(e) => {
+                      handleAddLike(e, comment);
+                    }}
+                  >
+                    {hasLiked.length === 0 && (
+                      <div>
+                        <img
+                          className="comment-like-pic"
+                          alt="like-pic"
+                          src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"
+                        />
                       </div>
-                    </li>
-                      )}
-                  </ul>
-
-                )}
-     </div>
-     </div>
-     <div className="comment-body-comment-modal">
-           {comment.comment}
-     </div>
-
-     <div className="comment-body-bottom-row">
-
-       <div className="comment-icon-container"
-            onClick={(e) => {
-              handleAddLike(e, comment);
-            }}
-            >
-              {hasLiked.length === 0 && (
-                <div>
-              <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
-              </div>
-                )}
-                {hasLiked.length > 0 && (
-                    <div>
-                  <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
-                    </div>
-                )}
-              <div>
-            {comment.likes.length}
-              </div>
-          </div>
-       {/* <div>
+                    )}
+                    {hasLiked.length > 0 && (
+                      <div>
+                        <img
+                          className="comment-like-pic"
+                          alt="like-pic"
+                          src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"
+                        />
+                      </div>
+                    )}
+                    <div>{comment.likes.length}</div>
+                  </div>
+                  {/* <div>
        {isFollower.includes(comment.user.id) && (
          <button
          onClick={(e) => {
@@ -451,39 +475,45 @@ const Comment = ({ comment, prop = false }) => {
          </button>
        )}
        </div> */}
+                </div>
 
-     </div>
-
-     <br></br>
-    </div>
-   </div>
-   <div>
-<form onSubmit={handleAddReply}>
-<div className="larger-comment-container">
-
-              <img className="comment-prof-pic" alt="comment-pic" src={user.profile_picture}>
-
-</img>
-<div className="add-comment-container">
-
-  <textarea className="add-comment-textarea"
-    name="Add Reply"
-    placeholder={`Reply to ${comment.user.username}'s post`}
-    value={newReply}
-    onChange={(e) => setNewReply(e.target.value)}
-    ></textarea>
-  <button className="post-comment-button" type="submit">Post</button>
-</div>
-</div>
-</form>
-</div>
-   {comment.replies.map((reply) => (
-       <Reply key={reply.id} reply={reply} handleAddFollow={handleAddFollow} isFollower={isFollower} />
-     ))}
-    </div>
-   </Modal>
-    )}
-
+                <br></br>
+              </div>
+            </div>
+            <div>
+              <form onSubmit={handleAddReply}>
+                <div className="larger-comment-container">
+                  <img
+                    className="comment-prof-pic"
+                    alt="comment-pic"
+                    src={user.profile_picture}
+                  ></img>
+                  <div className="add-comment-container">
+                    <textarea
+                      className="add-comment-textarea"
+                      name="Add Reply"
+                      placeholder={`Reply to ${comment.user.username}'s post`}
+                      value={newReply}
+                      onChange={(e) => setNewReply(e.target.value)}
+                    ></textarea>
+                    <button className="post-comment-button" type="submit">
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            {comment.replies.map((reply) => (
+              <Reply
+                key={reply.id}
+                reply={reply}
+                handleAddFollow={handleAddFollow}
+                isFollower={isFollower}
+              />
+            ))}
+          </div>
+        </Modal>
+      )}
     </>
   );
 };
