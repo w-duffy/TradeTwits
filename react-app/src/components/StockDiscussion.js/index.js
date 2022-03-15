@@ -11,7 +11,6 @@ import './stockdiscussion.css'
 import CompanyInfo from "./CompanyInfo";
 import DiscussionGraph from "./DiscussionGraph";
 import { getStockDiscussionGraph } from "../../store/stockDiscussionGraph";
-import { getPortfolioDetails } from "../../store/portfolio";
 import KeyData from "./KeyData";
 import './comment.css'
 import { tickers } from "../Search/tickers";
@@ -104,7 +103,7 @@ useEffect(() =>{
               Watchlist
 
      <div onClick={(e) => setEditPortfolio(!showEditPortfolio)} className="comment-icon-container">
-      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      <img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
       </div>
               </div>
             <div>
@@ -146,7 +145,7 @@ Loading latest stock data...
           <form onSubmit={handleAddComment}>
             <div className="larger-comment-container">
 
-                          <img className="comment-prof-pic" src={user.profile_picture}>
+                          <img className="comment-prof-pic" alt="comment-pic" src={user.profile_picture}>
 
 </img>
             <div className="add-comment-container">
@@ -198,7 +197,7 @@ Loading latest stock data...
                 {stockDiscussion.company_news.length > 0 && stockDiscussion.company_news.slice(0, 10).map((news) => (
                   <div className="news-container-here">
 
-                  <a className="a-news" target="_blank" href={news.url}>
+                  <a className="a-news" rel="noreferrer" target="_blank" href={news.url}>
                   <div className="news-headline">
                     {news.headline}
                   </div>

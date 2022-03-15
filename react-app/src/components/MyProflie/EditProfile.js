@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './myProfile.css'
 import { editUserProfile } from '../../store/session';
 import { Oval } from  'react-loader-spinner'
@@ -9,7 +9,7 @@ const EditProfileForm = ({userToEdit, showModal}) => {
   const [errors, setErrors] = useState([]);
   const [bio, setBio] = useState(userToEdit.bio);
   const [profPic, setProfPic] = useState(userToEdit.profile_picture);
-  const user = useSelector(state => state.session.user);
+  // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [landingLoader, setLandingLoader] = useState(false)
 

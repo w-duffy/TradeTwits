@@ -60,9 +60,9 @@ function PortfolioGraph({ showEditPortfolio, loaded, handleWatchlistRoute}){
                     <div>
                     {stockDiscussion.id && (
 
-                      <a  className="a-select" onClick={(e) => {handleWatchlistRoute(e, detail.ticker); browserHistory.push(`/discussion/${detail.ticker}`)}}>
+                      <div  className="a-select" onClick={(e) => {handleWatchlistRoute(e, detail.ticker); browserHistory.push(`/discussion/${detail.ticker}`)}}>
                 {detail.ticker}
-                </a>
+                </div>
                   )}
                 {/* href={`/discussion/${detail.ticker}`} */}
                 {!stockDiscussion.id && (

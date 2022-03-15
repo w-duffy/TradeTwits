@@ -9,12 +9,10 @@ const Main = ({showEditPortfolio, handleWatchlistRoute}) => {
 
 const dispatch = useDispatch()
 const [showForm, setShowForm] = useState(false)
-// const [tickerName, setTickerName] = useState("")
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
 const refHandler = useRef(null);
 
-// const portfolios = useSelector((state) => state.portfolioReducer);
 useEffect(() =>{
     setSearchTerm("")
 },[])
@@ -34,7 +32,6 @@ setSearchResults(finalResult)
 }, [searchTerm])
 
   const user = useSelector((state) => state.session.user);
-  // const portArr = Object.values(user.portfolio)
   const handleAddTicker = (e, tickerName) => {
     e.preventDefault();
     (async() => {
@@ -51,13 +48,9 @@ setSearchResults(finalResult)
       const ticker = tickerName
       let user_id = user.id
       await dispatch(addTicker(ticker, user_id))
-      // setTickerName("")
       await setShowForm(!showForm)
       await setLoaded(true)
     })();
-      // setLoaded(true)
-
-
 }
 
 
@@ -77,14 +70,6 @@ const clickedOffSearch = event => {
 
   return (
     <>
-        {/* <div className='add-stock-button'>
-
-      <button
-        onClick={(e) => setShowForm(!showForm)}
-        >
-          Add a Stock to your Portfolio
-      </button>
-        </div> */}
       {showEditPortfolio && (
 
 
@@ -111,24 +96,6 @@ const clickedOffSearch = event => {
                                )}
                </div>
                </div>
-
-
-
-
-
-        // <form onSubmit={handleAddTicker}>
-        //   <div>
-        //     <input
-        //       name="Add Ticker"
-        //       placeholder="Ticker name.."
-        //       value={tickerName}
-        //       onChange={(e) => setTickerName(e.target.value)}
-        //     ></input>
-        //     <button type="submit">
-        //       Submit
-        //     </button>
-        //   </div>
-        // </form>
       )}
       <PortfolioGraph key={user.id} handleWatchlistRoute={handleWatchlistRoute} showEditPortfolio={showEditPortfolio} loaded={loaded} />
     </>

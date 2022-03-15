@@ -89,7 +89,7 @@ class StockDiscussion(db.Model):
 
         today = datetime.now()
         formatted_time = today.strftime("%B %d, %Y %I:%M%p")
-        time_graph = today.strftime("%Y-%m-%d")
+        time_graph = today.strftime("%m-%d-%Y")
         # for comment in self.comments:
         #     comment.replies.sort(key=lambda r: r.time_created)
         week_ago = today - timedelta(days = 1)

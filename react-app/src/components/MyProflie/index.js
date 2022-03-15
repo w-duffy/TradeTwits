@@ -6,14 +6,13 @@ import { useHistory } from "react-router-dom";
 import { searchOptions, tickers } from "../Search/tickers";
 import { createBrowserHistory } from "history";
 import Main from "../Main";
-import '../Splash/splash.css'
-import './myProfile.css'
+import "../Splash/splash.css";
+import "./myProfile.css";
 import { ModalAuth } from "../../Context/ModalAuth";
 import EditProfileForm from "./EditProfile";
-import { useParams } from 'react-router-dom';
-import { Oval } from  'react-loader-spinner'
+import { useParams } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 import { addNewFollower, deleteNewFollower } from "../../store/followers";
-
 
 const MyProfile = ({ prop = false }) => {
   const user = useSelector((state) => state.session.user);
@@ -24,11 +23,11 @@ const MyProfile = ({ prop = false }) => {
   const refHandlerSplash = useRef(null);
   const [showEditPortfolio, setEditPortfolio] = useState(false);
   const [showModal, setShowModal] = useState(prop);
-  const { userId }  = useParams();
+  const { userId } = useParams();
 
   const hideButtonStyle = {
-    display: 'none',
-}
+    display: "none",
+  };
 
   const openProfileMenu = () => {
     setShowProfileMenu(!showProfileMenu);
@@ -91,8 +90,7 @@ const MyProfile = ({ prop = false }) => {
     }
   };
 
-
-//   --------------------
+  //   --------------------
   useEffect(() => {
     setSearchTermSplash("");
   }, []);
@@ -124,29 +122,19 @@ const MyProfile = ({ prop = false }) => {
   }, []);
 
   const clickedOffSearchSplash = (event) => {
-    if (refHandlerSplash.current && !refHandlerSplash.current.contains(event.target)) {
+    if (
+      refHandlerSplash.current &&
+      !refHandlerSplash.current.contains(event.target)
+    ) {
       setSearchTermSplash("");
     }
   };
-
-
-//   useEffect(() => {
-//     const id = user.id
-
-//       async function getDetails() {
-//       await dispatch(getPortfolioDetails(id))
-//     }
-//   getDetails()
-
-// }, [])
 
   const trendingStocks = Object.entries(user.trending);
   const filterArrStocks = trendingStocks.filter((stock) => {
     return tickers.includes(stock[0]);
   });
   const feedData = filterArrStocks.slice(0, 5);
-
-
 
   const handleAddFollow = async (e, id) => {
     e.preventDefault();
@@ -156,14 +144,13 @@ const MyProfile = ({ prop = false }) => {
     let currentlyFollowed = user.following.filter((follow) => {
       return follow.user_id === userToFollowId;
     });
-    setIsFollowerUpdated(true)
+    setIsFollowerUpdated(true);
     if (currentlyFollowed.length === 0) {
       await dispatch(addNewFollower(userToFollowId, user_id));
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      await setUserFollowers(my_followers)
-      await setIsFollowerUpdated(false)
-
+      await setUserFollowers(my_followers);
+      await setIsFollowerUpdated(false);
     }
 
     if (currentlyFollowed.length > 0) {
@@ -172,31 +159,24 @@ const MyProfile = ({ prop = false }) => {
       await dispatch(deleteNewFollower(followId, user_id, userToFollowId));
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      await setUserFollowers(my_followers)
-      await setIsFollowerUpdated(false)
+      await setUserFollowers(my_followers);
+      await setIsFollowerUpdated(false);
     }
-
-    // setNewTick(!newTick)
   };
-
-
 
   useEffect(() => {
     if (!userId) {
       return;
     }
     (async () => {
-      await setIsDiscussionLoaded(true)
+      await setIsDiscussionLoaded(true);
       const response = await fetch(`/api/users/${userId}`);
       const user2 = await response.json();
       setUserProf(user2);
-      setIsLoaded(!isLoaded)
-      await setIsDiscussionLoaded(false)
-
+      setIsLoaded(!isLoaded);
+      await setIsDiscussionLoaded(false);
     })();
-
   }, []);
-
 
   useEffect(() => {
     if (!userId) {
@@ -204,29 +184,25 @@ const MyProfile = ({ prop = false }) => {
     }
 
     (async () => {
-      await setIsFollowersLoaded(true)
+      await setIsFollowersLoaded(true);
       const res = await fetch(`/api/follower/${userId}`);
       const my_followers = await res.json();
-      await setUserFollowers(my_followers)
-      await setIsFollowersLoaded(false)
+      await setUserFollowers(my_followers);
+      await setIsFollowersLoaded(false);
     })();
 
     (async () => {
-      await setIsFollowersLoaded(true)
+      await setIsFollowersLoaded(true);
       const res = await fetch(`/api/follower/following/${userId}`);
       const my_following = await res.json();
-      if(my_following.error){
-        window.alert("User does not exist")
-        history.push('/home')
+      if (my_following.error) {
+        window.alert("User does not exist");
+        history.push("/home");
       }
-      await setUserFollowing(my_following)
-      await setIsFollowersLoaded(false)
+      await setUserFollowing(my_following);
+      await setIsFollowersLoaded(false);
     })();
-
-
   }, [dispatch]);
-
-
 
   let isFollower = user.following.map((follow) => {
     return follow.user_id;
@@ -239,16 +215,8 @@ const MyProfile = ({ prop = false }) => {
           <a href={`/home`} className="tradetwits-title">
             TradeTwits
           </a>
-          {/* <div>
-                Rooms
-                Shows
-                Rankings
-                Earnings
-                Newsletters
-                Shop
-            </div> */}
+
           <div className="search-bar-div">
-            {/* <SearchBar /> */}
             <div ref={refHandler} className="search_container">
               <div className="search__bar">
                 <input
@@ -269,7 +237,7 @@ const MyProfile = ({ prop = false }) => {
                             <a
                               onClick={() => {
                                 setSearchTerm("");
-                               browserHistory.push(`/discussion/${result[0]}`);
+                                browserHistory.push(`/discussion/${result[0]}`);
                               }}
                             >
                               {" "}
@@ -303,6 +271,7 @@ const MyProfile = ({ prop = false }) => {
                   <div className="profile-button" onClick={openProfileMenu}>
                     <img
                       className="profile-picture-on-button"
+                      alt="profile-pic"
                       src={user.profile_picture}
                     ></img>
                   </div>
@@ -315,25 +284,14 @@ const MyProfile = ({ prop = false }) => {
                       </a>
                     </li>
 
-                    {/* <li className="profile-li">
-                      <a className="profile-a" href={`/profile/${user.id}`}>
-                        Edit Profile
-                      </a>
-                    </li> */}
-
                     <li className="profile-li">
-                      <a
-                        className="profile-a"
-                        href="/"
-                        onClick={handleLogout}
-                      >
+                      <a className="profile-a" href="/" onClick={handleLogout}>
                         Sign Out
                       </a>
                     </li>
                   </ul>
                 )}
               </div>
-              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -381,11 +339,9 @@ const MyProfile = ({ prop = false }) => {
             </div>
           </div>
           <div className="feed">
-            {/* <div className='three-container-feed'> */}
             {feedData.length} Currently Trending:
             {feedData.map((data) => (
               <div className="three-container-feed">
-                {/* <div className='three-container-feed'> */}
                 {stockDiscussion.id && (
                   <a
                     className="a-select"
@@ -435,484 +391,382 @@ const MyProfile = ({ prop = false }) => {
                     )}
                   </a>
                 )}
-                {/* </div> */}
               </div>
             ))}
-            {/* </div> */}
           </div>
         </div>
       </div>
-
 
       <div className="main-container">
-      <div className="portfolio">
-        <div className="port-border">
-
+        <div className="portfolio">
+          <div className="port-border">
             <div className="portfolio-name">
               Watchlist
-
-     <div onClick={(e) => setEditPortfolio(!showEditPortfolio)} className="comment-icon-container">
-      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
-      </div>
+              <div
+                onClick={(e) => setEditPortfolio(!showEditPortfolio)}
+                className="comment-icon-container"
+              >
+                <img
+                  className="edit-icon"
+                  alt="edit-pic"
+                  src="https://img.icons8.com/ios/50/000000/more.png"
+                />
               </div>
-            <div>
-
-
-        <Main key={user.id} showEditPortfolio={showEditPortfolio} />
             </div>
-        </div>
-      </div>
-      {isDiscussionLoaded && (
-
-<div className="landing-page-spinner">
-<div className="loading-text">
-Loading profile data...
-</div>
-<div>
-<Oval color="#00BFFF" height={100} width={100} />
-</div>
-
-</div>
-)}
-
-      {isLoaded && !isDiscussionLoaded && userProf.id === user.id && (
-
-<div className="profile-container-top">
-  <div className="top-profile">
-      <div className="prof-pic-top">
-      <img
-            className="profile-picture-on-button-page"
-            src={user.profile_picture}
-          ></img>
-      </div>
-      <div className="top-profile-right">
-              <div className="top-profile-username">
-              {user.username}
-              </div>
-              {user.id == user.id && (
-
-                  <div className="edit-profile-button">
-              <button
-      className='login-splash-button-modal'
-      onClick={() => setShowModal(true)}
-      style={prop ? hideButtonStyle : null}
-      >
-      Edit Profile
-  </button>
-  {showModal && (
-      <ModalAuth onClose={() => setShowModal(false)}>
-          <EditProfileForm userToEdit={user} showModal={setShowModal} />
-      </ModalAuth>
-  )}
-
-              </div>
-          )}
-      </div>
-  </div>
-
-
-
-
-  {user.bio.length > 0 &&(
-      <>
-      <div className="about-user">
-          About {user.username}:
+            <div>
+              <Main key={user.id} showEditPortfolio={showEditPortfolio} />
+            </div>
           </div>
-      {user.bio}
-      </>
-  )}
-      {/* <div className="profile-container-follower">
-              <div className="following-container">
-                  {user.following.length} Following
-              </div>
-              <div className="follower-container">
-                  {user.followers.length} Followers
-              </div>
-      </div> */}
-      <div className="comment-feed-profile">
-          <div className="comment-title">
-             {user.username}'s Comments
+        </div>
+        {isDiscussionLoaded && (
+          <div className="landing-page-spinner">
+            <div className="loading-text">Loading profile data...</div>
+            <div>
+              <Oval color="#00BFFF" height={100} width={100} />
+            </div>
+          </div>
+        )}
 
-              </div>
-      {user.comments && (
-  <>
-  {user.comments.map((comment) => (
-      <>
-  <div className="link-to-discuss">
-      <div>
-
-
-    Discussion:
-
-      </div>
-      <div>
-
-    <a className="profile-a" href={`/discussion/${comment.discussion_ticker}`}>
-     {comment.discussion_ticker}
-        </a>
-      </div>
-  </div>
-
-    <div className="comment-container">
-    <div className="comment-body-div-prof-pic">
-      <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
-    </div>
-    <div className="comment-body-container">
-    <div className="comment-body-first-row">
-    <div className="username-posted">
-      <div className="comment-top-row-username">
-      {comment.user.username}
-      </div>
-      <div className="comment-top-row-updated">
-      {comment.profile_time}
-      </div>
-    </div>
-
-    </div>
-    <div className="comment-body-comment-c">
-          {comment.comment}
-    </div>
-
-    <div className="comment-body-bottom-row">
-      <div>
-
-    <div className="comment-icon-container">
-
-      {/* <div>
-
-    <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
-      </div>
-      <div>
-      {comment.replies.length}
-  </div> */}
-        {/* <div className="comment-icon-container-like">
-             <div>
-             <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
-               </div>
-               <div>
-  {comment.likes.length}
-    </div>
-        </div> */}
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-      </>
-    ))}
-    </>
-
-    )}
-      </div>
-
-
-</div>
-   )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {isLoaded && !isDiscussionLoaded && user.id !== userProf.id && (
-
+        {isLoaded && !isDiscussionLoaded && userProf.id === user.id && (
           <div className="profile-container-top">
             <div className="top-profile">
-                <div className="prof-pic-top">
+              <div className="prof-pic-top">
                 <img
-                      className="profile-picture-on-button-page"
-                      src={userProf.profile_picture}
-                    ></img>
-                </div>
-                <div className="top-profile-right">
-                        <div className="top-profile-username">
-                        {userProf.username}
-                        </div>
-                        {user.id !== userProf.id && (
-                          <>
-                          {isFollower.includes(userProf.id) && (
-
-                            <div className="edit-profile-button">
-                            <button
-                            className='login-splash-button-modal'
-                            onClick={(e) => handleAddFollow(e)}
-
-                            >
-                            Unfollow
-                            </button>
-
-                            {isFollowerUpdated && (
-                            <div className="update-follow-spinner">
-                              <Oval color="#00BFFF" height={25} width={25} />
-                              </div>
-                              )}
-
-                            </div>
-                            )}
-
-                          {!isFollower.includes(userProf.id) && (
-
-                            <div className="edit-profile-button">
-                            <button
-                            className='login-splash-button-modal'
-                            onClick={(e) => handleAddFollow(e)}
-
-                            >
-                            Follow
-                            </button>
-                            {isFollowerUpdated && (
-                              <div className="update-follow-spinner">
-                              <Oval color="#00BFFF" height={25} width={25} />
-                              </div>
-                            )}
-
-                            </div>
-                            )}
-                            </>
-
+                  className="profile-picture-on-button-page"
+                  alt="profile-pic"
+                  src={user.profile_picture}
+                ></img>
+              </div>
+              <div className="top-profile-right">
+                <div className="top-profile-username">{user.username}</div>
+                {user.id && (
+                  <div className="edit-profile-button">
+                    <button
+                      className="login-splash-button-modal"
+                      onClick={() => setShowModal(true)}
+                      style={prop ? hideButtonStyle : null}
+                    >
+                      Edit Profile
+                    </button>
+                    {showModal && (
+                      <ModalAuth onClose={() => setShowModal(false)}>
+                        <EditProfileForm
+                          userToEdit={user}
+                          showModal={setShowModal}
+                        />
+                      </ModalAuth>
                     )}
-                </div>
-            </div>
-
-
-
-
-            {userProf.bio.length > 0 &&(
-                <>
-                <div className="about-user">
-                    About {userProf.username}:
-                    </div>
-                {userProf.bio}
-                </>
-            )}
-                {/* <div className="profile-container-follower">
-                        <div className="following-container">
-                            {userProf.following.length} Following
-                        </div>
-                        <div className="follower-container">
-                            {userProf.followers.length} Followers
-                        </div>
-                </div> */}
-                <div className="comment-feed-profile">
-                    <div className="comment-title">
-                       {userProf.username}'s Comments
-
-                        </div>
-                {userProf.comments && (
-            <>
-            {userProf.comments.map((comment) => (
-                <>
-            <div className="link-to-discuss">
-                <div>
-
-
-    Discussion:
-
-                </div>
-                <div>
-
-              <a className="profile-a" href={`/discussion/${comment.discussion_ticker}`}>
-               {comment.discussion_ticker}
-                  </a>
-                </div>
-            </div>
-
-              <div className="comment-container">
-              <div className="comment-body-div-prof-pic">
-                <img className="comment-body-prof-pic" src={comment.user.profile_picture}></img>
-              </div>
-              <div className="comment-body-container">
-              <div className="comment-body-first-row">
-              <div className="username-posted">
-                <div className="comment-top-row-username">
-                {comment.user.username}
-                </div>
-                <div className="comment-top-row-updated">
-                {comment.profile_time}
-                </div>
-              </div>
-
-              </div>
-              <div className="comment-body-comment-c">
-                    {comment.comment}
-              </div>
-
-              <div className="comment-body-bottom-row">
-                <div>
-
-              <div className="comment-icon-container">
-
-                {/* <div>
-
-              <img className="comment-icon" src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-comment-chat-flatart-icons-outline-flatarticons-1.png"/>
-                </div>
-                <div>
-                {comment.replies.length}
-            </div> */}
-                  {/* <div className="comment-icon-container-like">
-                       <div>
-                       <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
-                         </div>
-                         <div>
-            {comment.likes.length}
-              </div>
-                  </div> */}
-              </div>
-              </div>
-              </div>
-              </div>
-              </div>
-                </>
-              ))}
-              </>
-
-              )}
-                </div>
-
-
-        </div>
+                  </div>
                 )}
-      {isFollowersLoaded && (
+              </div>
+            </div>
 
-<div className="landing-page-spinner">
-<div className="loading-text">
-Loading followers...
-</div>
-<div>
-<Oval color="#00BFFF" height={100} width={100} />
-</div>
+            {user.bio.length > 0 && (
+              <>
+                <div className="about-user">About {user.username}:</div>
+                {user.bio}
+              </>
+            )}
+            <div className="comment-feed-profile">
+              <div className="comment-title">{user.username}'s Comments</div>
+              {user.comments && (
+                <>
+                  {user.comments.map((comment) => (
+                    <>
+                      <div className="link-to-discuss">
+                        <div>Discussion:</div>
+                        <div>
+                          <a
+                            className="profile-a"
+                            href={`/discussion/${comment.discussion_ticker}`}
+                          >
+                            {comment.discussion_ticker}
+                          </a>
+                        </div>
+                      </div>
 
-</div>
-)}
-<div>
+                      <div className="comment-container">
+                        <div className="comment-body-div-prof-pic">
+                          <img
+                           alt="profile-pic"
+                            className="comment-body-prof-pic"
+                            src={comment.user.profile_picture}
+                          ></img>
+                        </div>
+                        <div className="comment-body-container">
+                          <div className="comment-body-first-row">
+                            <div className="username-posted">
+                              <div className="comment-top-row-username">
+                                {comment.user.username}
+                              </div>
+                              <div className="comment-top-row-updated">
+                                {comment.profile_time}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="comment-body-comment-c">
+                            {comment.comment}
+                          </div>
 
-<>
-{isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
-  <>
-  <div  className="news-border-t">
-  <div>
-     Followers: {userFollowers.length}
-  </div>
-  {userFollowers.map((follower) =>(
-    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
-      <div>
-    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
-    </div>
-    <div className="follower-username">
-      {follower.username}
+                          <div className="comment-body-bottom-row">
+                            <div>
+                              <div className="comment-icon-container"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {isLoaded && !isDiscussionLoaded && user.id !== userProf.id && (
+          <div className="profile-container-top">
+            <div className="top-profile">
+              <div className="prof-pic-top">
+                <img
+                  alt="profile-pic"
+                  className="profile-picture-on-button-page"
+                  src={userProf.profile_picture}
+                ></img>
+              </div>
+              <div className="top-profile-right">
+                <div className="top-profile-username">{userProf.username}</div>
+                {user.id !== userProf.id && (
+                  <>
+                    {isFollower.includes(userProf.id) && (
+                      <div className="edit-profile-button">
+                        <button
+                          className="login-splash-button-modal"
+                          onClick={(e) => handleAddFollow(e)}
+                        >
+                          Unfollow
+                        </button>
+
+                        {isFollowerUpdated && (
+                          <div className="update-follow-spinner">
+                            <Oval color="#00BFFF" height={25} width={25} />
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {!isFollower.includes(userProf.id) && (
+                      <div className="edit-profile-button">
+                        <button
+                          className="login-splash-button-modal"
+                          onClick={(e) => handleAddFollow(e)}
+                        >
+                          Follow
+                        </button>
+                        {isFollowerUpdated && (
+                          <div className="update-follow-spinner">
+                            <Oval color="#00BFFF" height={25} width={25} />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+
+            {userProf.bio.length > 0 && (
+              <>
+                <div className="about-user">About {userProf.username}:</div>
+                {userProf.bio}
+              </>
+            )}
+            <div className="comment-feed-profile">
+              <div className="comment-title">
+                {userProf.username}'s Comments
+              </div>
+              {userProf.comments && (
+                <>
+                  {userProf.comments.map((comment) => (
+                    <>
+                      <div className="link-to-discuss">
+                        <div>Discussion:</div>
+                        <div>
+                          <a
+                            className="profile-a"
+                            href={`/discussion/${comment.discussion_ticker}`}
+                          >
+                            {comment.discussion_ticker}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="comment-container">
+                        <div className="comment-body-div-prof-pic">
+                          <img
+                          alt="profile-pic"
+                            className="comment-body-prof-pic"
+                            src={comment.user.profile_picture}
+                          ></img>
+                        </div>
+                        <div className="comment-body-container">
+                          <div className="comment-body-first-row">
+                            <div className="username-posted">
+                              <div className="comment-top-row-username">
+                                {comment.user.username}
+                              </div>
+                              <div className="comment-top-row-updated">
+                                {comment.profile_time}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="comment-body-comment-c">
+                            {comment.comment}
+                          </div>
+
+                          <div className="comment-body-bottom-row">
+                            <div>
+                              <div className="comment-icon-container"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+        {isFollowersLoaded && (
+          <div className="landing-page-spinner">
+            <div className="loading-text">Loading followers...</div>
+            <div>
+              <Oval color="#00BFFF" height={100} width={100} />
+            </div>
+          </div>
+        )}
+        <div>
+          <>
+            {isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
+              <>
+                <div className="news-border-t">
+                  <div>Followers: {userFollowers.length}</div>
+                  {userFollowers.map((follower) => (
+                    <div
+                      className="follower-container-right"
+                      onClick={() =>
+                        (window.location.href = `/profile/${follower.id}`)
+                      }
+                    >
+                      <div>
+                        <img
+                        alt="comment-pic"
+                          className="comment-body-prof-pic"
+                          src={follower.profile_picture}
+                        ></img>
+                      </div>
+                      <div className="follower-username">
+                        {follower.username}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+          <>
+            {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
+              <>
+                <div className="news-border-t">
+                  <div>Followers: {user.followers.length}</div>
+                  {userFollowers.map((follower) => (
+                    <div
+                      className="follower-container-right"
+                      onClick={() =>
+                        (window.location.href = `/profile/${follower.id}`)
+                      }
+                    >
+                      <div>
+                        <img
+                        alt="prof-pic"
+                          className="comment-body-prof-pic"
+                          src={follower.profile_picture}
+                        ></img>
+                      </div>
+                      <div className="follower-username">
+                        {follower.username}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+
+          <div>
+            <>
+              {isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
+                <>
+                  <div className="news-border-r">
+                    <div className="following-container">
+                      Following: {userProf.following.length}
+                    </div>
+                    {userFollowing.map((follower) => (
+                      <div
+                        className="follower-container-right"
+                        onClick={() =>
+                          (window.location.href = `/profile/${follower.id}`)
+                        }
+                      >
+                        <div>
+                          <img
+                          alt="prof-pic"
+                            className="comment-body-prof-pic"
+                            src={follower.profile_picture}
+                          ></img>
+                        </div>
+                        <div className="follower-username">
+                          {follower.username}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+            <>
+              {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
+                <>
+                  <div className="news-border-r">
+                    <div className="following-container">
+                      Following: {user.following.length}
+                    </div>
+                    {userFollowing.map((follower) => (
+                      <div
+                        className="follower-container-right"
+                        onClick={() =>
+                          (window.location.href = `/profile/${follower.id}`)
+                        }
+                      >
+                        <div>
+                          <img
+                          alt="prof-pic"
+                            className="comment-body-prof-pic"
+                            src={follower.profile_picture}
+                          ></img>
+                        </div>
+                        <div className="follower-username">
+                          {follower.username}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          </div>
+        </div>
       </div>
-    </div>
-
-))}
-    </div>
-  </>
-  )}
-  </>
-    <>
-  {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
-    <>
-  <div  className="news-border-t">
-  <div>
-    Followers: {user.followers.length}
-  </div>
-  {userFollowers.map((follower) =>(
-    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
-      <div>
-    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
-    </div>
-    <div className="follower-username">
-      {follower.username}
-      </div>
-    </div>
-
-))}
-    </div>
-  </>
-  )}
-  </>
-
-
-
-
-
-
-<div>
-
-  <>
-{isLoaded && !isFollowersLoaded && user.id !== userProf.id && (
-  <>
-  <div className="news-border-r">
-  <div className="following-container">
-     Following: {userProf.following.length}
-  </div>
-  {userFollowing.map((follower) =>(
-    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
-      <div>
-    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
-    </div>
-    <div className="follower-username">
-      {follower.username}
-      </div>
-    </div>
-
-))}
-    </div>
-  </>
-  )}
-  </>
-    <>
-  {isLoaded && !isFollowersLoaded && user.id === userProf.id && (
-    <>
-  <div className="news-border-r">
-  <div className="following-container">
-    Following: {user.following.length}
-  </div>
-  {userFollowing.map((follower) =>(
-    <div className='follower-container-right' onClick={() => window.location.href=`/profile/${follower.id}`}>
-      <div>
-    <img className="comment-body-prof-pic" src={follower.profile_picture}></img>
-    </div>
-    <div className="follower-username">
-      {follower.username}
-      </div>
-    </div>
-
-))}
-    </div>
-  </>
-  )}
-  </>
-
-  </div>
-
-
-
-
-
-
-
-
-  </div>
-
-
-
-               </div>
     </>
   );
 };

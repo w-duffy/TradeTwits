@@ -98,12 +98,12 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
-const add = (newPortfolioTicker) => {
-  return {
-      type: ADD_PORTFOLIO_TICKER,
-      newPortfolioTicker
-  }
-}
+// const add = (newPortfolioTicker) => {
+//   return {
+//       type: ADD_PORTFOLIO_TICKER,
+//       newPortfolioTicker
+//   }
+// }
 
 
 export const addTicker = (ticker, user_id, name) => async (dispatch) =>{

@@ -37,7 +37,9 @@ def get_discussion_graph(ticker):
     #Creates an array of all the dates
     dates = []
     for key in values_to_destructure:
-        dates.append(key)
+        format_date = key.split(sep="-")
+        new_format = "{}-{}-{}".format(format_date[1], format_date[2], format_date[0])
+        dates.append(new_format)
     #creates an array of all the historical prices
     values = []
     panda_data = pd.DataFrame(values_to_destructure)

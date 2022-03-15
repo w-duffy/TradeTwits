@@ -76,13 +76,13 @@ let inPortfolio = user.portfolio.filter(detail =>{
                     {stockDiscussion.percent_change < 0 && (
 
                         <div className="co-p-change-red">
-                  <img className="down-arrow" src="https://img.icons8.com/external-rabit-jes-flat-rabit-jes/62/000000/external-direction-navigation-and-maps-rabit-jes-flat-rabit-jes-3.png"/> {stockDiscussion.percent_change.toFixed(2)} %
+                  <img className="down-arrow" alt="down-pic" src="https://img.icons8.com/external-rabit-jes-flat-rabit-jes/62/000000/external-direction-navigation-and-maps-rabit-jes-flat-rabit-jes-3.png"/> {stockDiscussion.percent_change.toFixed(2)} %
                   </div>
                       )}
             {stockDiscussion.percent_change > 0 && (
 
 <div className="co-p-change-green">
-<img src="https://img.icons8.com/office/16/000000/up--v1.png"/> +{stockDiscussion.percent_change.toFixed(2)} %
+<img alt="up-pic" src="https://img.icons8.com/office/16/000000/up--v1.png"/> +{stockDiscussion.percent_change.toFixed(2)} %
 </div>
 )}
                   </div>
@@ -105,7 +105,7 @@ let inPortfolio = user.portfolio.filter(detail =>{
                     <button className="watch-button" onClick={(e) => {handleAddTicker(e)}}>
 
                         <div>
-                        <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>
+                        <img className="watch-icon" alt="watch-pic" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>
                                      </div>
                         <div>
 
@@ -121,7 +121,7 @@ let inPortfolio = user.portfolio.filter(detail =>{
 
                         <div>
 
-                        <img className="watch-icon" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>                        </div>
+                        <img className="watch-icon" alt="watch-pic" src="https://img.icons8.com/ios-filled/50/000000/visible--v1.png"/>                        </div>
                         <div>
                         Unwatch
                         </div>

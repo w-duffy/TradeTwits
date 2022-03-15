@@ -69,7 +69,7 @@ return (
     <>
     <div className="comment-container">
       <div className="comment-body-div-prof-pic">
-        <img className="comment-body-prof-pic" src={reply.user.profile_picture}></img>
+        <img className="comment-body-prof-pic" alt="comment-pic" src={reply.user.profile_picture}></img>
       </div>
       <div className="comment-body-container">
       <div className="comment-body-first-row">
@@ -86,7 +86,7 @@ return (
       <div className="edit-container-c">
 
 <div onClick={openCommentMenu} className="comment-icon-container">
-<img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+<img className="edit-icon" alt="edit-pic" src="https://img.icons8.com/ios/50/000000/more.png"/>
                   </div>
           </div>
 
@@ -189,12 +189,12 @@ return (
             >
               {hasLiked.length === 0 && (
                 <div>
-              <img className="comment-like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
+              <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-frame-flat-feelings-flat-icons-inmotus-design.png"/>
               </div>
                 )}
                 {hasLiked.length > 0 && (
                     <div>
-                  <img className="comment-like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
+                  <img className="comment-like-pic" alt="like-pic" src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-heart-miscellaneous-kiranshastry-lineal-color-kiranshastry.png"/>
                     </div>
                 )}
               <div>

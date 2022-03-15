@@ -76,18 +76,19 @@ class User(db.Model, UserMixin):
     'x-rapidapi-host': "yh-finance.p.rapidapi.com",
     'x-rapidapi-key': os.environ.get("RAPID_API_KEY")
     }
-
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        this = response.json()
-        obj = this['finance']['result']
-        obj1 = obj[0]
-        quotes = obj1['quotes']
-        data = {}
-        for quote in quotes:
-            symbol = quote['symbol']
-            p_change = quote['regularMarketChangePercent']
-            data[symbol] = p_change
-
+        try:
+            response = requests.request("GET", url, headers=headers, params=querystring)
+            this = response.json()
+            obj = this['finance']['result']
+            obj1 = obj[0]
+            quotes = obj1['quotes']
+            data = {}
+            for quote in quotes:
+                symbol = quote['symbol']
+                p_change = quote['regularMarketChangePercent']
+                data[symbol] = p_change
+        except:
+            data = {}
 
 
 
