@@ -95,4 +95,4 @@ While I am mostly happy with TradeTwit's functionality, there are a few addition
 ## Contact
 Email - w.duffy@outlook.com
 <br>
-[Linked In](https://www.linkedin.com/in/will-duffy-a46a7a8a/)
+[LinkedIn](https://www.linkedin.com/in/will-duffy-a46a7a8a/)
