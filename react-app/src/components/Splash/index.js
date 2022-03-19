@@ -137,14 +137,6 @@ const Splash = () => {
           <a href={`/home`} className="tradetwits-title">
             TradeTwits
           </a>
-          {/* <div>
-                Rooms
-                Shows
-                Rankings
-                Earnings
-                Newsletters
-                Shop
-            </div> */}
           <div className="search-bar-div">
             {/* <SearchBar /> */}
             <div ref={refHandler} className="search_container">
@@ -201,6 +193,7 @@ const Splash = () => {
                 <div>
                   <div className="profile-button" onClick={openProfileMenu}>
                     <img
+                    alt="profile"
                       className="profile-picture-on-button"
                       src={user.profile_picture}
                     ></img>
@@ -214,12 +207,6 @@ const Splash = () => {
                       </a>
                     </li>
 
-                    {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                      </a>
-                    </li> */}
-
                     <li className="profile-li">
                       <a
                         className="profile-a"
@@ -232,7 +219,6 @@ const Splash = () => {
                   </ul>
                 )}
               </div>
-              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -350,7 +336,7 @@ const Splash = () => {
               Watchlist
 
      <div onClick={(e) => setEditPortfolio(!showEditPortfolio)} className="comment-icon-container">
-      <img className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
+      <img alt="comment" className="edit-icon" src="https://img.icons8.com/ios/50/000000/more.png"/>
       </div>
               </div>
             <div>
