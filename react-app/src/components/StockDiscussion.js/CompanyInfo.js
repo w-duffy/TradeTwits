@@ -45,7 +45,7 @@ const handleDeleteTicker = async (e) => {
     // await dispatch(getPortfolioDetails(id))
 }
 let inPortfolio = user.portfolio.filter(detail =>{
-    return detail.ticker == stockDiscussion.ticker
+    return detail.ticker === stockDiscussion.ticker
 })
 
 
