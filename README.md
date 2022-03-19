@@ -94,3 +94,5 @@ Python | Javascript | React | Redux | SQLAlchemy | PostgreSQL | CSS | HTML / JSX
 While I am mostly happy with TradeTwit's functionality, there are a few additional features I would like to include in the future.  I would like to add the ability to reference users and discussions via a hashtagging system (i.e. @user or #ticker).  Additionally, I would like to expand the search and stock discussion features to include a broader range of stocks since I am currently limited to the S&P500.
 ## Contact
 Email - w.duffy@outlook.com
+<br>
+[LinkedIn](https://www.linkedin.com/in/will-duffy-a46a7a8a/)
