@@ -188,12 +188,6 @@ const Comment = ({ comment, prop = false }) => {
                 </div>
               </li>
 
-              {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                        </a>
-                    </li> */}
-
               <li className="profile-li-c">
                 <div
                   className="profile-a-c"
@@ -222,11 +216,6 @@ const Comment = ({ comment, prop = false }) => {
                   </div>
                 </li>
               )}
-              {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                        </a>
-                    </li> */}
               {!isFollower.includes(comment.user.id) && (
                 <li className="profile-li-c">
                   <div
@@ -261,19 +250,6 @@ const Comment = ({ comment, prop = false }) => {
 
                 <div>{comment.replies.length}</div>
               </div>
-              {/* {true && (
-        <form onSubmit={handleAddReply}>
-          <div>
-            <input
-              name="Add Reply"
-              placeholder="Enter your reply here.."
-              value={newReply}
-              onChange={(e) => setNewReply(e.target.value)}
-            ></input>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-      )} */}
             </div>
             <div>
               <div
@@ -343,10 +319,6 @@ const Comment = ({ comment, prop = false }) => {
           )}
 
           <br></br>
-          {/*
-      {comment.replies.map((reply) => (
-        <Reply key={reply.id} reply={reply} />
-      ))} */}
         </div>
       </div>
       {showModal && (
