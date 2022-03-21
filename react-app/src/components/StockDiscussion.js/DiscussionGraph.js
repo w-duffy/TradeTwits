@@ -52,7 +52,7 @@ function DiscussionGraph({values, dates, cp, time}){
         if(valuesSlicer[valuesSlicer.length - 1] < valuesSlicer[valuesSlicer.length - 2]) {
            setLineColor('rgb(255, 0, 0)')
         }
-        if(valuesSlicer[valuesSlicer.length - 1] === valuesSlicer[valuesSlicer.length - 2]){
+        if(valuesSlicer[valuesSlicer.length - 1] == valuesSlicer[valuesSlicer.length - 2]){
           setLineColor('rgb(50, 190, 50)')
         }
       },[values])
