@@ -162,13 +162,6 @@ const NavigationBar = () => {
                         My Profile
                       </a>
                     </li>
-
-                    {/* <li className="profile-li">
-                      <a className="profile-a" href="/my-profile">
-                        Edit Profile
-                      </a>
-                    </li> */}
-
                     <li className="profile-li">
                       <a
                         className="profile-a"
@@ -181,7 +174,6 @@ const NavigationBar = () => {
                   </ul>
                 )}
               </div>
-              {/* <div>Post</div> */}
             </>
           )}
         </nav>
@@ -283,10 +275,10 @@ const NavigationBar = () => {
                     )}
                   </a>
                 )}
-                {/* </div> */}
+
               </div>
             ))}
-            {/* </div> */}
+
           </div>
         </div>
       </div>
