@@ -24,10 +24,8 @@ const LandingPage = ({ prop = false }) => {
 }
 
 const handleClick = async (e) => {
-  // await setLandingLoader(true)
   await setLandingLoader(true)
   await dispatch(sessionActions.login('demo@aa.io', 'password'))
-  // await setLandingLoader(false)
   history.push('/home')
 }
 
@@ -37,7 +35,6 @@ const handleClick = async (e) => {
 
   return (
     <>
-    {/* <div className="landing-page-container"> */}
 
 
     <div className="landing-nav-container">
