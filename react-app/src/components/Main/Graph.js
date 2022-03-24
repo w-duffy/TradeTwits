@@ -28,10 +28,9 @@ function Graph({pClose, high, low, openP,  current}){
       //for the slice make the second number a variable that will change with a useEffect when the user clicks how many days to view.
       // const daySlicer = dates.slice(0, 30)
       const daySlicer = ["Previous Close", "Open", 'Current']
-      // const daySlicer = ["Previous Close", "High", "Low", "Open", 'Current']
+
       const valuesSlicer = [pClose,  openP,  current]
-      // const valuesSlicer = [pClose, high, low, openP,  current]
-      // const valuesSlicer = values.slice(0, 30)
+
 
       useEffect(() =>{
         if(valuesSlicer[0] < valuesSlicer[valuesSlicer.length - 1]){

@@ -86,16 +86,9 @@ const NavigationBar = () => {
           <a href={`/home`} className="tradetwits-title">
             TradeTwits
           </a>
-          {/* <div>
-                Rooms
-                Shows
-                Rankings
-                Earnings
-                Newsletters
-                Shop
-            </div> */}
+
           <div className="search-bar-div">
-            {/* <SearchBar /> */}
+
             <div ref={refHandler} className="search_container">
               <div className="search__bar">
                 <input
@@ -221,11 +214,11 @@ const NavigationBar = () => {
             </div>
           </div>
           <div className="feed">
-            {/* <div className='three-container-feed'> */}
+
             {feedData.length} Currently Trending:
             {feedData.map((data) => (
               <div className="three-container-feed">
-                {/* <div className='three-container-feed'> */}
+
                 {stockDiscussion.id && (
                   <a
                     className="a-select"
@@ -261,7 +254,7 @@ const NavigationBar = () => {
                   >
                     <div>{data[0]}</div>
 
-                    {/* {data[0]} */}
+
                     {data[1] < 0 && (
                       <div className="three-p-change-red">
                         {data[1].toFixed(2)}%
